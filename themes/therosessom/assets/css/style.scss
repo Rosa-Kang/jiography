@@ -1,0 +1,56 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+ 
+ // Import Styles
+ @use 'variables' as *;
+ @use 'font' as *;
+ @use 'layout' as *;
+ @use 'components' as *;
+
+ /**
+ * Main Stylesheet for therosessom Theme
+ * Modern WordPress Photography Theme with Tailwind CSS
+ */
+@use 'navigation' as *;
+
+
+// Custom photography theme styles
+.therosessom-theme {
+  // Global theme styles
+  font-family: theme('fontFamily.body'); // This is a Tailwind function, not a Sass variable
+  line-height: 1.6;
+  color: theme('colors.neutral.800'); // This is a Tailwind function, not a Sass variable
+  
+  // Smooth scrolling
+  scroll-behavior: smooth;
+  
+  // Better text rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+// Animation utilities
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+  
+  &.aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Print styles
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .container {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+}
