@@ -42,7 +42,6 @@ vite.config.js.timestamp-*
 
 # System Files
 .DS_Store
-.DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
@@ -56,31 +55,25 @@ desktop.ini
 *.log
 *.cache
 
-# WordPress specific
-wp-config.php
+# WordPress specific (relative to wp-content/)
 uploads/
+upgrade/
 cache/
 backup*/
 backups/
 updraft*/
-upgrade/
 mu-plugins/
 .htaccess
 sitemap.xml
 sitemap.xml.gz
+wp-config.php
 
-# WordPress core files (if included)
-/wp-admin/
-/wp-includes/
-/wp-*.php
-/xmlrpc.php
-/readme.html
-/license.txt
-
-# Plugin directories (if not needed)
+# Plugin directories (ignore all except custom plugin)
+plugins/*
 !plugins/therosessom-custom-posts/
 
-# Theme development exceptions
+# Theme directories (ignore all except custom theme)
+themes/*
 !themes/therosessom/
 
 # Local development
@@ -186,5 +179,6 @@ wp-errors.log
 .well-known/
 security.txt
 
-# Custom additions for this project
-# Add any project-specific files or patterns here
+# Optional project-specific ignores
+index.php
+README.md
