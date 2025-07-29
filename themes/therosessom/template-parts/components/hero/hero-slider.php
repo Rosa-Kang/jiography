@@ -36,7 +36,7 @@ $bottom_signature = get_field('slide_bottom_signature');
         </div>
         
         <!-- Content Overlay (Static for all slides) -->
-        <div class="absolute inset-0 z-20 h-[56%] top-[40%] flex flex-col justify-between items-center text-center px-4">
+        <div class="absolute inset-0 z-20 h-[52%] top-[39%] flex flex-col justify-between items-center text-center px-4">
             <div class="max-w-6xl mx-auto">
                 <?php if ($title): ?>
                     <h1 class="hero-title text-3xl text-white font-light tracking-wider mb-6" data-aos="fade-in" data-aos-delay="300">
