@@ -134,16 +134,15 @@ class TheRosessomTheme {
           new Swiper(heroSlider, {
             loop: true,
             autoplay: {
-              delay: window.therosessomData?.heroSlides?.autoplayDelay || 5000,
+              delay: 3000,
               disableOnInteraction: false,
+              pauseOnMouseEnter: false,
             },
             effect: 'fade',
             fadeEffect: {
               crossFade: true
             },
-            speed: window.therosessomData?.heroSlides?.transitionSpeed || 1500,
-            
-            // Touch settings for mobile
+            speed:  2000,
             touchRatio: 0.2,
             simulateTouch: true,
             allowTouchMove: true,
@@ -403,7 +402,6 @@ class TheRosessomTheme {
     const heroSections = document.querySelectorAll('.hero-parallax');
     heroSections.forEach(hero => {
       gsap.to(hero, {
-        yPercent: -50,
         ease: 'none',
         scrollTrigger: {
           trigger: hero,

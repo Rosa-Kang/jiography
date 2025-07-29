@@ -9,8 +9,8 @@
 	$footer_script = get_field('footer_script', 'option');
 ?>
 
-		<footer id="colophon" class="bg-primary-light" role="contentinfo">
-			<div class="bg-primary-light py-12">
+		<footer id="colophon" role="contentinfo">
+			<div class="py-12">
 				<div class="container lg:max-w-[1400px] mx-auto">
 					<hr class="horizontal-line">
 				</div>

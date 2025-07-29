@@ -30,20 +30,14 @@ export class NavigationMenu {
     }
 
     /**
-     * Initialize navigation
+     * Initialize the menu
      */
     init() {
         this.getElements();
-        
-        if (!this.validateElements()) {
-            console.warn('Navigation: Required elements not found');
-            return;
+        if (this.validateElements()) {
+            this.setupInitialState();
+            this.bindEvents();
         }
-
-        this.setupInitialState();
-        this.bindEvents();
-        
-        console.log('✅ Navigation module loaded');
     }
 
     /**

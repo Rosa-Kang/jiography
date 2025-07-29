@@ -15,6 +15,9 @@ if (!defined('ABSPATH')) {
 // Theme version
 define('THEROSESSOM_VERSION', '1.0.0');
 
+// Vite dev server URL.
+define('VITE_DEV_SERVER', 'http://localhost:10024');
+
 /**
  * Theme setup function
  */
@@ -105,32 +108,17 @@ function therosessom_scripts() {
     
     if ($is_development && is_vite_server_running()) {
         // Development mode - load from Vite dev server
-        wp_enqueue_script('vite-client', 'http://localhost:3000/@vite/client', [], null, false);
+        wp_enqueue_script('vite-client', VITE_DEV_SERVER . '/@vite/client', [], null, false);
         wp_script_add_data('vite-client', 'type', 'module');
 
-        wp_enqueue_script('therosessom-main', 'http://localhost:3000/assets/js/main.js', [], null, true);
+        wp_enqueue_script('therosessom-main', VITE_DEV_SERVER . '/assets/js/main.js', [], null, true);
         wp_script_add_data('therosessom-main', 'type', 'module');
     } else {
         // Production mode - load built assets
         therosessom_enqueue_build_assets();
     }
 
-    // Conditionally load Swiper (CDN version for non-bundled approach)
-    if (therosessom_needs_swiper()) {
-        wp_enqueue_script(
-            'swiper',
-            'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',
-            [],
-            '11.0.0',
-            true
-        );
-        wp_enqueue_style(
-            'swiper',
-            'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
-            [],
-            '11.0.0'
-        );
-    }
+    // Swiper is now loaded via main.js, so we no longer enqueue it here.
 
     // Enqueue comment reply script
     if (is_singular() && comments_open() && get_option('thread_comments')) {
@@ -227,7 +215,7 @@ function is_vite_server_running() {
         ]
     ]);
     
-    $response = @file_get_contents('http://localhost:3000', false, $context);
+    $response = @file_get_contents(VITE_DEV_SERVER, false, $context);
     return $response !== false;
 }
 
@@ -236,43 +224,58 @@ function is_vite_server_running() {
  */
 function therosessom_enqueue_build_assets() {
     $manifest_path = get_template_directory() . '/dist/.vite/manifest.json';
-    
+
     if (!file_exists($manifest_path)) {
         wp_enqueue_style('therosessom-style', get_stylesheet_uri(), [], THEROSESSOM_VERSION);
         return;
     }
-    
+
     $manifest = json_decode(file_get_contents($manifest_path), true);
-    
+
     if (!$manifest) {
         wp_enqueue_style('therosessom-style', get_stylesheet_uri(), [], THEROSESSOM_VERSION);
         return;
     }
-    
-    // Enqueue CSS
-    if (isset($manifest['assets/css/style.scss'])) {
-        $css_file = $manifest['assets/css/style.scss'];
-        wp_enqueue_style(
-            'therosessom-style',
-            get_template_directory_uri() . '/dist/' . $css_file['file'],
-            [],
-            THEROSESSOM_VERSION
-        );
-    }
-    
-    // Enqueue JS
-    if (isset($manifest['assets/js/main.js'])) {
-        $js_file = $manifest['assets/js/main.js'];
+
+    // Entry point for main JS
+    $js_entry_key = 'assets/js/main.js';
+
+    if (isset($manifest[$js_entry_key])) {
+        $js_file_data = $manifest[$js_entry_key];
+
+        // Enqueue the main JS file
         wp_enqueue_script(
             'therosessom-main',
-            get_template_directory_uri() . '/dist/' . $js_file['file'],
+            get_template_directory_uri() . '/dist/' . $js_file_data['file'],
             [],
             THEROSESSOM_VERSION,
             true
         );
-        
-        // Add module type for ES6 modules
         wp_script_add_data('therosessom-main', 'type', 'module');
+
+        // Enqueue all associated CSS files for the main JS entry
+        if (isset($js_file_data['css'])) {
+            foreach ($js_file_data['css'] as $index => $css_file) {
+                wp_enqueue_style(
+                    'therosessom-main-style-' . $index,
+                    get_template_directory_uri() . '/dist/' . $css_file,
+                    [],
+                    THEROSESSOM_VERSION
+                );
+            }
+        }
+    }
+
+    // Fallback for main style if not included in JS entry
+    $css_entry_key = 'assets/css/style.scss';
+    if (isset($manifest[$css_entry_key]) && !isset($manifest[$js_entry_key]['css'])) {
+         $css_file_data = $manifest[$css_entry_key];
+        wp_enqueue_style(
+            'therosessom-style',
+            get_template_directory_uri() . '/dist/' . $css_file_data['file'],
+            [],
+            THEROSESSOM_VERSION
+        );
     }
 }
 
