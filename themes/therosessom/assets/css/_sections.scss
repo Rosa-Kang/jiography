@@ -1,14 +1,6 @@
 @use 'variables' as *;
 
 /**
-* General Wall Paper Style
-**/
-#content {
-    background: $color-primary-light;
-}
-
-
-/**
 * Hero Section
 **/
 .hero-section {
@@ -69,8 +61,9 @@
 }
 
 /**
-* Horizontal Line
+* IG Feed Section
 */
-.horizontal-line {
-    border: 0.5px solid $color-black;
+
+#sb_instagram img {
+    aspect-ratio: 1/1;
 }

@@ -1,0 +1,24 @@
+@use 'variables' as *;
+
+/**
+* General Wall Paper Style
+**/
+#content {
+    background: $color-primary-light;
+}
+
+
+/**
+* Horizontal Line
+*/
+.horizontal-line {
+    border: 0.5px solid $color-black;
+}
+
+/**
+* Polaroid Frame
+**/
+.polaroid-frame {
+    padding: 0.75rem 0.75rem 5.25rem;
+    background: $color-white;
+}
