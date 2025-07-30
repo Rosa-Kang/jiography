@@ -6,32 +6,33 @@
 .hero-section {
     position: relative;
     overflow: hidden;
+    
+    .hero-title {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        font-weight: 300;
+        letter-spacing: 0.05em;
+    }
+    
+    .hero-subtitle-prefix {
+        font-style: italic;
+        font-weight: 200;
+        opacity: 0.8;
+        font-size: 0.7em;
+        vertical-align: middle;
+        margin-right: 0.3em;
+    }
+    
+    .hero-parallax {
+        transition: transform 5s ease-out;
+        will-change: transform;
+        height: 100% !important;
+    }
+    
+    .swiper-slide-active .hero-parallax {
+        transform: scale(1.05);
+    }
 }
 
-.hero-title {
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    font-weight: 300;
-    letter-spacing: 0.05em;
-}
-
-.hero-subtitle-prefix {
-    font-style: italic;
-    font-weight: 200;
-    opacity: 0.8;
-    font-size: 0.7em;
-    vertical-align: middle;
-    margin-right: 0.3em;
-}
-
-.hero-parallax {
-    transition: transform 5s ease-out;
-    will-change: transform;
-    height: 100% !important;
-}
-
-.swiper-slide-active .hero-parallax {
-    transform: scale(1.05);
-}
 
 
 /**
