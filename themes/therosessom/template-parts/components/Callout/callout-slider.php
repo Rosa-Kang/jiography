@@ -22,12 +22,22 @@ if (!$callout_slides || !is_array($callout_slides)) {
     return;
 }
 
+// Prepare background style
+$background_style = '';
+$class = 'bg-neutral-100';
+
+if ($bg_image && isset($bg_image['url'])) {
+    $class = '';
+    $background_style = 'background-image: url(' . esc_url($bg_image['url']) . '); background-size: cover; background-position: center;';
+}
+
+
 ?>
 
-<section class="callout-slider min-h-screen relative">
+<section class="callout-slider min-h-screen relative" style="<?php echo $background_style; ?>">
     <div class="w-full h-screen flex">
         <!-- Left Content Section -->
-        <div class="bg-neutral-100 p-8 lg:p-16 flex-1 flex flex-col justify-between relative">
+        <div class="<?php echo $class;?> p-8 lg:p-16 flex-1 flex flex-col justify-between relative">
             <div>
                 <!-- Top Section - The Thought -->
                 <div class="space-y-6" data-aos="fade-up" data-aos-delay="200">

@@ -81,36 +81,58 @@ export class SliderManager {
 /**
  * Initialize callout slider
  */
-    initCallout(element, Swiper) {
-        if (!element) return;
-        
-        const slideCount = element.querySelectorAll('.swiper-slide').length;
-        if (slideCount <= 1) return;
+initCallout(element, Swiper) {
+    if (!element) return;
 
-        const swiper = new Swiper(element, {
-            direction: 'vertical',
-            effect: 'fade',
-            fadeEffect: { crossFade: true },
-            speed: 500,
-            on: {
-                slideChange: function() {
-                    // Update counter
-                    const counter = document.querySelector('.current-slide');
-                    if (counter) counter.textContent = this.activeIndex + 1;
-                    
-                    // Update dots
-                    document.querySelectorAll('.pagination-dot').forEach((dot, index) => {
-                        dot.classList.toggle('active', index === this.activeIndex);
-                    });
-                }
-            }
-        });
+    const slideCount = element.querySelectorAll('.swiper-slide').length;
+    if (slideCount <= 1) return;
 
-        // Bind dot clicks
-        document.querySelectorAll('.pagination-dot').forEach((dot, index) => {
-            dot.addEventListener('click', () => swiper.slideTo(index));
-        });
-    }
+    new Swiper(element, {
+        direction: 'vertical',
+        effect: 'fade',
+        fadeEffect: { crossFade: true },
+        speed: 500,
+        loop: true, // Added loop for continuous effect
+        autoplay: { // Added autoplay as per original request, if desired
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination-vertical-bullets', // Points to the div in PHP
+            clickable: true,
+            // Swiper will generate the bullets here, we style them with CSS
+        },
+        on: {
+            init: function () {
+                // Initial blur effect
+                const slides = this.slides;
+                slides.forEach((slide, idx) => {
+                    const img = slide.querySelector('img');
+                    if (img) {
+                        if (idx === this.activeIndex) {
+                            img.style.filter = 'none'; // Active slide is clear
+                        } else {
+                            img.style.filter = 'blur(4px)'; 
+                        }
+                    }
+                });
+            },
+            slideChangeTransitionEnd: function () {
+                const slides = this.slides;
+                slides.forEach((slide, idx) => {
+                    const img = slide.querySelector('img');
+                    if (img) {
+                        if (idx === this.activeIndex) {
+                            img.style.filter = 'none'; 
+                        } else {
+                            img.style.filter = 'blur(4px)'; 
+                        }
+                    }
+                });
+            },
+        },
+    });
+}
 
 /**
  * Initialize testimonials slider
