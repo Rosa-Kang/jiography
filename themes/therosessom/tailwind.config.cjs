@@ -16,32 +16,49 @@ module.exports = {
       colors: {
         primary: {
           light: 'var(--color-primary-light)',
+          DEFAULT: 'var(--color-primary)',
+          dark: 'var(--color-primary-dark)',
           50: '#f8f9ff',
           100: '#e8eaff',
           200: '#d6dbff',
           300: '#b4c0ff',
           400: '#8c9eff',
-          500: '#6366f1',
-          600: '#4f46e5',
+          500: 'var(--color-primary)',
+          600: 'var(--color-primary)',
           700: '#4338ca',
           800: '#3730a3',
           900: '#312e81',
         },
         secondary: {
           light: 'var(--color-secondary-light)',
+          DEFAULT: 'var(--color-secondary)',
+          dark: 'var(--color-secondary-dark)',
           50: '#fdf2f8',
           100: '#fce7f3',
           200: '#fbcfe8',
           300: '#f9a8d4',
           400: '#f472b6',
-          500: '#ec4899',
-          600: '#db2777',
+          500: 'var(--color-secondary)',
+          600: 'var(--color-secondary-dark)',
           700: '#be185d',
           800: '#9d174d',
           900: '#831843',
         },
         // Using CSS variables for gray colors from SCSS
         neutral: {
+          50: 'var(--color-gray-50)',
+          100: 'var(--color-gold)',
+          200: 'var(--color-gray-200)',
+          300: 'var(--color-gray-300)',
+          400: 'var(--color-gray-400)',
+          500: 'var(--color-gray-500)',
+          600: 'var(--color-gray-600)',
+          700: 'var(--color-gray-700)',
+          800: 'var(--color-gray-800)',
+          900: 'var(--color-gray-900)',
+        },
+        // Gray aliases for convenience
+        gray: {
           50: 'var(--color-gray-50)',
           100: 'var(--color-gray-100)',
           200: 'var(--color-gray-200)',
@@ -54,13 +71,16 @@ module.exports = {
           900: 'var(--color-gray-900)',
         },
         gold: {
+          light: 'var(--color-gold-light)',
+          DEFAULT: 'var(--color-gold)',
+          dark: 'var(--color-gold-dark)',
           50: '#fefdf7',
           100: '#fef9e7',
           200: '#fef3c7',
           300: '#fde68a',
-          400: '#fcd34d',
-          500: '#f59e0b',
-          600: '#d97706',
+          400: 'var(--color-gold-light)',
+          500: 'var(--color-gold)',
+          600: 'var(--color-gold-dark)',
           700: '#b45309',
           800: '#92400e',
           900: '#78350f',
@@ -73,10 +93,42 @@ module.exports = {
       // Custom fonts using CSS variables
       fontFamily: {
         'sans': ['Inter', 'system-ui', 'sans-serif'],
-        'primary': ['Perfectly Nineties', 'Georgia', 'serif'],
+        'primary': ['var(--font-primary)'],
+        'body': ['var(--font-body)'],
         'mono': ['JetBrains Mono', 'monospace'],
         'display': ['Playfair Display', 'Georgia', 'serif'],
-        'body': ['Inter', 'system-ui', 'sans-serif']
+      },
+      
+      // Font sizes using CSS variables
+      fontSize: {
+        'xs': 'var(--font-size-xs)',
+        'sm': 'var(--font-size-sm)', 
+        'base': 'var(--font-size-base)',
+        'lg': 'var(--font-size-lg)',
+        'xl': 'var(--font-size-xl)',
+        '2xl': 'var(--font-size-2xl)',
+        '3xl': 'var(--font-size-3xl)',
+        '4xl': 'var(--font-size-4xl)',
+        '5xl': 'var(--font-size-5xl)',
+        '6xl': 'var(--font-size-6xl)',
+      },
+      
+
+      
+      // Box shadows - 핵심적인 것만
+      boxShadow: {
+        DEFAULT: 'var(--shadow)',
+        'lg': 'var(--shadow-lg)',
+        // Photography specific shadows
+        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+        'medium': '0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 30px -5px rgba(0, 0, 0, 0.05)',
+      },
+      
+      // Animation durations - 핵심적인 것만
+      transitionDuration: {
+        '200': 'var(--duration-200)',
+        '300': 'var(--duration-300)',
+        '500': 'var(--duration-500)',
       },
       
       // Photography-specific aspect ratios
@@ -96,20 +148,13 @@ module.exports = {
         '144': '36rem'
       },
       
-      // Custom animations
+      // Custom animations - 핵심적인 것만
       animation: {
         'fade-in': 'fadeIn 0.6s ease-in-out',
         'fade-in-up': 'fadeInUp 0.6s ease-out',
-        'fade-in-down': 'fadeInDown 0.6s ease-out',
-        'slide-in-left': 'slideInLeft 0.6s ease-out',
-        'slide-in-right': 'slideInRight 0.6s ease-out',
-        'zoom-in': 'zoomIn 0.3s ease-out',
-        'zoom-out': 'zoomOut 0.3s ease-out',
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'bounce-slow': 'bounce 2s infinite'
       },
       
-      // Custom keyframes
+      // Custom keyframes - 핵심적인 것만
       keyframes: {
         fadeIn: {
           '0%': { opacity: '0' },
@@ -118,26 +163,6 @@ module.exports = {
         fadeInUp: {
           '0%': { opacity: '0', transform: 'translateY(30px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' }
-        },
-        fadeInDown: {
-          '0%': { opacity: '0', transform: 'translateY(-30px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' }
-        },
-        slideInLeft: {
-          '0%': { opacity: '0', transform: 'translateX(-30px)' },
-          '100%': { opacity: '1', transform: 'translateX(0)' }
-        },
-        slideInRight: {
-          '0%': { opacity: '0', transform: 'translateX(30px)' },
-          '100%': { opacity: '1', transform: 'translateX(0)' }
-        },
-        zoomIn: {
-          '0%': { opacity: '0', transform: 'scale(0.9)' },
-          '100%': { opacity: '1', transform: 'scale(1)' }
-        },
-        zoomOut: {
-          '0%': { opacity: '1', transform: 'scale(1)' },
-          '100%': { opacity: '0', transform: 'scale(0.9)' }
         }
       },
       
@@ -145,38 +170,19 @@ module.exports = {
       screens: {
         'xs': '475px',
         '3xl': '1600px'
-      },
-      
-      // Custom container
-      container: {
-        center: true,
-        padding: {
-          DEFAULT: '1rem',
-          sm: '2rem',
-          lg: '4rem',
-          xl: '5rem',
-          '2xl': '6rem'
-        },
-        screens: {
-          sm: '640px',
-          md: '768px',
-          lg: '1024px',
-          xl: '1280px',
-          '2xl': '1400px'
-        }
-      },
-      
-      // Custom box shadows
-      boxShadow: {
-        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
-        'medium': '0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 30px -5px rgba(0, 0, 0, 0.05)',
-        'large': '0 10px 50px -12px rgba(0, 0, 0, 0.15), 0 20px 40px -12px rgba(0, 0, 0, 0.1)',
-        'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)'
-      },
-      
-      // Custom backdrop blur
-      backdropBlur: {
-        xs: '2px'
+      }
+    },
+    
+    // Override default container configuration to match your usage patterns
+    container: {
+      center: true,
+      padding: 'var(--container-padding-xs)', // Default px-4 like your usage
+      screens: {
+        sm: 'var(--container-max-width-sm)',    // 640px
+        md: 'var(--container-max-width-md)',    // 768px  
+        lg: 'var(--container-max-width-lg)',    // 1024px - matches your lg:max-w-[1024px]
+        xl: 'var(--container-max-width-xl)',    // 1280px
+        '2xl': 'var(--container-max-width-2xl)' // 1400px - matches your lg:max-w-[1400px]
       }
     }
   },
@@ -190,8 +196,94 @@ module.exports = {
     }),
     require('@tailwindcss/aspect-ratio'),
     
-    // Custom plugin for photography-specific utilities
-    function({ addUtilities, addComponents, theme }) {
+    // Custom plugin for photography-specific utilities and container variants
+    function({ addUtilities, addComponents, theme, addBase }) {
+      // Add container variants - based on your current usage patterns
+      addComponents({
+        // Replace your: container lg:max-w-[640px] mx-auto px-4
+        '.container-sm': {
+          width: '100%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: 'var(--container-padding-xs)', // px-4
+          paddingRight: 'var(--container-padding-xs)',
+          maxWidth: 'var(--container-max-width-sm)', // 640px
+        },
+        
+        // Replace your: container lg:max-w-[768px] mx-auto px-4  
+        '.container-md': {
+          width: '100%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: 'var(--container-padding-xs)', // px-4
+          paddingRight: 'var(--container-padding-xs)',
+          maxWidth: 'var(--container-max-width-md)', // 768px
+        },
+        
+        // Replace your: container lg:max-w-[1024px] mx-auto px-4 py-6
+        '.container-lg': {
+          width: '100%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: 'var(--container-padding-xs)', // px-4
+          paddingRight: 'var(--container-padding-xs)',
+          maxWidth: 'var(--container-max-width-lg)', // 1024px
+        },
+        
+        // Standard XL container
+        '.container-xl': {
+          width: '100%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: 'var(--container-padding-xs)', // px-4
+          paddingRight: 'var(--container-padding-xs)',
+          maxWidth: 'var(--container-max-width-xl)', // 1280px
+        },
+        
+        // Replace your: container lg:max-w-[1400px] mx-auto
+        '.container-2xl': {
+          width: '100%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: 'var(--container-padding-xs)', // px-4
+          paddingRight: 'var(--container-padding-xs)',
+          maxWidth: 'var(--container-max-width-2xl)', // 1400px
+        },
+        
+        // Extra large container for full-width sections
+        '.container-3xl': {
+          width: '100%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: 'var(--container-padding-xs)', // px-4
+          paddingRight: 'var(--container-padding-xs)',
+          maxWidth: 'var(--container-max-width-3xl)', // 1600px
+        },
+        
+        // Utility containers with different padding
+        '.container-lg-padded': {
+          width: '100%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: 'var(--container-padding-xs)', // px-4
+          paddingRight: 'var(--container-padding-xs)',
+          paddingTop: 'var(--container-padding-sm)', // py-6 equivalent
+          paddingBottom: 'var(--container-padding-sm)',
+          maxWidth: 'var(--container-max-width-lg)', // 1024px
+        },
+        
+        '.container-2xl-padded': {
+          width: '100%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: 'var(--container-padding-xs)', // px-4
+          paddingRight: 'var(--container-padding-xs)',
+          paddingTop: 'var(--container-padding-sm)', // py-6 equivalent
+          paddingBottom: 'var(--container-padding-sm)',
+          maxWidth: 'var(--container-max-width-2xl)', // 1400px
+        }
+      });
+      
       const newUtilities = {
         // Image overlay utilities
         '.image-overlay': {
@@ -212,21 +304,6 @@ module.exports = {
           '&:hover::before': {
             opacity: '0'
           }
-        },
-        
-        // Text gradients
-        '.text-gradient': {
-          backgroundClip: 'text',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent'
-        },
-        
-        // Scroll snap utilities
-        '.scroll-snap-x': {
-          scrollSnapType: 'x mandatory'
-        },
-        '.scroll-snap-child': {
-          scrollSnapAlign: 'start'
         }
       }
       
@@ -235,54 +312,37 @@ module.exports = {
         '.portfolio-card': {
           position: 'relative',
           overflow: 'hidden',
-          borderRadius: theme('borderRadius.lg'),
-          boxShadow: theme('boxShadow.soft'),
+          boxShadow: 'var(--shadow-soft)',
           transition: 'all 0.3s ease',
           '&:hover': {
             transform: 'translateY(-5px)',
-            boxShadow: theme('boxShadow.large')
+            boxShadow: 'var(--shadow-medium)'
           }
         },
         
-        // Button components using CSS variables
+        // Button components using CSS variables - 핵심적인 것만
         '.btn-primary': {
-          backgroundColor: theme('colors.primary.600'),
-          color: theme('colors.white'),
-          padding: `${theme('spacing.3')} ${theme('spacing.6')}`,
-          borderRadius: theme('borderRadius.lg'),
-          fontWeight: theme('fontWeight.medium'),
-          transition: 'all 0.2s ease',
+          backgroundColor: 'var(--color-primary)',
+          color: 'var(--color-white)',
+          padding: 'var(--button-padding-y) var(--button-padding-x)',
+          fontWeight: 'var(--button-font-weight)',
+          transition: 'all var(--duration-200) ease',
           '&:hover': {
-            backgroundColor: theme('colors.primary.700'),
+            backgroundColor: 'var(--color-primary-dark)',
             transform: 'translateY(-1px)'
           }
         },
         
         '.btn-secondary': {
           backgroundColor: 'transparent',
-          color: theme('colors.primary.600'),
-          border: `2px solid ${theme('colors.primary.600')}`,
-          padding: `${theme('spacing.3')} ${theme('spacing.6')}`,
-          borderRadius: theme('borderRadius.lg'),
-          fontWeight: theme('fontWeight.medium'),
-          transition: 'all 0.2s ease',
+          color: 'var(--color-primary)',
+          border: '2px solid var(--color-primary)',
+          padding: 'var(--button-padding-y) var(--button-padding-x)',
+          fontWeight: 'var(--button-font-weight)',
+          transition: 'all var(--duration-200) ease',
           '&:hover': {
-            backgroundColor: theme('colors.primary.600'),
-            color: theme('colors.white')
-          }
-        },
-        
-        // Button using CSS variable
-        '.btn-primary-light': {
-          backgroundColor: 'var(--color-primary-light)',
-          color: 'var(--color-gray-800)',
-          padding: `${theme('spacing.3')} ${theme('spacing.6')}`,
-          borderRadius: theme('borderRadius.lg'),
-          fontWeight: theme('fontWeight.medium'),
-          transition: 'all 0.2s ease',
-          '&:hover': {
-            backgroundColor: 'var(--color-gray-100)',
-            transform: 'translateY(-1px)'
+            backgroundColor: 'var(--color-primary)',
+            color: 'var(--color-white)'
           }
         }
       }

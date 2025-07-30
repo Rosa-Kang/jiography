@@ -15,7 +15,7 @@
 					<hr class="horizontal-line">
 				</div>
 			</div>
-			<?php get_template_part('template-parts/components/ig/ig-feed') ;?>
+			<?php get_template_part('template-parts/components/IG/ig-feed') ;?>
 
 			<div class="container lg:max-w-[1024px] mx-auto px-4 py-6">
 				<div class="w-full flex justify-center items-center py-6 sm:px-6 lg:px-8">

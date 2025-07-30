@@ -12,6 +12,7 @@ import '../css/style.scss';
 
 // Import custom modules
 import { NavigationMenu } from './navigation.js';
+import { SliderManager } from './slider.js';
 
 /**
  * Lightweight Theme Class
@@ -21,9 +22,9 @@ class TheRosessomTheme {
     this.init();
   }
 
-  /**
-   * Initialize theme functionality
-   */
+/**
+ * Initialize theme functionality
+ */
   init() {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => {
@@ -34,30 +35,38 @@ class TheRosessomTheme {
     }
   }
 
-  /**
-   * Initialize essential components only
-   */
+/**
+ * Initialize essential components only
+ */
   initializeComponents() {
     this.initNavigation();
     this.initAOS();
     this.initLazyLoading();
-    this.initSwipers(); // Only if needed
+    this.initSwipers();
     this.initSmoothScroll();
     
     // Dispatch initialization complete event
     document.dispatchEvent(new CustomEvent('therosessom:initialized'));
   }
 
-  /**
-   * Initialize navigation
-   */
+/**
+ * Initialize navigation
+ */
   initNavigation() {
     this.navigation = new NavigationMenu();
   }
 
-  /**
-   * Initialize AOS (Animate On Scroll)
-   */
+/**
+ * Initialize Swiper sliders - 기존 메서드 교체
+ */
+  async initSwipers() {
+    this.sliderManager = new SliderManager();
+    await this.sliderManager.init();
+  }
+
+/**
+ * Initialize AOS (Animate On Scroll)
+ */
   initAOS() {
     AOS.init({
       duration: 800,
@@ -69,9 +78,9 @@ class TheRosessomTheme {
     });
   }
 
-  /**
-   * Simple lazy loading without external library
-   */
+/**
+ * Simple lazy loading without external library
+ */
   initLazyLoading() {
     // Native lazy loading support check
     if ('loading' in HTMLImageElement.prototype) {
@@ -81,7 +90,6 @@ class TheRosessomTheme {
         img.removeAttribute('data-src');
       });
     } else {
-      // Fallback for older browsers
       const images = document.querySelectorAll('img[data-src]');
       const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -99,67 +107,9 @@ class TheRosessomTheme {
     }
   }
 
-  /**
-   * Initialize Swiper only when needed with dynamic import
-   */
-  async initSwipers() {
-    const heroSlider = document.querySelector('.hero-swiper');
-    
-    // Exit early if no sliders exist
-    if (!heroSlider) {
-      return;
-    }
-
-    try {
-      // Dynamic import only when needed
-      const [{ default: Swiper }] = await Promise.all([
-        import('swiper/bundle'),
-        import('swiper/css/bundle')
-      ]);
-
-      // Hero slider - minimal configuration
-      if (heroSlider) {
-        const slideCount = heroSlider.querySelectorAll('.swiper-slide').length;
-        
-        if (slideCount > 1) {
-          new Swiper(heroSlider, {
-            loop: true,
-            autoplay: {
-              delay: 3000,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: false,
-            },
-            effect: 'fade',
-            fadeEffect: {
-              crossFade: true
-            },
-            speed: 2000,
-            touchRatio: 0.2,
-            simulateTouch: true,
-            allowTouchMove: true,
-            preloadImages: false,
-            lazy: {
-              loadPrevNext: true,
-              loadOnTransitionStart: true,
-            },
-            // Accessibility
-            a11y: {
-              enabled: true,
-              prevSlideMessage: 'Previous slide',
-              nextSlideMessage: 'Next slide',
-            }
-          });
-        }
-      }
-
-    } catch (error) {
-      console.error('Failed to load Swiper:', error);
-    }
-  }
-
-  /**
-   * Simple smooth scroll
-   */
+/**
+ * Simple smooth scroll
+ */
   initSmoothScroll() {
     const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
     
@@ -179,28 +129,24 @@ class TheRosessomTheme {
     });
   }
 
-  /**
-   * Get navigation instance
-   */
+/**
+ * Get navigation instance
+ */
   getNavigation() {
     return this.navigation;
   }
 
-  /**
-   * Reinitialize if needed
-   */
+/**
+ * Reinitialize if needed
+ */
   reinitialize() {
     this.initializeComponents();
   }
 }
+
 
 // Initialize theme
 const theme = new TheRosessomTheme();
 
 // Make theme available globally
 window.TheRosessomTheme = theme;
-
-// Theme initialization complete
-document.addEventListener('therosessom:initialized', () => {
-  console.log('🎉 TheRosessom Theme initialized');
-});

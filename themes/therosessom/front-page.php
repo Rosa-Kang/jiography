@@ -10,11 +10,9 @@
 echo "<!-- front-page.php is loading -->";
 get_header();
 
-get_template_part('template-parts/components/hero/hero-slider');
-// get_template_part('template-parts/section/intro');
-// get_template_part('template-parts/card/cards-quad');
-// get_template_part('template-parts/callout/callout-right');
-// get_template_part('template-parts/slider/slider-testimonials');
-// get_template_part('template-parts/section/signup-banner');
+get_template_part('template-parts/components/Hero/hero-slider');
+get_template_part('template-parts/components/Intro/intro');
+get_template_part('template-parts/components/Callout/callout-slider');
+get_template_part('template-parts/components/Testimonial/testimonials');
 
 get_footer();
