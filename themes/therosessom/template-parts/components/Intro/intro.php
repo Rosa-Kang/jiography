@@ -19,7 +19,11 @@ $intro_button = get_field('intro_button');
     <div class="container-lg">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 items-start">
             
-            <div class="order-1 p-[28px] lg:col-span-1 lg:pr-10 lg:pl-0" data-aos="fade-in" data-aos-delay="400" data-aos-duration="700" >
+            <div class="order-1 p-[28px] lg:col-span-1 lg:pr-10 lg:pl-0" 
+                 data-aos="fade-in" 
+                 data-aos-delay="600" 
+                 data-aos-duration="900" 
+                 data-aos-easing="ease-out-cubic">
                 <?php if ($intro_image): 
                     $image_url = is_array($intro_image) ? $intro_image['url'] : $intro_image;
                     $image_alt = is_array($intro_image) ? $intro_image['alt'] : 'Intro Image';
@@ -35,12 +39,20 @@ $intro_button = get_field('intro_button');
                                 $first_word = $decorative_words;
                             }
                             ?>
-                            <p class="text-2xl absolute -top-6 right-5 font-cursive text-gray-600">
+                            <p class="text-2xl absolute -top-6 right-5 font-cursive text-gray-600"
+                               data-aos="fade-in" 
+                               data-aos-delay="600" 
+                               data-aos-duration="600" 
+                               data-aos-easing="ease-out-quart">
                                 <?php echo esc_html($first_word); ?>
                             </p>
 
                             <?php if($rest_of_decorative): ?>
-                                <p class="text-4xl absolute -top-3 -right-8 font-cursive text-gray-600">
+                                <p class="text-4xl absolute -top-3 -right-8 font-cursive text-gray-600"
+                                   data-aos="fade-in" 
+                                   data-aos-delay="800" 
+                                   data-aos-duration="600" 
+                                   data-aos-easing="ease-out-quart">
                                     <?php echo esc_html($rest_of_decorative); ?>
                                 </p>
                             <?php endif;?>
@@ -51,20 +63,34 @@ $intro_button = get_field('intro_button');
                              class="w-full h-full object-cover">
                                         <!-- Subtitle -->
                         <?php if ($intro_subtitle): ?>
-                            <p class="text-2xs text-center absolute bottom-3 left-1/2 translate-x-[-50%] uppercase tracking-widest text-gray-600 font-medium">
-                                <?php echo esc_html($intro_subtitle); ?>
-                            </p>
+                            <div class="absolute bottom-3 left-0 right-0 flex justify-center">
+                                <p class="text-2xs text-center uppercase tracking-widest text-gray-600 font-medium" 
+                                data-aos="fade-in" 
+                                data-aos-delay="300" 
+                                data-aos-duration="1500" 
+                                data-aos-easing="ease-out-back">
+                                    <?php echo esc_html($intro_subtitle); ?>
+                                </p>
+                            </div>
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
             </div>
 
             <!-- Right Column - Content -->
-            <div class="order-2 p-6 lg:col-span-2 lg:pl-[174px] space-y-6" data-aos="fade-in" data-aos-delay="400" data-aos-duration="700" >
+            <div class="order-2 p-6 lg:col-span-2 lg:pl-[174px] space-y-6" 
+                 data-aos="fade-in" 
+                 data-aos-delay="400" 
+                 data-aos-duration="900" 
+                 data-aos-easing="ease-out-cubic">
                 
                 <!-- Title -->
                 <?php if ($intro_title): ?>
-                    <h2 class="text-4xl lg:text-5xl font-primary text-gray-900 leading-tight">
+                    <h2 class="text-4xl lg:text-5xl font-primary text-gray-900 leading-tight"
+                        data-aos="fade-in" 
+                        data-aos-delay="600" 
+                        data-aos-duration="700" 
+                        data-aos-easing="ease-out-quart">
                         <span class="block font-normal"><?php echo esc_html($intro_title); ?></span>
                     </h2>
                 <?php endif; ?>
@@ -74,14 +100,22 @@ $intro_button = get_field('intro_button');
                     
                     <!-- Left Content -->  
                     <?php if ($intro_content_left): ?>
-                        <div class="space-y-4">
+                        <div class="space-y-4"
+                             data-aos="fade-in" 
+                             data-aos-delay="700" 
+                             data-aos-duration="600" 
+                             data-aos-easing="ease-out-sine">
                               <?php echo $intro_content_left; ?>
                         </div>
                     <?php endif; ?>
 
                     <!-- Right Content -->
                     <?php if ($intro_content_right): ?>
-                        <div class="space-y-4">
+                        <div class="space-y-4"
+                             data-aos="fade-in" 
+                             data-aos-delay="900" 
+                             data-aos-duration="600" 
+                             data-aos-easing="ease-out-sine">
                              <?php echo $intro_content_right; ?>
                         </div>
                     <?php endif; ?>
@@ -93,7 +127,11 @@ $intro_button = get_field('intro_button');
                     $button_text = esc_html($intro_button['title']);
                     $button_target = esc_attr($intro_button['target'] ?: '_self');
                 ?>
-                    <div class="pt-4 flex justify-end">
+                    <div class="pt-4 flex justify-end"
+                         data-aos="fade-in" 
+                         data-aos-delay="900" 
+                         data-aos-duration="700" 
+                         data-aos-easing="ease-out-back">
                         <a href="<?php echo $button_url; ?>" 
                            target="<?php echo $button_target; ?>"
                            class="btn-primary flex text-xs uppercase tracking-widest font-medium">

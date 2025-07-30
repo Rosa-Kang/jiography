@@ -6,6 +6,7 @@
  */
 
 // Get ACF callout slider data
+$bg_image = get_field('callout_slides_bg_image');
 $title = get_field('callout_slides_title');
 $subtitle = get_field('callout_slides_subtitle');
 $thought_image = get_field('callout_slides_thought_image');
@@ -23,7 +24,7 @@ if (!$callout_slides || !is_array($callout_slides)) {
 
 ?>
 
-<section class="callout-slider bg-neutral-100 min-h-screen relative">
+<section class="callout-slider min-h-screen relative">
     <div class="w-full h-screen flex">
         <!-- Left Content Section -->
         <div class="bg-neutral-100 p-8 lg:p-16 flex-1 flex flex-col justify-between relative">
