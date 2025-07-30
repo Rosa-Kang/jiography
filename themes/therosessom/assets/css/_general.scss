@@ -19,6 +19,20 @@
 * Polaroid Frame
 **/
 .polaroid-frame {
-    padding: 0.75rem 0.75rem 5.25rem;
+    padding: 0.75rem 0.75rem 4rem;
     background: $color-white;
+}
+
+/**
+* Button Style Arrow
+**/
+.btn-primary {
+    img{
+        transition: $transition;
+    }
+    &:hover {
+        img {
+            transform: rotate(45deg) translateX(5px);
+        }
+    }
 }

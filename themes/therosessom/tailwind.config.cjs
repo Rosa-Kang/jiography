@@ -97,10 +97,12 @@ module.exports = {
         'body': ['var(--font-body)'],
         'mono': ['JetBrains Mono', 'monospace'],
         'display': ['Playfair Display', 'Georgia', 'serif'],
+        'cursive': ['Dancing Script', 'cursive'],
       },
       
       // Font sizes using CSS variables
       fontSize: {
+        '2xs': 'var(--font-size-2xs)',
         'xs': 'var(--font-size-xs)',
         'sm': 'var(--font-size-sm)', 
         'base': 'var(--font-size-base)',
@@ -307,48 +309,7 @@ module.exports = {
         }
       }
       
-      const newComponents = {
-        // Portfolio card component
-        '.portfolio-card': {
-          position: 'relative',
-          overflow: 'hidden',
-          boxShadow: 'var(--shadow-soft)',
-          transition: 'all 0.3s ease',
-          '&:hover': {
-            transform: 'translateY(-5px)',
-            boxShadow: 'var(--shadow-medium)'
-          }
-        },
-        
-        // Button components using CSS variables - 핵심적인 것만
-        '.btn-primary': {
-          backgroundColor: 'var(--color-primary)',
-          color: 'var(--color-white)',
-          padding: 'var(--button-padding-y) var(--button-padding-x)',
-          fontWeight: 'var(--button-font-weight)',
-          transition: 'all var(--duration-200) ease',
-          '&:hover': {
-            backgroundColor: 'var(--color-primary-dark)',
-            transform: 'translateY(-1px)'
-          }
-        },
-        
-        '.btn-secondary': {
-          backgroundColor: 'transparent',
-          color: 'var(--color-primary)',
-          border: '2px solid var(--color-primary)',
-          padding: 'var(--button-padding-y) var(--button-padding-x)',
-          fontWeight: 'var(--button-font-weight)',
-          transition: 'all var(--duration-200) ease',
-          '&:hover': {
-            backgroundColor: 'var(--color-primary)',
-            color: 'var(--color-white)'
-          }
-        }
-      }
-      
       addUtilities(newUtilities)
-      addComponents(newComponents)
     }
   ]
 }

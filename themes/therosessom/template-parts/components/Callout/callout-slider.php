@@ -85,13 +85,13 @@ if (!$callout_slides || !is_array($callout_slides)) {
                         
                         <?php if ($way_content_left): ?>
                             <div>
-                                <p><?php echo esc_html($way_content_left); ?></p>
+                                <?php echo $way_content_left; ?>
                             </div>
                         <?php endif; ?>
     
                         <?php if ($way_content_right): ?>
                             <div>
-                                <p><?php echo esc_html($way_content_right); ?></p>
+                                <?php echo $way_content_right; ?>
                             </div>
                         <?php endif; ?>
                     </div>

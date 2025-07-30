@@ -2,6 +2,11 @@
  * Font Definitions for Therosessom Theme
  * Custom font loading with modern CSS features
  */
+ // Cursive Font Import
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+// Heebo Font Import
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap');
 
 // Perfectly Nineties - Regular
 @font-face {
@@ -20,9 +25,6 @@
     font-display: swap;
     unicode-range: U+0020-007F, U+AC00-D7AF;
 }
-
-// Heebo Font Import
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap');
 
 // CSS Custom Properties
 :root {

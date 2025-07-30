@@ -36,6 +36,7 @@ $color-gray-900: #171717;
 $font-primary: 'Perfectly Nineties', Georgia, serif;
 $font-body: 'Inter', system-ui, sans-serif;
 
+$font-size-2xs: 0.54rem;
 $font-size-xs: 0.75rem;     // 12px
 $font-size-sm: 0.875rem;    // 14px
 $font-size-base: 1rem;      // 16px
@@ -184,6 +185,7 @@ $button-font-weight: $font-weight-medium;
   --font-body: #{$font-body};
   
   // Font Sizes
+  --font-size-2xs: #{$font-size-2xs};
   --font-size-xs: #{$font-size-xs};
   --font-size-sm: #{$font-size-sm};
   --font-size-base: #{$font-size-base};
