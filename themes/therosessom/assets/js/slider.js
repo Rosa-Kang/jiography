@@ -152,18 +152,17 @@ initCallout(element, Swiper) {
         if (slideCount <= 1) return;
 
         const swiper = new Swiper(element, {
-            loop: true,
+            // loop: true,
             effect: 'fade',
             fadeEffect: { crossFade: true },
             speed: 800,
             autoplay: {
-                delay: 8000,
+                delay: 3000,
                 disableOnInteraction: false,
             },
             a11y: { enabled: true }
         });
 
-        // Bind number clicks
         document.querySelectorAll('.testimonial-number').forEach(number => {
             number.addEventListener('click', () => {
                 const slideIndex = parseInt(number.getAttribute('data-slide'));

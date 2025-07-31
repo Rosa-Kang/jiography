@@ -14,9 +14,6 @@ $short_code = get_field('ig_shortcode', 'option');
 
 <section 
   class="relative py-6" 
-  data-aos="fade-in" 
-  data-aos-easing="ease" 
-  data-aos-once="true"
 >
   <div class="container lg:max-w-[1024px] mx-auto px-4">
     <div class="flex flex-col items-center">

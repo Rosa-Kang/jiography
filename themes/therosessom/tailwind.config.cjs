@@ -183,7 +183,7 @@ module.exports = {
         sm: 'var(--container-max-width-sm)',    // 640px
         md: 'var(--container-max-width-md)',    // 768px  
         lg: 'var(--container-max-width-lg)',    // 1024px - matches your lg:max-w-[1024px]
-        xl: 'var(--container-max-width-xl)',    // 1280px
+        xl: 'var(--container-max-width-xl)',    // 1200px
         '2xl': 'var(--container-max-width-2xl)' // 1400px - matches your lg:max-w-[1400px]
       }
     }

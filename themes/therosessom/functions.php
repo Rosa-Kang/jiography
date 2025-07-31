@@ -192,31 +192,33 @@ if (!isset($content_width)) {
 /**
  * ACF Pro Integration - Theme Options pages
  */
-if (function_exists('acf_add_options_page')) {
-    // Main Theme Options page
-    acf_add_options_page([
-        'page_title'  => __('Theme Options', 'therosessom'),
-        'menu_title'  => __('Theme Options', 'therosessom'),
-        'menu_slug'   => 'theme-options',
-        'capability'  => 'edit_posts',
-        'icon_url'    => 'dashicons-admin-generic',
-        'redirect'    => true, 
-    ]);
+add_action('init', function() {
+    if (function_exists('acf_add_options_page')) {
+        // Main Theme Options page
+        acf_add_options_page([
+            'page_title'  => __('Theme Options', 'therosessom'),
+            'menu_title'  => __('Theme Options', 'therosessom'),
+            'menu_slug'   => 'theme-options',
+            'capability'  => 'edit_posts',
+            'icon_url'    => 'dashicons-admin-generic',
+            'redirect'    => true, 
+        ]);
 
-    // Site Settings sub-page
-    acf_add_options_sub_page([
-        'page_title'  => __('Site Settings', 'therosessom'),
-        'menu_title'  => __('Site Settings', 'therosessom'),
-        'parent_slug' => 'theme-options',
-    ]);
+        // Site Settings sub-page
+        acf_add_options_sub_page([
+            'page_title'  => __('Site Settings', 'therosessom'),
+            'menu_title'  => __('Site Settings', 'therosessom'),
+            'parent_slug' => 'theme-options',
+        ]);
 
-    // Business Settings sub-page
-    acf_add_options_sub_page([
-        'page_title'  => __('Business Settings', 'therosessom'),
-        'menu_title'  => __('Business Settings', 'therosessom'),
-        'parent_slug' => 'theme-options',
-    ]);
-}
+        // Business Settings sub-page
+        acf_add_options_sub_page([
+            'page_title'  => __('Business Settings', 'therosessom'),
+            'menu_title'  => __('Business Settings', 'therosessom'),
+            'parent_slug' => 'theme-options',
+        ]);
+    }
+});
 
 /**
  * Optional: Hide unnecessary admin menu items

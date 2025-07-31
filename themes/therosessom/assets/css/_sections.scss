@@ -34,7 +34,6 @@
 }
 
 
-
 /**
 * Callout-Slider Section
 **/
@@ -109,6 +108,31 @@
     .callout-swiper .swiper-slide .text-xs p { 
         font-family: var(--font-body);
         font-size: var(--font-size-2xs); 
+    }
+}
+
+/**
+* Testimonials Section
+**/
+.testimonials {
+    .polaroid-frame {
+        background-color: white;
+        padding: 1rem; 
+        padding-bottom: 0.75rem; 
+        box-shadow: $shadow-lg;
+        transition: $transition;
+        max-width: 390px;
+    }
+
+    .polaroid-frame img {
+        margin-bottom: 1rem; 
+    }
+
+    .testimonial-content-area {
+        transition: opacity 0.4s ease-in-out;
+    }
+    .testimonial-content-area.is-fading {
+        opacity: 0;
     }
 }
 

@@ -40,7 +40,7 @@ if ($bg_image && isset($bg_image['url'])) {
         <div class="<?php echo $class;?> px-8 py-16 lg:px-16 lg:py-[96px] flex-1 flex flex-col justify-between relative">
             <div>
                 <!-- Top Section - The Thought -->
-                <div data-aos="fade-up" data-aos-delay="200">
+                <div>
                     
                     <!-- Title -->
                     <?php if ($title || $subtitle): ?>
@@ -82,7 +82,7 @@ if ($bg_image && isset($bg_image['url'])) {
                 </div>
     
                 <!-- Bottom Section - The Way I See -->
-                <div class="space-y-6 mt-12 px-6" data-aos="fade" data-aos-delay="400">
+                <div class="space-y-6 mt-12 px-6">
                     <?php if ($way_title): ?>
                         <h3 class="text-2xl lg:text-3xl font-light font-primary text-gray-800 italic leading-tight">
                             <?php echo esc_html($way_title); ?>
@@ -110,20 +110,11 @@ if ($bg_image && isset($bg_image['url'])) {
                     $button_text = esc_html($callout_slides_button['title']);
                     $button_target = esc_attr($callout_slides_button['target'] ?: '_self');
                 ?>
-                    <div class="pt-4 flex justify-end"
-                         data-aos="fade-in" 
-                         data-aos-delay="900" 
-                         data-aos-duration="700" 
-                         data-aos-easing="ease-out-back">
+                    <div class="pt-4 flex justify-end">
                         <a href="<?php echo $button_url; ?>" 
                            target="<?php echo $button_target; ?>"
                            class="btn-primary flex text-xs uppercase tracking-widest font-medium">
                             <span><?php echo $button_text; ?></span>
-                            <div class="pl-2">
-                               <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-forward.svg" 
-                                    alt="Arrow" 
-                                    class="w-4 h-4 transform rotate-45 transition"> 
-                            </div>
                         </a>
                     </div>
                 <?php endif; ?>
@@ -140,7 +131,7 @@ if ($bg_image && isset($bg_image['url'])) {
                     <?php foreach ($callout_slides as $index => $slide): ?>
                     <div class="swiper-slide">
                         <!-- Right Image Area -->
-                        <div class="relative bg-white overflow-hidden w-full h-full" data-aos="fade-left" data-aos-delay="300">
+                        <div class="relative bg-white overflow-hidden w-full h-full">
                             <?php if (!empty($slide['slide_image'])): 
                                 $slide_img_url = is_array($slide['slide_image']) ? $slide['slide_image']['url'] : $slide['slide_image'];
                                 $slide_img_alt = is_array($slide['slide_image']) ? $slide['slide_image']['alt'] : 'Main Slide Image';

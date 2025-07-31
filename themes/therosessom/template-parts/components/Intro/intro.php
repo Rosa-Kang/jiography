@@ -128,19 +128,13 @@ $intro_button = get_field('intro_button');
                     $button_target = esc_attr($intro_button['target'] ?: '_self');
                 ?>
                     <div class="pt-4 flex justify-end"
-                         data-aos="fade-in" 
-                         data-aos-delay="900" 
-                         data-aos-duration="700" 
+                         data-aos="fade-up" 
+                         data-aos-duration="900" 
                          data-aos-easing="ease-out-back">
                         <a href="<?php echo $button_url; ?>" 
                            target="<?php echo $button_target; ?>"
                            class="btn-primary flex text-xs uppercase tracking-widest font-medium">
                             <span><?php echo $button_text; ?></span>
-                            <div class="pl-2">
-                               <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-forward.svg" 
-                                    alt="Arrow" 
-                                    class="w-4 h-4 transform rotate-45 transition"> 
-                            </div>
                         </a>
                     </div>
                 <?php endif; ?>

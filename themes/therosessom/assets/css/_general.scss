@@ -27,11 +27,27 @@
 * Button Style Arrow
 **/
 .btn-primary {
-    img{
-        transition: $transition;
+    > span {
+        position: relative;
+        
+        &::after {
+            content: '';
+            display: inline-block;
+            width: 16px; 
+            height: 16px;
+            background-image: url('@images/arrow-forward.svg');
+            transform: rotate(45deg);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-left: 3px;
+            transition: $transition;
+            vertical-align: middle;
+        }
     }
+    
     &:hover {
-        img {
+        > span::after {
             transform: rotate(45deg) translateX(5px);
         }
     }
