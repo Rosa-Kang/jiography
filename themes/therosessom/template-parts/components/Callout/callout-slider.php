@@ -15,7 +15,7 @@ $way_title = get_field('way_title');
 $way_content_left = get_field('way_content_left');
 $way_content_right = get_field('way_content_right');
 $callout_slides = get_field('callout_slides');
-$works_button = get_field('works_button');
+$callout_slides_button = get_field('callout_slides_button');
 
 // Check if slides exist before rendering
 if (!$callout_slides || !is_array($callout_slides)) {
@@ -35,24 +35,24 @@ if ($bg_image && isset($bg_image['url'])) {
 ?>
 
 <section class="callout-slider min-h-screen relative" style="<?php echo $background_style; ?>">
-    <div class="w-full h-screen flex">
+    <div class="w-full h-screen flex flex-col md:flex-row">
         <!-- Left Content Section -->
-        <div class="<?php echo $class;?> p-8 lg:p-16 flex-1 flex flex-col justify-between relative">
+        <div class="<?php echo $class;?> px-8 py-16 lg:px-16 lg:py-[96px] flex-1 flex flex-col justify-between relative">
             <div>
                 <!-- Top Section - The Thought -->
-                <div class="space-y-6" data-aos="fade-up" data-aos-delay="200">
+                <div data-aos="fade-up" data-aos-delay="200">
                     
                     <!-- Title -->
                     <?php if ($title || $subtitle): ?>
                     <div class="space-y-2">
                         <?php if ($title): ?>
-                            <h2 class="text-2xl lg:text-3xl font-light font-primary text-gray-800 italic leading-tight">
+                            <h2 class="italic lowercase text-2xl lg:text-4xl -mb-6 font-light font-primary text-gray-800 leading-tight">
                                 <?php echo esc_html($title); ?>
                             </h2>
                         <?php endif; ?>
                         
                         <?php if ($subtitle): ?>
-                            <h3 class="text-xl lg:text-2xl font-bold font-primary text-gray-900 uppercase tracking-wide">
+                            <h3 class="italic uppercase text-3xl lg:text-5xl font-bold font-primary text-gray-900">
                                 <?php echo esc_html($subtitle); ?>
                             </h3>
                         <?php endif; ?>
@@ -60,12 +60,12 @@ if ($bg_image && isset($bg_image['url'])) {
                     <?php endif; ?>
     
                     <!-- Content with Image -->
-                    <div class="flex gap-6 items-start">
+                    <div class="flex flex-col gap-2 px-6 items-start">
                         <?php if ($thought_image): 
                             $thought_img_url = is_array($thought_image) ? $thought_image['url'] : $thought_image;
                             $thought_img_alt = is_array($thought_image) ? $thought_image['alt'] : 'Thought Image';
                         ?>
-                            <div class="flex-shrink-0 w-20 lg:w-24">
+                            <div class="flex-shrink-0 w-20 lg:w-36">
                                 <img src="<?php echo esc_url($thought_img_url); ?>" 
                                         alt="<?php echo esc_attr($thought_img_alt); ?>"
                                         class="w-full aspect-[3/4] object-cover grayscale">
@@ -82,9 +82,7 @@ if ($bg_image && isset($bg_image['url'])) {
                 </div>
     
                 <!-- Bottom Section - The Way I See -->
-                <div class="space-y-6 mt-12" data-aos="fade" data-aos-delay="400">
-                    
-                    <!-- Title -->
+                <div class="space-y-6 mt-12 px-6" data-aos="fade" data-aos-delay="400">
                     <?php if ($way_title): ?>
                         <h3 class="text-2xl lg:text-3xl font-light font-primary text-gray-800 italic leading-tight">
                             <?php echo esc_html($way_title); ?>
@@ -106,23 +104,35 @@ if ($bg_image && isset($bg_image['url'])) {
                             </div>
                         <?php endif; ?>
                     </div>
+
+                <?php if ($callout_slides_button): 
+                    $button_url = esc_url($callout_slides_button['url']);
+                    $button_text = esc_html($callout_slides_button['title']);
+                    $button_target = esc_attr($callout_slides_button['target'] ?: '_self');
+                ?>
+                    <div class="pt-4 flex justify-end"
+                         data-aos="fade-in" 
+                         data-aos-delay="900" 
+                         data-aos-duration="700" 
+                         data-aos-easing="ease-out-back">
+                        <a href="<?php echo $button_url; ?>" 
+                           target="<?php echo $button_target; ?>"
+                           class="btn-primary flex text-xs uppercase tracking-widest font-medium">
+                            <span><?php echo $button_text; ?></span>
+                            <div class="pl-2">
+                               <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-forward.svg" 
+                                    alt="Arrow" 
+                                    class="w-4 h-4 transform rotate-45 transition"> 
+                            </div>
+                        </a>
+                    </div>
+                <?php endif; ?>
                 </div>
             </div>
-    
-            <!-- Works Button -->
-            <?php if ($works_button && !empty($works_button['url'])): ?>
-            <div class="mt-8" data-aos="fade-up" data-aos-delay="600">
-                <a href="<?php echo esc_url($works_button['url']); ?>" 
-                    target="<?php echo esc_attr($works_button['target'] ?: '_self'); ?>"
-                    class="btn-arrow-simple inline-block text-gray-900 text-xs uppercase tracking-widest font-medium hover:text-gray-700 transition-colors duration-300 relative pr-8">
-                    <?php echo esc_html($works_button['title'] ?: 'View Works'); ?>
-                </a>
-            </div>
-            <?php endif; ?>
         </div>
                             
         <!-- Right Swiper Section -->
-        <div class="flex-1 relative">
+        <div class="flex-1 relative px-8 py-16 lg:px-16 lg:py-[96px]">
             <!-- Swiper Container -->
             <div class="callout-swiper swiper w-full h-full">
                 <div class="swiper-wrapper">
@@ -138,11 +148,6 @@ if ($bg_image && isset($bg_image['url'])) {
                                 <img src="<?php echo esc_url($slide_img_url); ?>" 
                                     alt="<?php echo esc_attr($slide_img_alt); ?>"
                                     class="w-full h-full object-cover">
-                            <?php else: ?>
-                                <!-- Placeholder for demo -->
-                                <div class="w-full h-full bg-gray-200 flex items-center justify-center">
-                                    <span class="text-gray-400">Studio Image Placeholder</span>
-                                </div>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -151,20 +156,15 @@ if ($bg_image && isset($bg_image['url'])) {
             </div>
 
             <!-- Vertical Dot Navigation -->
-            <?php if (count($callout_slides) > 1): ?>
-            <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-                <div class="callout-pagination flex flex-col space-y-4">
-                    <?php foreach ($callout_slides as $index => $slide): ?>
-                        <button class="w-2 h-2 rounded-full bg-gray-400 opacity-50 transition-all duration-300 hover:opacity-100 pagination-dot" 
-                                data-slide="<?php echo esc_attr($index); ?>"></button>
-                    <?php endforeach; ?>
+             <?php if (count($callout_slides) > 1): ?>
+                <div class="absolute left-4 top-1/2 transform -translate-y-1/2 z-20">
+                    <div class="swiper-pagination-vertical-bullets"></div>
                 </div>
-            </div>
             <?php endif; ?>
 
             <!-- Slide Counter -->
             <?php if (count($callout_slides) > 1): ?>
-            <div class="absolute bottom-8 right-8 z-20">
+            <div class="absolute bottom-16 left-1/2 -translate-x-1/2 z-20">
                 <span class="callout-counter text-xs text-gray-600 font-mono">
                     (<span class="current-slide">1</span>/<span class="total-slides"><?php echo count($callout_slides); ?></span>)
                 </span>

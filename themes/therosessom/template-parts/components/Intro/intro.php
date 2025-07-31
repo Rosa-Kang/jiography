@@ -39,7 +39,7 @@ $intro_button = get_field('intro_button');
                                 $first_word = $decorative_words;
                             }
                             ?>
-                            <p class="text-2xl absolute -top-6 right-5 font-cursive text-gray-600"
+                            <p class="z-10 text-2xl absolute -top-6 right-5 font-cursive text-gray-600"
                                data-aos="fade-in" 
                                data-aos-delay="600" 
                                data-aos-duration="600" 
@@ -48,7 +48,7 @@ $intro_button = get_field('intro_button');
                             </p>
 
                             <?php if($rest_of_decorative): ?>
-                                <p class="text-4xl absolute -top-3 -right-8 font-cursive text-gray-600"
+                                <p class="z-10 text-4xl absolute -top-3 -right-8 font-cursive text-gray-600"
                                    data-aos="fade-in" 
                                    data-aos-delay="800" 
                                    data-aos-duration="600" 
@@ -60,7 +60,7 @@ $intro_button = get_field('intro_button');
 
                         <img src="<?php echo esc_url($image_url); ?>" 
                              alt="<?php echo esc_attr($image_alt); ?>"
-                             class="w-full h-full object-cover">
+                             class="w-full h-full object-cover grayscale">
                                         <!-- Subtitle -->
                         <?php if ($intro_subtitle): ?>
                             <div class="absolute bottom-3 left-0 right-0 flex justify-center">

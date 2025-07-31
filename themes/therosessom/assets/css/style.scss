@@ -13,7 +13,9 @@
  * Modern WordPress Photography Theme with Tailwind CSS
  */
 @use 'navigation' as *;
-
+:root {
+    --swiper-pagination-color: #{$color-gray-800};
+}
 
 // Custom photography theme styles
 .therosessom-theme {
