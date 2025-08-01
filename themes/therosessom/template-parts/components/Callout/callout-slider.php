@@ -31,20 +31,19 @@ if ($bg_image && isset($bg_image['url'])) {
     $background_style = 'background-image: url(' . esc_url($bg_image['url']) . '); background-size: cover; background-position: center;';
 }
 
-
 ?>
 
-<section class="callout-slider min-h-screen relative" style="<?php echo $background_style; ?>">
-    <div class="w-full h-screen flex flex-col md:flex-row">
+<section class="callout-slider relative" style="<?php echo $background_style; ?>">
+    <div class="w-full flex flex-col lg:flex-row lg:items-center lg:justify-around">
         <!-- Left Content Section -->
-        <div class="<?php echo $class;?> px-8 py-16 lg:px-16 lg:py-[96px] flex-1 flex flex-col justify-between relative">
+        <div class="<?php echo $class;?> px-8 py-16 lg:px-16 lg:py-[82px] max-w-[660px] flex-1 flex-col justify-between relative">
             <div>
                 <!-- Top Section - The Thought -->
                 <div>
                     
                     <!-- Title -->
                     <?php if ($title || $subtitle): ?>
-                    <div class="space-y-2">
+                    <div class="space-y-2" data-aos="fade-in"  dat-aos-delay="100">
                         <?php if ($title): ?>
                             <h2 class="italic lowercase text-2xl lg:text-4xl -mb-6 font-light font-primary text-gray-800 leading-tight">
                                 <?php echo esc_html($title); ?>
@@ -65,7 +64,7 @@ if ($bg_image && isset($bg_image['url'])) {
                             $thought_img_url = is_array($thought_image) ? $thought_image['url'] : $thought_image;
                             $thought_img_alt = is_array($thought_image) ? $thought_image['alt'] : 'Thought Image';
                         ?>
-                            <div class="flex-shrink-0 w-20 lg:w-36">
+                            <div class="flex-shrink-0 w-20 lg:w-36" data-aos="fade-in"  dat-aos-delay="200">
                                 <img src="<?php echo esc_url($thought_img_url); ?>" 
                                         alt="<?php echo esc_attr($thought_img_alt); ?>"
                                         class="w-full aspect-[3/4] object-cover grayscale">
@@ -82,7 +81,7 @@ if ($bg_image && isset($bg_image['url'])) {
                 </div>
     
                 <!-- Bottom Section - The Way I See -->
-                <div class="space-y-6 mt-12 px-6">
+                <div class=" mt-12 px-6">
                     <?php if ($way_title): ?>
                         <h3 class="text-2xl lg:text-3xl font-light font-primary text-gray-800 italic leading-tight">
                             <?php echo esc_html($way_title); ?>
@@ -93,13 +92,13 @@ if ($bg_image && isset($bg_image['url'])) {
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs leading-relaxed text-gray-700">
                         
                         <?php if ($way_content_left): ?>
-                            <div>
+                            <div data-aos="fade-in" dat-aos-delay="300">
                                 <?php echo $way_content_left; ?>
                             </div>
                         <?php endif; ?>
     
                         <?php if ($way_content_right): ?>
-                            <div>
+                            <div data-aos="fade-in" dat-aos-delay="400">
                                 <?php echo $way_content_right; ?>
                             </div>
                         <?php endif; ?>
@@ -123,35 +122,34 @@ if ($bg_image && isset($bg_image['url'])) {
         </div>
                             
         <!-- Right Swiper Section -->
-        <div class="flex-1 relative px-8 py-16 lg:px-16 lg:py-[96px]">
+        <div class="flex items-center relative px-8 py-16 lg:px-16 lg:py-[96px]">
             <!-- Swiper Container -->
-            <div class="callout-swiper swiper w-full h-full">
-                <div class="swiper-wrapper">
-                    
+            <div class="callout-swiper swiper h-[647px]">
+                <div class="swiper-wrapper">   
                     <?php foreach ($callout_slides as $index => $slide): ?>
                     <div class="swiper-slide">
                         <!-- Right Image Area -->
-                        <div class="relative bg-white overflow-hidden w-full h-full">
+                        <div class="relative bg-transparent px-5 overflow-hidden size-fit">
                             <?php if (!empty($slide['slide_image'])): 
                                 $slide_img_url = is_array($slide['slide_image']) ? $slide['slide_image']['url'] : $slide['slide_image'];
                                 $slide_img_alt = is_array($slide['slide_image']) ? $slide['slide_image']['alt'] : 'Main Slide Image';
                             ?>
                                 <img src="<?php echo esc_url($slide_img_url); ?>" 
                                     alt="<?php echo esc_attr($slide_img_alt); ?>"
-                                    class="w-full h-full object-cover">
+                                    class="h-[647px] aspect-[3/4] object-cover">
                             <?php endif; ?>
                         </div>
                     </div>
                     <?php endforeach; ?>
                 </div>
+                <!-- Vertical Dot Navigation -->
+                 <?php if (count($callout_slides) > 1): ?>
+                    <div class="absolute -left-0 top-1/2 transform -translate-y-1/2 z-20">
+                        <div class="swiper-pagination-vertical-bullets"></div>
+                    </div>
+                <?php endif; ?>
             </div>
 
-            <!-- Vertical Dot Navigation -->
-             <?php if (count($callout_slides) > 1): ?>
-                <div class="absolute left-4 top-1/2 transform -translate-y-1/2 z-20">
-                    <div class="swiper-pagination-vertical-bullets"></div>
-                </div>
-            <?php endif; ?>
 
             <!-- Slide Counter -->
             <?php if (count($callout_slides) > 1): ?>

@@ -78,73 +78,73 @@ export class SliderManager {
         });
     }
 
-/**
- * Initialize callout slider
- */
-initCallout(element, Swiper) {
-    if (!element) return;
+    /**
+     * Initialize callout slider
+     */
+    initCallout(element, Swiper) {
+        if (!element) return;
 
-    const slideCount = element.querySelectorAll('.swiper-slide').length;
-    if (slideCount <= 1) return;
+        const slideCount = element.querySelectorAll('.swiper-slide').length;
+        if (slideCount <= 1) return;
 
-    const currentSlideSpan = document.querySelector('.callout-counter .current-slide');
+        const currentSlideSpan = document.querySelector('.callout-counter .current-slide');
 
-        new Swiper(element, {
-        direction: 'vertical',
-        effect: 'fade',
-        fadeEffect: { crossFade: true },
-        speed: 500,
-        loop: true,
-        autoplay: {
-            delay: 5000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: '.swiper-pagination-vertical-bullets',
-            clickable: true,
-        },
-        on: {
-            init: function () {
-                const slides = this.slides;
-                slides.forEach((slide, idx) => {
-                    const img = slide.querySelector('img');
-                    if (img) {
-                        if (idx === this.activeIndex) {
-                            img.style.filter = 'none';
-                        } else {
-                            img.style.filter = 'blur(4px)';
-                        }
-                    }
-                });
-                
-                if (currentSlideSpan) {
-                    currentSlideSpan.textContent = this.realIndex + 1; 
-                }
+            new Swiper(element, {
+            direction: 'vertical',
+            effect: 'fade',
+            fadeEffect: { crossFade: true },
+            speed: 500,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
             },
-            slideChangeTransitionEnd: function () {
-                const slides = this.slides;
-                slides.forEach((slide, idx) => {
-                    const img = slide.querySelector('img');
-                    if (img) {
-                        if (idx === this.activeIndex) {
-                            img.style.filter = 'none';
-                        } else {
-                            img.style.filter = 'blur(4px)';
-                        }
-                    }
-                });
-
-                if (currentSlideSpan) {
-                    currentSlideSpan.textContent = this.realIndex + 1; 
-                }
+            pagination: {
+                el: '.swiper-pagination-vertical-bullets',
+                clickable: true,
             },
-        },
-    });
-}
+            on: {
+                init: function () {
+                    const slides = this.slides;
+                    slides.forEach((slide, idx) => {
+                        const img = slide.querySelector('img');
+                        if (img) {
+                            if (idx === this.activeIndex) {
+                                img.style.filter = 'none';
+                            } else {
+                                img.style.filter = 'blur(4px)';
+                            }
+                        }
+                    });
+                    
+                    if (currentSlideSpan) {
+                        currentSlideSpan.textContent = this.realIndex + 1; 
+                    }
+                },
+                slideChangeTransitionEnd: function () {
+                    const slides = this.slides;
+                    slides.forEach((slide, idx) => {
+                        const img = slide.querySelector('img');
+                        if (img) {
+                            if (idx === this.activeIndex) {
+                                img.style.filter = 'none';
+                            } else {
+                                img.style.filter = 'blur(4px)';
+                            }
+                        }
+                    });
 
-/**
- * Initialize testimonials slider
- */
+                    if (currentSlideSpan) {
+                        currentSlideSpan.textContent = this.realIndex + 1; 
+                    }
+                },
+            },
+        });
+    }
+
+    /**
+     * Initialize testimonials slider
+     */
     initTestimonials(element, Swiper) {
         if (!element) return;
         
@@ -152,13 +152,19 @@ initCallout(element, Swiper) {
         if (slideCount <= 1) return;
 
         const swiper = new Swiper(element, {
-            // loop: true,
             effect: 'fade',
             fadeEffect: { crossFade: true },
             speed: 800,
             autoplay: {
                 delay: 3000,
                 disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                renderBullet: function (index, className) {
+                return '<span class="' + className + '">' + String(index + 1).padStart(2, '0') + '</span>';
+                },
             },
             a11y: { enabled: true }
         });

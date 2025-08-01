@@ -15,7 +15,7 @@ $intro_content_right = get_field('intro_content_right');
 $intro_button = get_field('intro_button');
 ?>  
 
-<section class="intro-section bg-primary-light py-16 lg:py-[9.5rem]">
+<section class="intro-section bg-primary-light py-16 lg:py-[92px]">
     <div class="container-lg">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 items-start">
             
@@ -28,7 +28,7 @@ $intro_button = get_field('intro_button');
                     $image_url = is_array($intro_image) ? $intro_image['url'] : $intro_image;
                     $image_alt = is_array($intro_image) ? $intro_image['alt'] : 'Intro Image';
                 ?>
-                    <div class="polaroid-frame relative aspect-portrait shadow-lg">
+                    <div class="polaroid-frame relative aspect-portrait">
                          <?php if ($intro_decorative_text): 
                             $decorative_words = explode(' ', trim(esc_html($intro_decorative_text)));
                             $word_count = count($decorative_words);
@@ -128,8 +128,9 @@ $intro_button = get_field('intro_button');
                     $button_target = esc_attr($intro_button['target'] ?: '_self');
                 ?>
                     <div class="pt-4 flex justify-end"
-                         data-aos="fade-up" 
-                         data-aos-duration="900" 
+                         data-aos="fade-in" 
+                         data-aos-delay="900" 
+                         data-aos-duration="600" 
                          data-aos-easing="ease-out-back">
                         <a href="<?php echo $button_url; ?>" 
                            target="<?php echo $button_target; ?>"
