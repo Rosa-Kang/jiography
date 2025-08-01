@@ -43,7 +43,7 @@ if ($bg_image && isset($bg_image['url'])) {
                     
                     <!-- Title -->
                     <?php if ($title || $subtitle): ?>
-                    <div class="space-y-2" data-aos="fade-in"  dat-aos-delay="100">
+                    <div class="space-y-2" data-aos="fade-in"  data-aos-delay="100"  data-aos-duration="200" >
                         <?php if ($title): ?>
                             <h2 class="italic lowercase text-2xl lg:text-4xl -mb-6 font-light font-primary text-gray-800 leading-tight">
                                 <?php echo esc_html($title); ?>
@@ -64,7 +64,7 @@ if ($bg_image && isset($bg_image['url'])) {
                             $thought_img_url = is_array($thought_image) ? $thought_image['url'] : $thought_image;
                             $thought_img_alt = is_array($thought_image) ? $thought_image['alt'] : 'Thought Image';
                         ?>
-                            <div class="flex-shrink-0 w-20 lg:w-36" data-aos="fade-in"  dat-aos-delay="200">
+                            <div class="flex-shrink-0 w-20 lg:w-36" data-aos="fade-in" data-aos-delay="200"  data-aos-duration="300">
                                 <img src="<?php echo esc_url($thought_img_url); ?>" 
                                         alt="<?php echo esc_attr($thought_img_alt); ?>"
                                         class="w-full aspect-[3/4] object-cover grayscale">
@@ -73,7 +73,7 @@ if ($bg_image && isset($bg_image['url'])) {
     
                         <!-- Text Content -->
                         <?php if ($content): ?>
-                            <div class="flex-1 text-xs">
+                            <div class="flex-1 text-xs" data-aos="fade-in" data-aos-delay="300"  data-aos-duration="500">
                                     <?php echo $content; ?>
                             </div>
                         <?php endif; ?>
@@ -92,13 +92,13 @@ if ($bg_image && isset($bg_image['url'])) {
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs leading-relaxed text-gray-700">
                         
                         <?php if ($way_content_left): ?>
-                            <div data-aos="fade-in" dat-aos-delay="300">
+                            <div data-aos="fade-in" data-aos-delay="300"  data-aos-duration="700">
                                 <?php echo $way_content_left; ?>
                             </div>
                         <?php endif; ?>
     
                         <?php if ($way_content_right): ?>
-                            <div data-aos="fade-in" dat-aos-delay="400">
+                            <div data-aos="fade-in" data-aos-delay="400"  data-aos-duration="700">
                                 <?php echo $way_content_right; ?>
                             </div>
                         <?php endif; ?>
@@ -112,7 +112,8 @@ if ($bg_image && isset($bg_image['url'])) {
                     <div class="pt-4 flex justify-end">
                         <a href="<?php echo $button_url; ?>" 
                            target="<?php echo $button_target; ?>"
-                           class="btn-primary flex text-xs uppercase tracking-widest font-medium">
+                           class="btn-primary flex text-xs uppercase tracking-widest font-medium"
+                           data-aos-delay="450"  data-aos-duration="600">
                             <span><?php echo $button_text; ?></span>
                         </a>
                     </div>
@@ -122,7 +123,7 @@ if ($bg_image && isset($bg_image['url'])) {
         </div>
                             
         <!-- Right Swiper Section -->
-        <div class="flex items-center relative px-8 py-16 lg:px-16 lg:py-[96px]">
+        <div class="flex items-center relative px-8 py-16 lg:px-16 lg:py-[96px]" data-aos="fade-in" data-aos-delay="650">
             <!-- Swiper Container -->
             <div class="callout-swiper swiper h-[647px]">
                 <div class="swiper-wrapper">   

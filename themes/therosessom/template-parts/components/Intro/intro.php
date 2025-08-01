@@ -21,7 +21,7 @@ $intro_button = get_field('intro_button');
             
             <div class="order-1 p-[28px] lg:col-span-1 lg:pr-10 lg:pl-0" 
                  data-aos="fade-in" 
-                 data-aos-delay="600" 
+                 data-aos-delay="100" 
                  data-aos-duration="900" 
                  data-aos-easing="ease-out-cubic">
                 <?php if ($intro_image): 
@@ -41,7 +41,7 @@ $intro_button = get_field('intro_button');
                             ?>
                             <p class="z-10 text-2xl absolute -top-6 right-5 font-cursive text-gray-600"
                                data-aos="fade-in" 
-                               data-aos-delay="600" 
+                               data-aos-delay="200" 
                                data-aos-duration="600" 
                                data-aos-easing="ease-out-quart">
                                 <?php echo esc_html($first_word); ?>
@@ -50,7 +50,7 @@ $intro_button = get_field('intro_button');
                             <?php if($rest_of_decorative): ?>
                                 <p class="z-10 text-4xl absolute -top-3 -right-8 font-cursive text-gray-600"
                                    data-aos="fade-in" 
-                                   data-aos-delay="800" 
+                                   data-aos-delay="300" 
                                    data-aos-duration="600" 
                                    data-aos-easing="ease-out-quart">
                                     <?php echo esc_html($rest_of_decorative); ?>
@@ -66,8 +66,7 @@ $intro_button = get_field('intro_button');
                             <div class="absolute bottom-3 left-0 right-0 flex justify-center">
                                 <p class="text-2xs text-center uppercase tracking-widest text-gray-600 font-medium" 
                                 data-aos="fade-in" 
-                                data-aos-delay="300" 
-                                data-aos-duration="1500" 
+                                data-aos-delay="400" 
                                 data-aos-easing="ease-out-back">
                                     <?php echo esc_html($intro_subtitle); ?>
                                 </p>
@@ -80,7 +79,7 @@ $intro_button = get_field('intro_button');
             <!-- Right Column - Content -->
             <div class="order-2 p-6 lg:col-span-2 lg:pl-[174px] space-y-6" 
                  data-aos="fade-in" 
-                 data-aos-delay="400" 
+                 data-aos-delay="500" 
                  data-aos-duration="900" 
                  data-aos-easing="ease-out-cubic">
                 
@@ -102,7 +101,7 @@ $intro_button = get_field('intro_button');
                     <?php if ($intro_content_left): ?>
                         <div class="space-y-4"
                              data-aos="fade-in" 
-                             data-aos-delay="700" 
+                             data-aos-delay="650" 
                              data-aos-duration="600" 
                              data-aos-easing="ease-out-sine">
                               <?php echo $intro_content_left; ?>
@@ -113,7 +112,7 @@ $intro_button = get_field('intro_button');
                     <?php if ($intro_content_right): ?>
                         <div class="space-y-4"
                              data-aos="fade-in" 
-                             data-aos-delay="900" 
+                             data-aos-delay="650" 
                              data-aos-duration="600" 
                              data-aos-easing="ease-out-sine">
                              <?php echo $intro_content_right; ?>
@@ -129,8 +128,8 @@ $intro_button = get_field('intro_button');
                 ?>
                     <div class="pt-4 flex justify-end"
                          data-aos="fade-in" 
-                         data-aos-delay="900" 
-                         data-aos-duration="600" 
+                         data-aos-delay="700" 
+                         data-aos-duration="800" 
                          data-aos-easing="ease-out-back">
                         <a href="<?php echo $button_url; ?>" 
                            target="<?php echo $button_target; ?>"

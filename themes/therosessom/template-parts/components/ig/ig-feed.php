@@ -23,7 +23,7 @@ $short_code = get_field('ig_shortcode', 'option');
         <?php endif; ?>
       </div>
 
-      <div class="">
+      <div>
         <h3 class="inline-block">
          <?php if ($blurb): ?>
            <span class="text-base leading-relaxed text-gray-700"><?= $blurb; ?></span>

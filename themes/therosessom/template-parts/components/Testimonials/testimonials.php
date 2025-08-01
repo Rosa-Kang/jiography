@@ -42,7 +42,7 @@ if (!$see_moments_button) {
         </div>
 
         <!-- Testimonials Swiper Container -->
-        <div class="testimonials-swiper swiper">
+        <div class="testimonials-swiper swiper" data-aos="fade-in" data-aos-delay="300">
             <div class="swiper-wrapper relative"> 
                 <?php foreach ($testimonials_slides as $index => $slide): ?>
                 <div class="swiper-slide pl-12">
