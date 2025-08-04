@@ -253,35 +253,7 @@ export class NavigationMenu {
             this.highlightCurrentPage();
         });
     }
-
-    /**
-     * Process individual menu link for wavy effect
-     */
-    processLinkForWavy(link) {
-        // Skip if already processed
-        if (link.classList.contains(this.config.classes.wavyProcessed)) {
-            return;
-        }
-
-        const text = link.textContent.trim();
-        
-        // Skip empty links
-        if (!text) return;
-
-        const letters = text.split('').map((letter, index) => {
-            const delay = index * this.config.wavy.animationDelay;
-            
-            if (letter === ' ') {
-                return `<span class="letter" style="animation-delay: ${delay}s">&nbsp;</span>`;
-            }
-            
-            return `<span class="letter" style="animation-delay: ${delay}s">${letter}</span>`;
-        }).join('');
-
-        link.innerHTML = letters;
-        link.classList.add(this.config.classes.wavyProcessed);
-    }
-
+    
     /**
      * Highlight current page menu item
      */

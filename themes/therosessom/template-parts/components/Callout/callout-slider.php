@@ -43,15 +43,15 @@ if ($bg_image && isset($bg_image['url'])) {
                     
                     <!-- Title -->
                     <?php if ($title || $subtitle): ?>
-                    <div class="space-y-2" data-aos="fade-in"  data-aos-delay="100"  data-aos-duration="200" >
+                    <div data-aos="fade-in"  data-aos-delay="100"  data-aos-duration="200" >
                         <?php if ($title): ?>
-                            <h2 class="italic lowercase text-2xl lg:text-4xl -mb-6 font-light font-primary text-gray-800 leading-tight">
+                            <h2 class="italic lowercase lg:text-7xl font-light font-primary text-gray-800 leading-tight">
                                 <?php echo esc_html($title); ?>
                             </h2>
                         <?php endif; ?>
                         
                         <?php if ($subtitle): ?>
-                            <h3 class="italic uppercase text-3xl lg:text-5xl font-bold font-primary text-gray-900">
+                            <h3 class="italic uppercase lg:text-7xl mb-3 font-bold font-primary text-gray-900">
                                 <?php echo esc_html($subtitle); ?>
                             </h3>
                         <?php endif; ?>
@@ -59,21 +59,21 @@ if ($bg_image && isset($bg_image['url'])) {
                     <?php endif; ?>
     
                     <!-- Content with Image -->
-                    <div class="flex flex-col gap-2 px-6 items-start">
+                    <div class="flex flex-col gap-[14px] pr-6 pl-[85px] items-start">
                         <?php if ($thought_image): 
                             $thought_img_url = is_array($thought_image) ? $thought_image['url'] : $thought_image;
                             $thought_img_alt = is_array($thought_image) ? $thought_image['alt'] : 'Thought Image';
                         ?>
-                            <div class="flex-shrink-0 w-20 lg:w-36" data-aos="fade-in" data-aos-delay="200"  data-aos-duration="300">
+                            <div class="flex-shrink-0 w-[250px]" data-aos="fade-in" data-aos-delay="200"  data-aos-duration="300">
                                 <img src="<?php echo esc_url($thought_img_url); ?>" 
                                         alt="<?php echo esc_attr($thought_img_alt); ?>"
-                                        class="w-full aspect-[3/4] object-cover grayscale">
+                                        class="w-full aspect-[3/3.71] object-cover grayscale">
                             </div>
                         <?php endif; ?>
     
                         <!-- Text Content -->
                         <?php if ($content): ?>
-                            <div class="flex-1 text-xs" data-aos="fade-in" data-aos-delay="300"  data-aos-duration="500">
+                            <div class="flex-1 text-xs/4" data-aos="fade-in" data-aos-delay="300"  data-aos-duration="500">
                                     <?php echo $content; ?>
                             </div>
                         <?php endif; ?>
@@ -81,7 +81,7 @@ if ($bg_image && isset($bg_image['url'])) {
                 </div>
     
                 <!-- Bottom Section - The Way I See -->
-                <div class=" mt-12 px-6">
+                <div class="mt-12 pr-6 pl-[85px]" data-aos="fade-in" data-aos-delay="300"  data-aos-duration="500">
                     <?php if ($way_title): ?>
                         <h3 class="text-2xl lg:text-3xl font-light font-primary text-gray-800 italic leading-tight">
                             <?php echo esc_html($way_title); ?>
