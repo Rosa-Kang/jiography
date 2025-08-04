@@ -21,7 +21,7 @@ if (!$see_moments_button) {
 ?>
 
 <section class="testimonials bg-texture-neutral py-16 lg:py-[92px] relative">
-    <div class="container-xl relative z-10">
+    <div class="container-xl m-auto px-8 relative z-10">
         
         <!-- Section Title -->
         <div class="text-center mb-16" data-aos="fade-in" data-aos-delay="100">
@@ -45,11 +45,11 @@ if (!$see_moments_button) {
         <div class="testimonials-swiper swiper" data-aos="fade-in" data-aos-delay="300">
             <div class="swiper-wrapper relative"> 
                 <?php foreach ($testimonials_slides as $index => $slide): ?>
-                <div class="swiper-slide pl-12">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="swiper-slide lg:pl-12">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center justify-center">
                         
                         <!-- Left Column - Polaroid Image -->
-                        <div class="order-2 lg:order-1 flex flex-col justify-center w-[390px]">
+                        <div class="order-2 lg:order-1 m-auto flex flex-col items-center justify-center w-full md:w-[390px]">
                             <div class="polaroid-frame">
                                 <?php if ($slide['client_image']): 
                                     $client_img_url = is_array($slide['client_image']) ? $slide['client_image']['url'] : $slide['client_image'];
@@ -62,7 +62,7 @@ if (!$see_moments_button) {
                                 
                             </div>
                             <!-- Polaroid Caption -->
-                            <div class="flex items-center justify-between text-center pt-4">
+                            <div class="flex w-full items-center justify-between text-center pt-4">
                                 <?php if ($slide['client_names']): ?>
                                     <p class="font-primary text-sm text-gray-800 italic">
                                         <?php echo esc_html($slide['client_names']); ?>
@@ -77,7 +77,7 @@ if (!$see_moments_button) {
                         </div>
 
                         <!-- Right Column - Testimonials -->
-                        <div class="order-1 lg:order-2 space-y-8">
+                        <div class="order-1 lg:order-2 space-y-8 m-auto">
                             
                             <!-- Current Testimonial -->
                             <div class="testimonial-content">

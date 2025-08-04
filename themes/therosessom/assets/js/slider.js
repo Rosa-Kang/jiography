@@ -141,6 +141,7 @@ export class SliderManager {
             },
         });
     }
+    
 
     /**
      * Initialize testimonials slider

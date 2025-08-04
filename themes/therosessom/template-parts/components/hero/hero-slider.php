@@ -36,10 +36,10 @@ $bottom_signature = get_field('slide_bottom_signature');
         </div>
         
         <!-- Content Overlay (Static for all slides) -->
-        <div class="absolute inset-0 z-20 h-[52%] top-[39%] flex flex-col justify-between items-center text-center px-4">
+        <div class="absolute inset-0 z-20 h-[58%] top-[31%] flex flex-col justify-between items-center text-center px-4">
             <div class="max-w-6xl mx-auto">
                 <?php if ($title): ?>
-                    <h1 class="hero-title text-3xl text-white font-light tracking-wider mb-6" data-aos="fade-in" data-aos-delay="300">
+                    <h1 class="hero-title text-5xl text-white font-light tracking-wider mb-6" data-aos="fade-in" data-aos-delay="300">
                         <?php  
                             $title_words = explode(' ', trim($title));
                             $word_count = count($title_words);
@@ -55,12 +55,13 @@ $bottom_signature = get_field('slide_bottom_signature');
                                 $second_line = [];
                             }
                             ?>
-                        <span class="block font-primary leading-tight">
+                        <span class="block capitalize font-primary leading-tight">
                             <?php echo esc_html(implode(' ', $first_line)); ?>
                         </span>
                         <?php if (!empty($second_line)): ?>
-                            <span class="block text-3xl font-primary leading-tight mt-2">
-                                <span class="hero-subtitle-prefix"><?php echo esc_html($middle_word);?></span> <?php echo esc_html(implode(' ', $second_line)); ?>
+                            <span class="flex flex-col items-center md:flex-row md:items-end justify-center font-primary italic leading-tight mt-2">
+                                <span class="hero-subtitle-prefix mb-1"><?php echo esc_html($middle_word);?></span>
+                                <span class="capitalize"><?php echo esc_html(implode(' ', $second_line)); ?></span>
                             </span>
                         <?php endif; ?>
                     </h1>
@@ -81,7 +82,7 @@ $bottom_signature = get_field('slide_bottom_signature');
                             $title_text = esc_html($bottom_signature['title']);
                             $target = esc_attr($bottom_signature['target'] ?: '_self');
                     ?>
-                            <div class="text-white text-xs italic font-light">
+                            <div class="text-white text-xs font-light">
                                  <a href="<?php echo $url; ?>" target="<?php echo $target; ?>" class="hover:text-white transition-colors"><?php echo $title_text; ?></a> 
                             </div>
                     <?php endif; ?>
