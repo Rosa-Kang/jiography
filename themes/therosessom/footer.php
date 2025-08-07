@@ -9,7 +9,7 @@
 	$footer_script = get_field('footer_script', 'option');
 ?>
 
-		<footer id="colophon" role="contentinfo" class="relative z-20">
+		<footer id="colophon" role="contentinfo" class="relative z-20 bg-primary-light">
 			<div class="py-12">
 				<?php if ( is_front_page() ) : ?>
 					<div class="container lg:max-w-[1400px] mx-auto">

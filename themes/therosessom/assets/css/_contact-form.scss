@@ -1,0 +1,81 @@
+@use 'variables' as *;
+/**
+* WP Form Style Customization
+**/
+
+#jiography-contactform{
+  form.wpforms-form {
+      .wpforms-field {
+        margin: 0 auto;
+        &.wpforms-one-half {
+          width: 45%;
+          margin-left: 0 !important;
+          margin: 0 3% 0;
+        }
+      }
+      
+      input[type=email], input[type=text], textarea, select {
+        background: transparent;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        border-bottom: 0.9px solid black;
+        padding: 0;
+
+        &:focus, &:active {
+        border-top: none !important;
+        border-right: none !important;
+        border-left: none !important;
+        border-bottom: 0.9px solid #e75e5e;
+        }
+      }
+
+      textarea, select {
+        width: 93%;
+      }
+
+      .wpforms-submit-container {
+        display: flex;
+        justify-content: end;
+
+          button[type="submit"] {
+            background: none;
+            border: none;
+            padding: 0;
+            position: relative;
+            font-family: $font-secondary;
+            text-transform: uppercase;
+            transition: $transition;
+            font-size: 0.75rem;
+
+            &::after {
+              content: '';
+              display: inline-block;
+              width: 16px; 
+              height: 16px;
+              transition: $transition;
+              background-image: url('@images/arrow-forward.svg');
+              transform: rotate(45deg);
+              background-size: contain;
+              background-repeat: no-repeat;
+              background-position: center;
+              margin-left: 3px;
+              vertical-align: middle;
+            }
+
+            &:hover {
+            background: none;
+            padding: 0;
+            border: none;
+            opacity: 0.65;
+
+              &::after {
+                transform: rotate(45deg) translateX(5px);
+              }
+            }
+
+          }
+        }
+      }
+
+}

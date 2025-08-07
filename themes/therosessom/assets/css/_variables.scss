@@ -34,6 +34,7 @@ $color-gray-900: #171717;
 
 // Typography
 $font-primary: 'Perfectly Nineties', Georgia, serif;
+$font-secondary : 'Heebo', system-ui, sans-serif;
 $font-body: 'Inter', system-ui, sans-serif;
 
 $font-size-2xs: 0.54rem;
@@ -115,8 +116,7 @@ $z-index-popover: 1060;
 $z-index-tooltip: 1070;
 
 // Header heights
-$header-height-mobile: 60px;
-$header-height-desktop: 80px;
+$header-height: 64px;
 
 // Container Variables - based on your current usage patterns
 $container-padding-xs: 1rem;      // 16px - px-4
@@ -240,8 +240,8 @@ $button-font-weight: $font-weight-medium;
   --container-max-width-3xl: #{$container-max-width-3xl};   // 1600px
   
   // Component Specific
-  --header-height-mobile: #{$header-height-mobile};
-  --header-height-desktop: #{$header-height-desktop};
+  --header-height-mobile: #{$header-height};
+  --header-height-desktop: #{$header-height};
   --portfolio-grid-gap: #{$portfolio-grid-gap};
   --hero-min-height: #{$hero-min-height};
   --hero-min-height-mobile: #{$hero-min-height-mobile};
