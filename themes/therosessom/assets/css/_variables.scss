@@ -127,7 +127,7 @@ $container-padding-xl: 3rem;      // 48px - px-12
 
 // Container max-widths based on your usage
 $container-max-width-sm: 640px;   // Small container
-$container-max-width-md: 768px;   // Medium container  
+$container-max-width-md: 860px;   // Medium container  
 $container-max-width-lg: 1024px;  // Your lg:max-w-[1024px]
 $container-max-width-xl: 1200px;  // Standard XL
 $container-max-width-2xl: 1400px; // Your lg:max-w-[1400px]
@@ -233,7 +233,7 @@ $button-font-weight: $font-weight-medium;
   --container-padding-xl: #{$container-padding-xl};    // 3rem - px-12
   
   --container-max-width-sm: #{$container-max-width-sm};     // 640px
-  --container-max-width-md: #{$container-max-width-md};     // 768px
+  --container-max-width-md: #{$container-max-width-md};     // 960px
   --container-max-width-lg: #{$container-max-width-lg};     // 1024px
   --container-max-width-xl: #{$container-max-width-xl};     // 1280px  
   --container-max-width-2xl: #{$container-max-width-2xl};   // 1400px

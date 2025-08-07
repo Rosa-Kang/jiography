@@ -15,7 +15,8 @@ export class SliderManager {
         const sliders = {
             hero: document.querySelector('.hero-swiper'),
             callout: document.querySelector('.callout-swiper'), 
-            testimonials: document.querySelector('.testimonials-swiper')
+            testimonials: document.querySelector('.testimonials-swiper'),
+            testimonialsAbout: document.querySelector('.testimonials-about-swiper') 
         };
 
         // Exit early if no sliders exist
@@ -34,6 +35,8 @@ export class SliderManager {
             this.initHero(sliders.hero, Swiper);
             this.initCallout(sliders.callout, Swiper);
             this.initTestimonials(sliders.testimonials, Swiper);
+            this.initTestimonialsAbout(sliders.testimonialsAbout, Swiper);
+
 
         } catch (error) {
             console.error('Failed to load Swiper:', error);
@@ -175,6 +178,47 @@ export class SliderManager {
                 const slideIndex = parseInt(number.getAttribute('data-slide'));
                 if (!isNaN(slideIndex)) swiper.slideTo(slideIndex);
             });
+        });
+    }
+
+    /**
+     * Initialize testimonials slider for the About page
+     */
+    initTestimonialsAbout(element, Swiper) {
+    if (!element) return;
+    
+    const slideCount = element.querySelectorAll('.swiper-slide').length;
+    if (slideCount <= 1) return;
+
+    new Swiper(element, {
+            loop: true,
+            effect: 'fade',
+            fadeEffect: { crossFade: true },
+            speed: 800,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination-fraction',
+                type: 'fraction',
+                renderFraction: function (currentClass, totalClass) {
+                return '(<span class="' + currentClass + '"></span>' +
+                '/' +
+                '<span class="' + totalClass + '"></span>)';
+                }
+            },
+
+            navigation: {
+                nextEl: '#next-btn',
+                prevEl: '#prev-btn',
+            },
+
+            a11y: { 
+                enabled: true,
+                prevSlideMessage: 'Previous testimonial',
+                nextSlideMessage: 'Next testimonial',
+            }
         });
     }
 }

@@ -1,6 +1,6 @@
 /**
  * Navigation Module for therosessom Theme
- * Integrated with main theme architecture and wavy effects
+ * Special Auto-Reveal Sticky Header Effect
  */
 
 export class NavigationMenu {
@@ -9,6 +9,7 @@ export class NavigationMenu {
             DESKTOP_BREAKPOINT: 768,
             DEBOUNCE_DELAY: 250,
             selectors: {
+                header: '#masthead',
                 navigation: '#site-navigation',
                 menuToggle: '#menu-toggle', 
                 menu: '#primary-menu',
@@ -17,13 +18,16 @@ export class NavigationMenu {
             classes: {
                 toggled: 'toggled',
                 menuOpen: 'menu-open',
-                wavyProcessed: 'wavy-processed',
-                menuCurrent: 'menu-current'
+                menuCurrent: 'menu-current',
+                headerHidden: 'header-hidden',
+                headerSticky: 'header-sticky',
+                headerScrolled: 'header-scrolled'
             },
-            wavy: {
-                animationDelay: 0.05, // seconds between each letter
-                animationDuration: 600, // ms
-                enabled: true
+            scroll: {
+                hideStart: 7,
+                hideEnd: 210,  
+                stickyThreshold: 50, 
+                scrollDelta: 5   
             }
         };
 
@@ -32,7 +36,14 @@ export class NavigationMenu {
             isOpen: false,
             isAnimating: false,
             isDesktop: window.innerWidth >= this.config.DESKTOP_BREAKPOINT,
-            prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+            lastScrollY: 0,
+            currentScrollY: 0,
+            isTicking: false,
+            isScrollingDown: false,
+            headerHeight: 0,
+            didScroll: false,
+            hasHiddenOnce: false     // Track if header was hidden at least once
         };
 
         this.init();
@@ -46,7 +57,7 @@ export class NavigationMenu {
         if (this.validateElements()) {
             this.setupInitialState();
             this.bindEvents();
-            this.initWavyEffect();
+            this.initScrollBehavior();
         }
     }
 
@@ -57,6 +68,7 @@ export class NavigationMenu {
         const { selectors } = this.config;
         
         this.elements = {
+            header: document.querySelector(selectors.header),
             navigation: document.querySelector(selectors.navigation),
             menuToggle: document.querySelector(selectors.menuToggle),
             menu: document.querySelector(selectors.menu),
@@ -66,18 +78,11 @@ export class NavigationMenu {
     }
 
     /**
-     * Update menu links collection (useful for dynamic menus)
-     */
-    updateMenuLinks() {
-        this.elements.menuLinks = document.querySelectorAll(this.config.selectors.menuLinks);
-    }
-
-    /**
      * Validate required elements exist
      */
     validateElements() {
-        const { navigation, menuToggle, body } = this.elements;
-        return navigation && menuToggle && body;
+        const { header, navigation, menuToggle, body } = this.elements;
+        return header && navigation && menuToggle && body;
     }
 
     /**
@@ -85,6 +90,25 @@ export class NavigationMenu {
      */
     setupInitialState() {
         this.elements.menuToggle.setAttribute('aria-expanded', 'false');
+        
+        // Cache header height for performance
+        if (this.elements.header) {
+            this.state.headerHeight = this.elements.header.offsetHeight;
+        }
+    }
+
+    /**
+     * Initialize scroll behavior
+     */
+    initScrollBehavior() {
+        // Set initial scroll position
+        this.state.lastScrollY = window.scrollY;
+        this.state.currentScrollY = window.scrollY;
+        
+        // Apply initial state if already scrolled
+        if (window.scrollY > 0) {
+            this.handleScroll();
+        }
     }
 
     /**
@@ -110,12 +134,143 @@ export class NavigationMenu {
                 this.handleResize();
             }, this.config.DEBOUNCE_DELAY);
         });
+        
+        // Optimized scroll handler with RAF
+        window.addEventListener('scroll', () => {
+            this.state.currentScrollY = window.scrollY;
+            
+            if (!this.state.isTicking) {
+                window.requestAnimationFrame(() => {
+                    this.handleScroll();
+                    this.state.isTicking = false;
+                });
+                this.state.isTicking = true;
+            }
+        }, { passive: true });
 
         // Listen for reduced motion preference changes
         const motionMediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
         motionMediaQuery.addEventListener('change', (e) => {
             this.state.prefersReducedMotion = e.matches;
         });
+    }
+
+    /**
+     * Special Auto-Reveal Scroll Handler
+     * Header disappears initially, then reappears as sticky
+     */
+    handleScroll() {
+        const { header } = this.elements;
+        if (!header) return;
+
+        const { classes, scroll } = this.config;
+        const currentScrollY = this.state.currentScrollY;
+        const scrollDelta = Math.abs(currentScrollY - this.state.lastScrollY);
+        
+        // Don't react to tiny scroll movements
+        if (scrollDelta < scroll.scrollDelta && currentScrollY > 0) {
+            return;
+        }
+
+        // Determine scroll direction
+        this.state.isScrollingDown = currentScrollY > this.state.lastScrollY;
+        
+        // Reset when scrolled to top
+        if (currentScrollY === 0) {
+            header.classList.remove(classes.headerHidden, classes.headerSticky, classes.headerScrolled);
+            this.state.hasHiddenOnce = false;
+            this.state.lastScrollY = currentScrollY;
+            return;
+        }
+
+        // Apply sticky background styles when scrolled
+        if (currentScrollY > scroll.stickyThreshold) {
+            header.classList.add(classes.headerSticky);
+        } else {
+            header.classList.remove(classes.headerSticky);
+        }
+
+        // Special auto-reveal logic
+        if (this.state.isScrollingDown) {
+            // Phase 1: Hide header between hideStart and hideEnd
+            if (currentScrollY > scroll.hideStart && currentScrollY < scroll.hideEnd) {
+                header.classList.add(classes.headerHidden);
+                this.state.hasHiddenOnce = true;
+            }
+            // Phase 2: Auto-reveal as sticky after hideEnd
+            else if (currentScrollY >= scroll.hideEnd && this.state.hasHiddenOnce) {
+                header.classList.remove(classes.headerHidden);
+            }
+        } else {
+            // Always show when scrolling up
+            header.classList.remove(classes.headerHidden);
+        }
+
+        // Update last scroll position
+        this.state.lastScrollY = currentScrollY;
+    }
+
+    /**
+     * Alternative Scroll Handler - Traditional Hide/Show on Scroll Direction
+     * Uncomment this and comment out the above handleScroll if you prefer traditional behavior
+     */
+    handleScrollTraditional() {
+        const { header } = this.elements;
+        if (!header) return;
+
+        const { classes, scroll } = this.config;
+        const currentScrollY = this.state.currentScrollY;
+        const scrollDelta = Math.abs(currentScrollY - this.state.lastScrollY);
+        
+        // Don't react to tiny scroll movements
+        if (scrollDelta < scroll.scrollDelta && currentScrollY > 0) {
+            return;
+        }
+
+        // Determine scroll direction
+        this.state.isScrollingDown = currentScrollY > this.state.lastScrollY;
+        
+        // Apply sticky styles when scrolled
+        if (currentScrollY > scroll.stickyThreshold) {
+            header.classList.add(classes.headerSticky);
+        } else {
+            header.classList.remove(classes.headerSticky);
+        }
+
+        // Traditional hide/show based on scroll direction
+        if (this.state.isScrollingDown && currentScrollY > scroll.hideStart) {
+            // Hide when scrolling down
+            header.classList.add(classes.headerHidden);
+        } else if (!this.state.isScrollingDown) {
+            // Show when scrolling up
+            header.classList.remove(classes.headerHidden);
+        }
+
+        // Reset at top
+        if (currentScrollY === 0) {
+            header.classList.remove(classes.headerHidden, classes.headerSticky);
+        }
+
+        // Update last scroll position
+        this.state.lastScrollY = currentScrollY;
+    }
+
+    /**
+     * Handle window resize
+     */
+    handleResize() {
+        const wasDesktop = this.state.isDesktop;
+        this.state.isDesktop = window.innerWidth >= this.config.DESKTOP_BREAKPOINT;
+        
+        // Update cached header height
+        if (this.elements.header) {
+            this.state.headerHeight = this.elements.header.offsetHeight;
+        }
+
+        // Close mobile menu when switching to desktop
+        if (this.state.isDesktop && this.state.isOpen) {
+            this.closeMenu();
+        }
     }
 
     /**
@@ -154,24 +309,6 @@ export class NavigationMenu {
     }
 
     /**
-     * Handle window resize
-     */
-    handleResize() {
-        const wasDesktop = this.state.isDesktop;
-        this.state.isDesktop = window.innerWidth >= this.config.DESKTOP_BREAKPOINT;
-
-        // Close mobile menu when switching to desktop
-        if (this.state.isDesktop && this.state.isOpen) {
-            this.closeMenu();
-        }
-
-        // Re-initialize wavy effect if switching to desktop
-        if (!wasDesktop && this.state.isDesktop) {
-            this.initWavyEffect();
-        }
-    }
-
-    /**
      * Toggle mobile menu
      */
     async toggleMenu() {
@@ -182,7 +319,6 @@ export class NavigationMenu {
             await this.updateVisuals();
             this.manageFocus();
         } finally {
-            // Reset animation state after transition completes
             setTimeout(() => {
                 this.state.isAnimating = false;
             }, 300);
@@ -203,7 +339,6 @@ export class NavigationMenu {
 
         menuToggle.setAttribute('aria-expanded', isOpen.toString());
 
-        // Small delay for smooth transitions
         return new Promise(resolve => setTimeout(resolve, 50));
     }
 
@@ -214,14 +349,12 @@ export class NavigationMenu {
         const { isOpen } = this.state;
         
         if (isOpen) {
-            // Update menu links and focus first one when menu opens
             this.updateMenuLinks();
             const firstLink = this.elements.menuLinks[0];
             if (firstLink) {
                 setTimeout(() => firstLink.focus(), 100);
             }
         } else {
-            // Return focus to toggle button when menu closes
             this.elements.menuToggle.focus();
         }
     }
@@ -236,29 +369,16 @@ export class NavigationMenu {
     }
 
     /**
-     * Initialize wavy text effect for desktop menu
+     * Update menu links collection
      */
-    initWavyEffect() {
-        // Only apply on desktop and if animations are allowed
-        if (!this.state.isDesktop || 
-            this.state.prefersReducedMotion || 
-            !this.config.wavy.enabled) {
-            return;
-        }
-
-        requestAnimationFrame(() => {
-            this.elements.menuLinks.forEach(link => {
-                this.processLinkForWavy(link);
-            });
-            this.highlightCurrentPage();
-        });
+    updateMenuLinks() {
+        this.elements.menuLinks = document.querySelectorAll(this.config.selectors.menuLinks);
     }
     
     /**
      * Highlight current page menu item
      */
     highlightCurrentPage() {
-        // WordPress automatically adds current-menu-item class
         const currentItems = document.querySelectorAll(`
             .current-menu-item > a,
             .current-page-ancestor > a,
@@ -272,58 +392,22 @@ export class NavigationMenu {
     }
 
     /**
-     * Update wavy effect (useful for dynamic menu updates)
+     * Destroy the navigation instance
      */
-    refreshWavyEffect() {
-        // Remove existing processing
-        this.elements.menuLinks.forEach(link => {
-            link.classList.remove(this.config.classes.wavyProcessed);
-        });
-
-        // Re-get menu links in case DOM changed
-        this.updateMenuLinks();
+    destroy() {
+        // Remove all event listeners and clean up
+        this.elements.menuToggle?.removeEventListener('click', this.handleToggleClick);
+        document.removeEventListener('click', this.handleDocumentClick);
+        document.removeEventListener('keydown', this.handleKeydown);
         
-        // Re-initialize wavy effect
-        this.initWavyEffect();
-    }
-
-    /**
-     * Public API: Enable/disable wavy effect
-     */
-    toggleWavyEffect(enabled = null) {
-        this.config.wavy.enabled = enabled !== null ? enabled : !this.config.wavy.enabled;
-        
-        if (this.config.wavy.enabled) {
-            this.initWavyEffect();
-        } else {
-            // Remove wavy effect
-            this.elements.menuLinks.forEach(link => {
-                const letters = link.querySelectorAll('.letter');
-                if (letters.length > 0) {
-                    link.textContent = link.textContent;
-                    link.classList.remove(this.config.classes.wavyProcessed);
-                }
-            });
-            // Still highlight current page even without wavy effect
-            this.highlightCurrentPage();
-        }
-    }
-
-    /**
-     * Get current state (useful for debugging)
-     */
-    getState() {
-        return {
-            isOpen: this.state.isOpen,
-            isAnimating: this.state.isAnimating,
-            isDesktop: this.state.isDesktop,
-            wavyEnabled: this.config.wavy.enabled,
-            prefersReducedMotion: this.state.prefersReducedMotion,
-            elements: Object.keys(this.elements).reduce((acc, key) => {
-                acc[key] = !!this.elements[key];
-                return acc;
-            }, {})
-        };
+        // Reset states
+        this.elements.body?.classList.remove(this.config.classes.menuOpen);
+        this.elements.navigation?.classList.remove(this.config.classes.toggled);
+        this.elements.header?.classList.remove(
+            this.config.classes.headerHidden,
+            this.config.classes.headerSticky,
+            this.config.classes.headerScrolled
+        );
     }
 }
 

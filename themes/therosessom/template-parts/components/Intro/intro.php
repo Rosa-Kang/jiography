@@ -16,7 +16,7 @@ $intro_button = get_field('intro_button');
 ?>
 
 <section class="intro-section bg-primary-light py-16 lg:py-[92px]">
-    <div class="container-lg m-auto">
+    <div class="container-lg mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 items-start">
 
             <div class="order-1 p-4 lg:p-[28px] lg:col-span-1 lg:pr-10 lg:pl-0"

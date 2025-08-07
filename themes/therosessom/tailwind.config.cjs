@@ -181,7 +181,7 @@ module.exports = {
       padding: 'var(--container-padding-xs)', // Default px-4 like your usage
       screens: {
         sm: 'var(--container-max-width-sm)',    // 640px
-        md: 'var(--container-max-width-md)',    // 768px  
+        md: 'var(--container-max-width-md)',    // 860px  
         lg: 'var(--container-max-width-lg)',    // 1024px
         xl: 'var(--container-max-width-xl)',    // 1200px
         '2xl': 'var(--container-max-width-2xl)' // 1400px
@@ -212,14 +212,14 @@ module.exports = {
           maxWidth: 'var(--container-max-width-sm)', // 640px
         },
         
-        // Replace your: container lg:max-w-[768px] mx-auto px-4  
+        // Replace your: container lg:max-w-[860px] mx-auto px-4  
         '.container-md': {
           width: '100%',
           marginLeft: 'auto',
           marginRight: 'auto',
           paddingLeft: 'var(--container-padding-xs)', // px-4
           paddingRight: 'var(--container-padding-xs)',
-          maxWidth: 'var(--container-max-width-md)', // 768px
+          maxWidth: 'var(--container-max-width-md)', // 860px
         },
         
         // Replace your: container lg:max-w-[1024px] mx-auto px-4 py-6
