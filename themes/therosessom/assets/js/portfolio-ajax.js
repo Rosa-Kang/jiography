@@ -17,7 +17,7 @@ export class PortfolioAjax {
     this.config = {
       classes: {
         loading: 'is-loading',
-        hidden: 'is-hidden',
+        hidden: 'hidden',
         active: 'active'
       },
       ajax: {
@@ -115,6 +115,7 @@ export class PortfolioAjax {
   loadMore() {
     if (this.state.isLoading) return;
     this.state.currentPage++;
+    console.log('loadMore: Requesting page', this.state.currentPage);
     this.fetchPosts(true); // `true` means append to the grid.
   }
 
@@ -124,14 +125,21 @@ export class PortfolioAjax {
     const formData = new FormData();
     formData.append('action', this.config.ajax.action);
     formData.append('nonce', this.config.ajax.nonce);
-    formData.append('offset', this.state.postCount); // Use offset for fetching
     formData.append('category', this.state.currentCategory);
     formData.append('page', this.state.currentPage); // Pass page number for max_pages calculation
+
+    console.log('fetchPosts: Current state before fetch:', {
+      currentPage: this.state.currentPage,
+      maxPages: this.state.maxPages,
+      currentCategory: this.state.currentCategory
+    });
 
     try {
       const response = await fetch(this.config.ajax.url, { method: 'POST', body: formData });
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       const result = await response.json();
+
+      console.log('fetchPosts: AJAX response data:', result.data);
 
       if (result.success) {
         const { html, max_pages, post_count: newItemsCount } = result.data;
@@ -142,20 +150,28 @@ export class PortfolioAjax {
           this.grid.innerHTML = html || `<p class="text-center text-gray-500">No portfolios found in this category.</p>`;
         }
         
-        // Refresh AOS to apply animations to new items
-        AOS.refresh();
-
         // Update state
-        this.state.postCount += newItemsCount;
+        this.state.postCount = isAppending ? this.state.postCount + newItemsCount : newItemsCount;
         this.state.maxPages = max_pages;
+
+        console.log('fetchPosts: State after update:', {
+          currentPage: this.state.currentPage,
+          maxPages: this.state.maxPages
+        });
 
         if (this.loadMoreBtn) {
           if (this.state.currentPage >= this.state.maxPages) {
+            console.log('fetchPosts: Hiding button. Current page (', this.state.currentPage, ') >= Max pages (', this.state.maxPages, ')');
             this.loadMoreBtn.classList.add(this.config.classes.hidden);
           } else {
+            console.log('fetchPosts: Showing button. Current page (', this.state.currentPage, ') < Max pages (', this.state.maxPages, ')');
             this.loadMoreBtn.classList.remove(this.config.classes.hidden);
           }
         }
+
+        setTimeout(() => {
+          AOS.refresh();
+        }, 100);
       } else {
         throw new Error(result.data.message || 'AJAX request failed.');
       }

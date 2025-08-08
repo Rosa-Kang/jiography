@@ -26,22 +26,17 @@
     
             if ($query->have_posts()) :
                 $post_counter = 0;
-                $is_row_open = false; // 이 변수는 참조로 전달됩니다.
+                $is_row_open = false;
     
                 while ($query->have_posts()) : $query->the_post();
                     
-                    // ▼▼▼▼▼ 수정된 부분 ▼▼▼▼▼
-                    // 복잡한 if/else 블록 대신, 새로 만든 파일을 호출하는 한 줄로 대체합니다.
                     get_template_part('template-parts/components/Sections/portfolio-layout-item', null, [
                         'post_counter' => $post_counter,
                         'is_row_open'  => &$is_row_open,
                     ]);
-                    // ▲▲▲▲▲ 수정된 부분 ▲▲▲▲▲
-
                     $post_counter++;
                 endwhile;
     
-                // 루프가 끝난 후에도 2열 div가 열려있다면 닫아줍니다.
                 if ($is_row_open) { echo '</div>'; }
                 
                 $initial_post_count = $query->post_count;
@@ -57,6 +52,7 @@
         <?php if ($query->max_num_pages > 1) : ?>
             <div class="flex justify-center mt-10">
                     <button
+                    data-aos="fade-up"
                     id="portfolio-loadmore"
                     data-page="1"
                     data-category="all"

@@ -213,12 +213,13 @@ function therosessom_load_portfolio_posts() {
 
     $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : 'all';
     $posts_per_page = 4;
-    $offset = isset($_POST['offset']) ? absint($_POST['offset']) : 0;
+    // Switched from offset to paged for more reliable pagination.
+    $page = isset($_POST['page']) ? absint($_POST['page']) : 1;
     
     $args = [
         'post_type'      => 'portfolio',
         'posts_per_page' => $posts_per_page,
-        'offset'         => $offset,
+        'paged'          => $page, // Use paged instead of offset
         'orderby'        => 'date',
         'order'          => 'DESC',
         'post_status'    => 'publish',
@@ -245,6 +246,8 @@ function therosessom_load_portfolio_posts() {
 
     if ($query->have_posts()) {
         ob_start();
+        // Calculate offset for the counter based on the current page.
+        $offset = ($page - 1) * $posts_per_page;
         $post_counter = $offset;
         $is_row_open = false;
 

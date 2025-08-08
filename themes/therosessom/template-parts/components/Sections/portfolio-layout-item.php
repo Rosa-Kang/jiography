@@ -13,24 +13,30 @@
  * }
  */
 
+
 $post_counter = $args['post_counter'];
 $is_row_open  = &$args['is_row_open'];
+$permalink = esc_url(get_the_permalink());
 
 $layout_index = $post_counter % 4;
 
 if ($layout_index == 0) {
     if ($is_row_open) { echo '</div>'; $is_row_open = false; }
+    echo '<a href="' . $permalink . '" class="portfolio-link-wrapper">';    
     echo '<div class="portfolio-item-full pt-16 lg:mx-10" data-aos="fade-in" data-aos-delay="200" data-aos-duration="700">';
     get_template_part('template-parts/components/Sections/portfolio-item');
     echo '</div>';
+    echo '</a>';
 
 } elseif ($layout_index == 1) {
     if ($is_row_open) { echo '</div>'; } 
+    echo '<a href="' . $permalink . '" class="portfolio-link-wrapper">';    
     echo '<div class="portfolio-row grid grid-cols-1 md:grid-cols-2 gap-16 items-start py-16" data-aos="fade-in" data-aos-delay="200" data-aos-duration="700">';
     $is_row_open = true; 
     echo '<div class="portfolio-item-half square">';
     get_template_part('template-parts/components/Sections/portfolio-item');
     echo '</div>';
+    echo '</a>';
 
 } elseif ($layout_index == 2) {
     if (!$is_row_open) { 
@@ -38,14 +44,18 @@ if ($layout_index == 0) {
         $is_row_open = true;
         echo '<div></div>'; 
     }
+    echo '<a href="' . $permalink . '" class="portfolio-link-wrapper">';    
     echo '<div class="portfolio-item-half rectangular lg:pt-[20rem]" data-aos="fade-in" data-aos-delay="400" data-aos-duration="900">';
     get_template_part('template-parts/components/Sections/portfolio-item');
     echo '</div></div>'; 
+    echo '</a>';
     $is_row_open = false; 
 
 } elseif ($layout_index == 3) {
     if ($is_row_open) { echo '</div>'; $is_row_open = false; }
+    echo '<a href="' . $permalink . '" class="portfolio-link-wrapper">';    
     echo '<div class="portfolio-item-full rectangular portfolio-item-alt pb-16" data-aos="fade-in" data-aos-delay="300" data-aos-duration="700">';
     get_template_part('template-parts/components/Sections/portfolio-item');
     echo '</div>';
+    echo '</a>';
 }

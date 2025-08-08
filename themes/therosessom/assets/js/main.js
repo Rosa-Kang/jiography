@@ -35,7 +35,34 @@ class TheRosessomTheme {
       this.initPortfolioAjax();
     }
 
+    this.initPortfolioFilterToggle();
+
     document.dispatchEvent(new CustomEvent('therosessom:initialized'));
+  }
+
+  initPortfolioFilterToggle() {
+    const filterToggleButton = document.getElementById('filter-toggle-btn');
+    const filterList = document.getElementById('portfolio-filter-list');
+
+    if (filterToggleButton && filterList) {
+      filterToggleButton.addEventListener('click', () => {
+        filterList.classList.toggle('open');
+        filterToggleButton.classList.toggle('open');
+      });
+
+      const filterButtons = filterList.querySelectorAll('.filter-btn');
+      const toggleButtonText = filterToggleButton.querySelector('.filter-toggle-text');
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          if (window.innerWidth < 1024) {
+            toggleButtonText.textContent = button.textContent;
+            filterList.classList.remove('open');
+            filterToggleButton.classList.remove('open');
+          }
+        });
+      });
+    }
   }
 
   initNavigation() {

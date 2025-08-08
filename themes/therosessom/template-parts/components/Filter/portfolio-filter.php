@@ -8,16 +8,32 @@
 $terms = get_terms([
     'taxonomy'   => 'portfolio_category',
     'hide_empty' => true,
+    'orderby'    => 'id',
+    'order'      => 'ASC',
 ]);
 ?>
 
-<div class="portfolio-filter flex gap-6 justify-center border-b border-gray-200 pb-4">
-    <button class="filter-btn active font-medium text-black" data-category="all">ALL</button>
-    <?php foreach ($terms as $term) : ?>
-        <button class="filter-btn text-gray-500 hover:text-black transition" data-category="<?php echo esc_attr($term->slug); ?>">
-            <?php echo esc_html($term->name); ?>
+<div class="flex flex-col">
+    <div class="section-title">
+        <h1 data-aos="fade-in" data-aos-duration="700"  class="uppercase font-primary text-4xl mb-4">check out our work</h1>
+        <hr data-aos="fade-left" data-aos-delay="400" data-aos-duration="800" class="horizontal-line-gray-300 mb-4">
+    </div>
+    <div class="portfolio-filter-container relative">
+        <button id="filter-toggle-btn" class="filter-toggle-btn font-primary">
+            <span class="filter-toggle-text font-primary">ALL</span>
+            <svg class="filter-toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
         </button>
-    <?php endforeach; ?>
+        <div id="portfolio-filter-list" class="portfolio-filter flex gap-6 justify-center lg:justify-around pb-4 bg-primary-light">
+            <button class="filter-btn active font-primary text-black" data-category="all">ALL</button>
+            <?php foreach ($terms as $term) : ?>
+                <button class="filter-btn text-gray-500 hover:text-black transition font-primary" data-category="<?php echo esc_attr($term->slug); ?>">
+                    <?php echo esc_html($term->name); ?>
+                </button>
+            <?php endforeach; ?>
+        </div>
+    </div>
 </div>
 
 <?php 

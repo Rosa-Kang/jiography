@@ -14,7 +14,7 @@
         </div>
     <?php endif; ?>
 
-    <div class="portfolio-content mt-4 prose max-w-none">
+    <div class="portfolio-content mt-4 prose max-w-none line-clamp-2">
         <?php the_content(); ?>
     </div>
 </article>

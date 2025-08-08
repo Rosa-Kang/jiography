@@ -28,6 +28,10 @@
     border: 0.5px solid $color-black;
 }
 
+.horizontal-line-gray-300 {
+    border: 0.5px solid $color-gray-300;
+}
+
 /**
 * Polaroid Frame
 **/
@@ -80,21 +84,5 @@
         > span::after {
             transform: rotate(-45deg) translateX(5px);
         }
-    }
-}
-
-/**
-* View More Button Animation
-**/
-#portfolio-loadmore {
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-    opacity: 1;
-    transform: translateY(0);
-
-    &.is-hidden {
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(20px); // Start position for fade-in
-        pointer-events: none; // Prevent clicking during transition
     }
 }
