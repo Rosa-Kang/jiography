@@ -75,9 +75,11 @@ function therosessom_scripts() {
         wp_enqueue_script('comment-reply');
     }
 
-    // Minimal localization - no form handling needed
+    // Localize script with data for JS
     wp_localize_script('therosessom-main', 'therosessomData', [
         'themeUrl' => get_template_directory_uri(),
+        'ajax_url' => admin_url('admin-ajax.php'), // AJAX URL 추가
+        'nonce'    => wp_create_nonce('therosessom_portfolio_nonce') // 보안 Nonce 추가
     ]);
 }
 add_action('wp_enqueue_scripts', 'therosessom_scripts');
@@ -102,7 +104,6 @@ function therosessom_is_vite_running() {
 function therosessom_enqueue_production_assets() {
     $manifest_path = get_template_directory() . '/dist/.vite/manifest.json';
 
-    // Simple fallback if no build exists
     if (!file_exists($manifest_path)) {
         wp_enqueue_style('therosessom-style', get_stylesheet_uri(), [], THEROSESSOM_VERSION);
         return;
@@ -114,21 +115,12 @@ function therosessom_enqueue_production_assets() {
         return;
     }
 
-    $js_file = $manifest['assets/js/main.js'];
+    $main_js_entry = $manifest['assets/js/main.js'];
 
-    // Enqueue main JS
-    wp_enqueue_script(
-        'therosessom-main',
-        get_template_directory_uri() . '/dist/' . $js_file['file'],
-        [],
-        THEROSESSOM_VERSION,
-        true
-    );
-    wp_script_add_data('therosessom-main', 'type', 'module');
-
-    // Enqueue CSS files
-    if (!empty($js_file['css'])) {
-        foreach ($js_file['css'] as $index => $css_file) {
+    // 1. Enqueue CSS files from the manifest directly in the <head>.
+    // This is the key to fixing the Flash of Unstyled Content (FOUC).
+    if (!empty($main_js_entry['css'])) {
+        foreach ($main_js_entry['css'] as $index => $css_file) {
             wp_enqueue_style(
                 'therosessom-style-' . $index,
                 get_template_directory_uri() . '/dist/' . $css_file,
@@ -137,6 +129,18 @@ function therosessom_enqueue_production_assets() {
             );
         }
     }
+
+    // 2. Enqueue the main JS file in the footer.
+    wp_enqueue_script(
+        'therosessom-main',
+        get_template_directory_uri() . '/dist/' . $main_js_entry['file'],
+        [], // No dependencies needed here
+        THEROSESSOM_VERSION,
+        true // Load in footer
+    );
+    
+    // Ensure the script is loaded as a module.
+    wp_script_add_data('therosessom-main', 'type', 'module');
 }
 
 /**
@@ -233,3 +237,71 @@ add_action('admin_menu', function() {
     remove_submenu_page('themes.php', 'themes.php?page=gutenberg-edit-site&path=%2Fpatterns');
     remove_submenu_page('themes.php', 'theme-editor.php');
 }, 999);
+
+
+/**
+ * AJAX handler for loading portfolio posts.
+ *
+ * This function now includes a check for post count and returns a more
+ * robust JSON object for frontend handling.
+ */
+function therosessom_load_portfolio_posts() {
+    // Check for a valid AJAX nonce and exit if it's not present or invalid.
+    check_ajax_referer('therosessom_portfolio_nonce', 'nonce');
+
+    // Sanitize and validate input parameters.
+    $page = isset($_POST['page']) ? absint($_POST['page']) : 1;
+    $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : 'all';
+    $posts_per_page = 6;
+
+    // Define the WP_Query arguments.
+    $args = [
+        'post_type'      => 'portfolio',
+        'posts_per_page' => $posts_per_page,
+        'paged'          => $page,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'post_status'    => 'publish',
+        'no_found_rows'  => true, // Improves performance for pagination that doesn't need to count all posts
+    ];
+
+    if ($category !== 'all') {
+        $args['tax_query'] = [
+            [
+                'taxonomy' => 'portfolio_category',
+                'field'    => 'slug',
+                'terms'    => $category,
+            ],
+        ];
+    }
+    
+    $query = new WP_Query($args);
+
+    // Prepare the response data.
+    $response = [
+        'html'       => '',
+        'has_more'   => false, // New flag to easily check if there are more posts
+        'post_count' => 0,
+    ];
+
+    if ($query->have_posts()) {
+        ob_start();
+        while ($query->have_posts()) : $query->the_post();
+            get_template_part('template-parts/components/Sections/portfolio-layout-item');
+        endwhile;
+        $response['html'] = ob_get_clean();
+
+        // Check if there are more posts to load.
+        $response['has_more'] = ($query->max_num_pages > $page);
+        $response['post_count'] = $query->post_count;
+    }
+    
+    wp_reset_postdata();
+
+    // Send the JSON response.
+    wp_send_json_success($response);
+}
+
+// Add the action hooks to register the AJAX handler.
+add_action('wp_ajax_therosessom_load_portfolio_posts', 'therosessom_load_portfolio_posts');
+add_action('wp_ajax_nopriv_therosessom_load_portfolio_posts', 'therosessom_load_portfolio_posts');
