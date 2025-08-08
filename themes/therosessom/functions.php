@@ -5,6 +5,7 @@
  *
  * @package therosessom
  */
+require_once get_template_directory() . '/inc/template-tags.php';
 
 // Prevent direct access
 if (!defined('ABSPATH')) {
@@ -278,3 +279,53 @@ function therosessom_load_portfolio_posts() {
 // Register both logged-in and logged-out AJAX handlers
 add_action('wp_ajax_load_portfolio', 'therosessom_load_portfolio_posts');
 add_action('wp_ajax_nopriv_load_portfolio', 'therosessom_load_portfolio_posts');
+
+
+
+/**
+ * Prevent archive from overriding page template with the same slug.
+ * This function forces WordPress to load the page template
+ * for the 'portfolio' slug instead of the archive template.
+ */
+function therosessom_custom_portfolio_slug_fix( $query ) {
+    if ( ! is_admin() && $query->is_main_query() && $query->is_post_type_archive('portfolio') ) {
+        
+        $page_object = get_page_by_path('portfolio');
+        
+        if ($page_object) {
+            $query->set('page_id', $page_object->ID);
+            $query->set('post_type', 'page');
+            $query->is_page = true;
+            $query->is_archive = false;
+            
+            $query->query_vars['p'] = $page_object->ID;
+            $query->queried_object_id = $page_object->ID;
+            $query->queried_object = $page_object;
+        }
+    }
+}
+add_action( 'pre_get_posts', 'therosessom_custom_portfolio_slug_fix' );
+
+function therosessom_custom_nav_class($classes, $item, $args) {
+    
+    $portfolio_page_id = get_page_by_path('portfolio')->ID;
+    
+    if (is_page($portfolio_page_id) && $item->object_id == $portfolio_page_id) {
+        
+        $classes = array_filter($classes, function($class) {
+            return strpos($class, 'current-') === false;
+        });
+        $classes[] = 'current-menu-item';
+    }
+
+    
+    if (is_singular('portfolio')) {
+        
+        if ($item->object_id == $portfolio_page_id) {
+            $classes[] = 'current-menu-item';
+        }
+    }
+
+    return $classes;
+}
+add_filter('nav_menu_css_class', 'therosessom_custom_nav_class', 10, 3);

@@ -14,7 +14,7 @@ $bottom_text = get_field('slide_bottom_text');
 $bottom_signature = get_field('slide_bottom_signature');
 ?>
 
-<section class="hero-section relative overflow-hidden" style="height: calc(100vh - 64px);">
+<section class="hero-section relative overflow-hidden" style="height: calc(100vh + 32px);">
     <?php if ($hero_slides && count($hero_slides) > 1): ?>
         <!-- Swiper Container -->
         <div class="hero-swiper swiper absolute inset-0 w-full h-full">
