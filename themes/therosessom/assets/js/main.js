@@ -13,6 +13,7 @@ import '../css/style.scss';
 // Import custom modules
 import { NavigationMenu } from './navigation.js';
 import { SliderManager } from './slider.js';
+import { PortfolioAjax } from './portfolio-ajax.js';
 
 /**
  * Lightweight Theme Class
@@ -44,6 +45,7 @@ class TheRosessomTheme {
     this.initLazyLoading();
     this.initSwipers();
     this.initSmoothScroll();
+    this.initPortfolioAjax();
     
     // Dispatch initialization complete event
     document.dispatchEvent(new CustomEvent('therosessom:initialized'));
@@ -55,6 +57,13 @@ class TheRosessomTheme {
   initNavigation() {
     this.navigation = new NavigationMenu();
   }
+
+/**
+ * Initialize Portfolio Ajax
+ */
+initPortfolioAjax() {
+  this.portfolioAjax = new PortfolioAjax();
+}
 
 /**
  * Initialize Swiper sliders - 기존 메서드 교체

@@ -1,0 +1,17 @@
+
+#portfolio-load-more {
+  @apply px-6 py-3 mt-6 text-white bg-gray-900 rounded-full shadow-lg transition;
+  @apply hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500;
+
+  &.is-loading {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  &.is-hidden {
+    @apply hidden;
+  }
+}
+
+.portfolio-item {
+  @apply transition duration-300 ease-in-out transform hover:scale-[1.02];
+}
