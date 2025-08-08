@@ -1,3 +1,7 @@
+/**
+ * REVISED: A more robust version to correctly handle state, filtering,
+ * and the browser's back-forward cache (bfcache).
+ */
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import '../css/style.scss';
@@ -8,9 +12,6 @@ import { PortfolioAjax } from './portfolio-ajax.js';
 
 class TheRosessomTheme {
   constructor() {
-    this.isPortfolioPage = document.body.classList.contains('page-portfolio') || 
-                            document.body.classList.contains('single-portfolio') ||
-                            document.body.classList.contains('post-type-archive-portfolio');
     this.init();
   }
 
@@ -29,8 +30,8 @@ class TheRosessomTheme {
     this.initSmoothScroll();
     this.initSwipers();
 
-    // Portfolio 페이지 전용 기능
-    if (this.isPortfolioPage) {
+    // Portfolio-specific functionality
+    if (document.getElementById('portfolio-grid')) {
       this.initPortfolioAjax();
     }
 

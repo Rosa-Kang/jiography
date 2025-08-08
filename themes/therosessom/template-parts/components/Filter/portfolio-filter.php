@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Template part for displaying portfolio filter.
  *
@@ -20,3 +19,17 @@ $terms = get_terms([
         </button>
     <?php endforeach; ?>
 </div>
+
+<?php 
+$posts_per_page = 4;
+$initial_query = new WP_Query([
+    'post_type'      => 'portfolio',
+    'posts_per_page' => $posts_per_page,
+    'post_status'    => 'publish',
+    'no_found_rows'  => false,
+]);
+$total_posts = $initial_query->found_posts;
+$max_pages = ceil($total_posts / $posts_per_page);
+$initial_post_count = $initial_query->post_count;
+wp_reset_postdata();
+?>

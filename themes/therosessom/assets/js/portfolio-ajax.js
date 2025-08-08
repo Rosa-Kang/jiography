@@ -4,6 +4,8 @@
  * REVISED: A more robust version to correctly handle state, filtering,
  * and the browser's back-forward cache (bfcache).
  */
+import AOS from 'aos';
+
 export class PortfolioAjax {
   constructor() {
     this.grid = document.getElementById('portfolio-grid');
@@ -81,6 +83,11 @@ export class PortfolioAjax {
     this.state.currentPage = 1;
     this.state.postCount = 0;
 
+    // Hide "View More" button immediately on filter change for better UX.
+    if (this.loadMoreBtn) {
+      this.loadMoreBtn.classList.add(this.config.classes.hidden);
+    }
+
     this.updateFilterUI(category);
     this.fetchPosts(false); // `false` means replace the grid content.
   }
@@ -117,9 +124,9 @@ export class PortfolioAjax {
     const formData = new FormData();
     formData.append('action', this.config.ajax.action);
     formData.append('nonce', this.config.ajax.nonce);
-    formData.append('page', this.state.currentPage);
+    formData.append('offset', this.state.postCount); // Use offset for fetching
     formData.append('category', this.state.currentCategory);
-    formData.append('offset', this.state.postCount);
+    formData.append('page', this.state.currentPage); // Pass page number for max_pages calculation
 
     try {
       const response = await fetch(this.config.ajax.url, { method: 'POST', body: formData });
@@ -135,6 +142,10 @@ export class PortfolioAjax {
           this.grid.innerHTML = html || `<p class="text-center text-gray-500">No portfolios found in this category.</p>`;
         }
         
+        // Refresh AOS to apply animations to new items
+        AOS.refresh();
+
+        // Update state
         this.state.postCount += newItemsCount;
         this.state.maxPages = max_pages;
 

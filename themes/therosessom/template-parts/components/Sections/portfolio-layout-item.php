@@ -20,7 +20,7 @@ $layout_index = $post_counter % 4;
 
 if ($layout_index == 0) {
     if ($is_row_open) { echo '</div>'; $is_row_open = false; }
-    echo '<div class="portfolio-item-full py-16" data-aos="fade-in" data-aos-delay="200" data-aos-duration="700">';
+    echo '<div class="portfolio-item-full pt-16 lg:mx-10" data-aos="fade-in" data-aos-delay="200" data-aos-duration="700">';
     get_template_part('template-parts/components/Sections/portfolio-item');
     echo '</div>';
 
@@ -45,7 +45,7 @@ if ($layout_index == 0) {
 
 } elseif ($layout_index == 3) {
     if ($is_row_open) { echo '</div>'; $is_row_open = false; }
-    echo '<div class="portfolio-item-full rectangular portfolio-item-alt py-16" data-aos="fade-in" data-aos-delay="300" data-aos-duration="700">';
+    echo '<div class="portfolio-item-full rectangular portfolio-item-alt pb-16" data-aos="fade-in" data-aos-delay="300" data-aos-duration="700">';
     get_template_part('template-parts/components/Sections/portfolio-item');
     echo '</div>';
 }

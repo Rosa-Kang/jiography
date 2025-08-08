@@ -18,19 +18,10 @@ define('THEROSESSOM_VERSION', '1.0.0');
  * Theme setup function
  */
 function therosessom_setup() {
-    // Make theme available for translation
     load_theme_textdomain('therosessom', get_template_directory() . '/languages');
-
-    // Add default posts and comments RSS feed links to head
     add_theme_support('automatic-feed-links');
-
-    // Let WordPress manage the document title
     add_theme_support('title-tag');
-
-    // Enable support for Post Thumbnails
     add_theme_support('post-thumbnails');
-
-    // Add theme support for HTML5 markup
     add_theme_support('html5', [
         'search-form',
         'comment-form',
@@ -38,14 +29,10 @@ function therosessom_setup() {
         'gallery',
         'caption',
     ]);
-
-    // Register navigation menus
     register_nav_menus([
         'primary-menu' => esc_html__('Primary Menu', 'therosessom'),
         'footer-menu'  => esc_html__('Footer Menu', 'therosessom'),
     ]);
-
-    // Add essential image sizes only
     add_image_size('hero-image', 1920, 1080, true);
     add_image_size('portfolio-thumb', 400, 300, true);
 }
@@ -55,31 +42,25 @@ add_action('after_setup_theme', 'therosessom_setup');
  * Enqueue scripts and styles - Further simplified
  */
 function therosessom_scripts() {
-    // Check if in development mode
     $is_development = (defined('WP_ENVIRONMENT_TYPE') && WP_ENVIRONMENT_TYPE === 'development');
     
     if ($is_development && therosessom_is_vite_running()) {
-        // Development mode
         wp_enqueue_script('vite-client', 'http://localhost:10024/@vite/client', [], null, false);
         wp_script_add_data('vite-client', 'type', 'module');
-
         wp_enqueue_script('therosessom-main', 'http://localhost:10024/assets/js/main.js', [], null, true);
         wp_script_add_data('therosessom-main', 'type', 'module');
     } else {
-        // Production mode
         therosessom_enqueue_production_assets();
     }
 
-    // Comment reply script
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }
 
-    // Localize script with data for JS
     wp_localize_script('therosessom-main', 'therosessomData', [
         'themeUrl' => get_template_directory_uri(),
-        'ajax_url' => admin_url('admin-ajax.php'), // AJAX URL 추가
-        'nonce'    => wp_create_nonce('therosessom_portfolio_nonce') // 보안 Nonce 추가
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce'    => wp_create_nonce('therosessom_portfolio_nonce')
     ]);
 }
 add_action('wp_enqueue_scripts', 'therosessom_scripts');
@@ -117,8 +98,6 @@ function therosessom_enqueue_production_assets() {
 
     $main_js_entry = $manifest['assets/js/main.js'];
 
-    // 1. Enqueue CSS files from the manifest directly in the <head>.
-    // This is the key to fixing the Flash of Unstyled Content (FOUC).
     if (!empty($main_js_entry['css'])) {
         foreach ($main_js_entry['css'] as $index => $css_file) {
             wp_enqueue_style(
@@ -130,16 +109,14 @@ function therosessom_enqueue_production_assets() {
         }
     }
 
-    // 2. Enqueue the main JS file in the footer.
     wp_enqueue_script(
         'therosessom-main',
         get_template_directory_uri() . '/dist/' . $main_js_entry['file'],
-        [], // No dependencies needed here
+        [],
         THEROSESSOM_VERSION,
-        true // Load in footer
+        true
     );
     
-    // Ensure the script is loaded as a module.
     wp_script_add_data('therosessom-main', 'type', 'module');
 }
 
@@ -147,18 +124,11 @@ function therosessom_enqueue_production_assets() {
  * Essential WordPress cleanup only
  */
 function therosessom_cleanup() {
-    // Remove emoji scripts for performance
     remove_action('wp_head', 'print_emoji_detection_script', 7);
     remove_action('wp_print_styles', 'print_emoji_styles');
-    
-    // Remove WordPress version for security
     remove_action('wp_head', 'wp_generator');
-    
-    // Remove only clearly unnecessary links
     remove_action('wp_head', 'wlwmanifest_link');
     remove_action('wp_head', 'rsd_link');
-    
-    // Keep REST API and oEmbed for Contact Form plugins compatibility
 }
 add_action('init', 'therosessom_cleanup');
 
@@ -167,7 +137,6 @@ add_action('init', 'therosessom_cleanup');
  */
 function therosessom_optimize_queries($query) {
     if (!is_admin() && $query->is_main_query()) {
-        // Limit search to posts and pages only
         if ($query->is_search()) {
             $query->set('post_type', ['post', 'page']);
         }
@@ -198,7 +167,6 @@ if (!isset($content_width)) {
  */
 add_action('init', function() {
     if (function_exists('acf_add_options_page')) {
-        // Main Theme Options page
         acf_add_options_page([
             'page_title'  => __('Theme Options', 'therosessom'),
             'menu_title'  => __('Theme Options', 'therosessom'),
@@ -207,15 +175,11 @@ add_action('init', function() {
             'icon_url'    => 'dashicons-admin-generic',
             'redirect'    => true, 
         ]);
-
-        // Site Settings sub-page
         acf_add_options_sub_page([
             'page_title'  => __('Site Settings', 'therosessom'),
             'menu_title'  => __('Site Settings', 'therosessom'),
             'parent_slug' => 'theme-options',
         ]);
-
-        // Business Settings sub-page
         acf_add_options_sub_page([
             'page_title'  => __('Business Settings', 'therosessom'),
             'menu_title'  => __('Business Settings', 'therosessom'),
@@ -226,7 +190,6 @@ add_action('init', function() {
 
 /**
  * Optional: Hide unnecessary admin menu items
- * Comment out if you need access to these features
  */
 add_action('admin_menu', function() {
     remove_submenu_page('themes.php', 'customize.php');   
@@ -246,23 +209,20 @@ add_action('admin_menu', function() {
  * robust JSON object for frontend handling.
  */
 function therosessom_load_portfolio_posts() {
-    // Check for a valid AJAX nonce and exit if it's not present or invalid.
     check_ajax_referer('therosessom_portfolio_nonce', 'nonce');
 
-    // Sanitize and validate input parameters.
-    $page = isset($_POST['page']) ? absint($_POST['page']) : 1;
     $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : 'all';
-    $posts_per_page = 6;
-
-    // Define the WP_Query arguments.
+    $posts_per_page = 4;
+    $offset = isset($_POST['offset']) ? absint($_POST['offset']) : 0;
+    
     $args = [
         'post_type'      => 'portfolio',
         'posts_per_page' => $posts_per_page,
-        'paged'          => $page,
+        'offset'         => $offset,
         'orderby'        => 'date',
         'order'          => 'DESC',
         'post_status'    => 'publish',
-        'no_found_rows'  => true, // Improves performance for pagination that doesn't need to count all posts
+        'no_found_rows'  => false,
     ];
 
     if ($category !== 'all') {
@@ -277,31 +237,41 @@ function therosessom_load_portfolio_posts() {
     
     $query = new WP_Query($args);
 
-    // Prepare the response data.
     $response = [
         'html'       => '',
-        'has_more'   => false, // New flag to easily check if there are more posts
+        'max_pages'  => 1,
         'post_count' => 0,
     ];
 
     if ($query->have_posts()) {
         ob_start();
+        $post_counter = $offset;
+        $is_row_open = false;
+
         while ($query->have_posts()) : $query->the_post();
-            get_template_part('template-parts/components/Sections/portfolio-layout-item');
+            get_template_part('template-parts/components/Sections/portfolio-layout-item', null, [
+                'post_counter' => $post_counter,
+                'is_row_open'  => &$is_row_open,
+            ]);
+            $post_counter++;
         endwhile;
+
+        if ($is_row_open) { 
+            echo '</div>'; 
+        }
+
         $response['html'] = ob_get_clean();
 
-        // Check if there are more posts to load.
-        $response['has_more'] = ($query->max_num_pages > $page);
+        // Calculate total pages based on found posts
+        $response['max_pages'] = $query->max_num_pages;
         $response['post_count'] = $query->post_count;
     }
     
     wp_reset_postdata();
 
-    // Send the JSON response.
     wp_send_json_success($response);
 }
 
-// Add the action hooks to register the AJAX handler.
-add_action('wp_ajax_therosessom_load_portfolio_posts', 'therosessom_load_portfolio_posts');
-add_action('wp_ajax_nopriv_therosessom_load_portfolio_posts', 'therosessom_load_portfolio_posts');
+// Register both logged-in and logged-out AJAX handlers
+add_action('wp_ajax_load_portfolio', 'therosessom_load_portfolio_posts');
+add_action('wp_ajax_nopriv_load_portfolio', 'therosessom_load_portfolio_posts');

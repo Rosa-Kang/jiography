@@ -55,9 +55,7 @@
         </div>
     
         <?php if ($query->max_num_pages > 1) : ?>
-            <div 
-                data-aos="fade-up"
-                class="flex justify-center mt-10">
+            <div class="flex justify-center mt-10">
                     <button
                     id="portfolio-loadmore"
                     data-page="1"

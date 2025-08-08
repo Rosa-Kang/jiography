@@ -1,3 +1,4 @@
+@use 'variables' as *;
 /**
 * Portfolio.scss
 **/
@@ -5,7 +6,11 @@
 .portfolio-item-full {
   img{
     max-height: 585px;
-    aspect-ratio: 2.5/1;
+    aspect-ratio: 2/1;
+
+    @media (min-width: $breakpoint-lg ) {
+      aspect-ratio: 2.5/1;
+    }
   }
 }
 
