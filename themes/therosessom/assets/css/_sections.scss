@@ -126,31 +126,54 @@
 /**
 * Footer
 */
+footer {
+    li{
+        transition: $transition;
 
-#footer-menu-container {
-    width: 100%;
-
-    #footer-menu {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        align-items: center;
-        gap: 1rem;
-        
-        @media (min-width: $breakpoint-md ) {
-            gap: 3rem;
-        }
-
-        a{
-            text-transform: uppercase;
+        &:hover {
+            a {
+                opacity: 0.6;
+            }
         }
     }
-}
 
-/**
-* IG Feed Section
-*/
+    a{
+        transition: $transition;
 
-#sb_instagram img {
-    aspect-ratio: 1/1;
+        &:hover {
+            opacity: 0.6;
+        }
+    }
+
+    #footer-menu-container {
+        width: 100%;
+    
+        #footer-menu {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+            gap: 1rem;
+    
+            li{
+      
+                a{
+                    text-transform: uppercase;
+                }
+            }
+            
+            @media (min-width: $breakpoint-md ) {
+                gap: 3rem;
+            }
+    
+        }
+    }
+    
+    /**
+    * IG Feed Section
+    */
+    
+    .ig-feed img {
+        aspect-ratio: 1/1;
+    }
 }

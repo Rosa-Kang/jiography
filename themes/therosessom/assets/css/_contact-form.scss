@@ -4,6 +4,13 @@
 **/
 
 #jiography-contactform{
+   select, option.placeholder, label {
+    font-size: $font-size-base;
+      color: $color-gray-400;
+      font-family: $font-secondary;
+      font-weight: normal;
+    }
+
   form.wpforms-form {
       .wpforms-field {
         margin: 0 auto;
@@ -21,12 +28,14 @@
         border-left: none;
         border-bottom: 0.9px solid black;
         padding: 0;
+        transition: $transition;
 
-        &:focus, &:active {
+        &:hover, &:focus, &:active {
         border-top: none !important;
         border-right: none !important;
         border-left: none !important;
         border-bottom: 0.9px solid #e75e5e;
+        box-shadow: none;
         }
       }
 
@@ -37,6 +46,7 @@
       .wpforms-submit-container {
         display: flex;
         justify-content: end;
+        align-items: baseline;
 
           button[type="submit"] {
             background: none;
@@ -47,6 +57,8 @@
             text-transform: uppercase;
             transition: $transition;
             font-size: 0.75rem;
+            margin-top: 5rem;
+            margin-bottom: -2.5rem;
 
             &::after {
               content: '';
@@ -73,9 +85,7 @@
                 transform: rotate(45deg) translateX(5px);
               }
             }
-
           }
         }
       }
-
 }

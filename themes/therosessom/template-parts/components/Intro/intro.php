@@ -105,7 +105,7 @@ $intro_button = get_field('intro_button');
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm leading-relaxed text-gray-700">
 
                     <?php if ($intro_content_left): ?>
-                        <div class="space-y-4"
+                        <div class="space-y-4 font-secondary"
                              data-aos="fade-in"
                              data-aos-delay="650"
                              data-aos-duration="600"
@@ -115,7 +115,7 @@ $intro_button = get_field('intro_button');
                     <?php endif; ?>
 
                     <?php if ($intro_content_right): ?>
-                        <div class="space-y-4"
+                        <div class="space-y-4 font-secondary"
                              data-aos="fade-in"
                              data-aos-delay="650"
                              data-aos-duration="600"

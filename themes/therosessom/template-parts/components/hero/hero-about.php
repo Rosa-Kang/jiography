@@ -56,10 +56,10 @@ $content_left = get_field('hero_content_left');
                     </h1>
                 <?php endif; ?>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm leading-relaxed text-gray-700">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm font-light leading-relaxed text-gray-700">
 
                     <?php if ($content_left): ?>
-                        <div class="space-y-4"
+                        <div class="space-y-4 font-secondary"
                              data-aos="fade-in"
                              data-aos-delay="500"
                              data-aos-duration="1200"
@@ -69,7 +69,7 @@ $content_left = get_field('hero_content_left');
                     <?php endif; ?>
 
                     <?php if ($content_right): ?>
-                        <div class="space-y-4"
+                        <div class="space-y-4 font-secondary"
                              data-aos="fade-in"
                              data-aos-delay="550"
                              data-aos-duration="1200"

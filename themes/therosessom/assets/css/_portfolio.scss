@@ -130,3 +130,155 @@
         padding: $spacing-2; 
     }
 }
+
+
+//Portfolio Slider
+/* Portfolio Slider Styles */
+
+/* Main Portfolio Slider */
+.main-portfolio-swiper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Navigation Buttons Styling */
+.main-portfolio-swiper .swiper-button-next,
+.main-portfolio-swiper .swiper-button-prev {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    width: 29px;
+    height: 29px;
+    margin-top: -25px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    bottom: 42%;
+    top: unset;
+}
+
+.main-portfolio-swiper .swiper-button-next:hover,
+.main-portfolio-swiper .swiper-button-prev:hover {
+    opacity: 0.65;
+}
+
+.main-portfolio-swiper .swiper-button-next::after,
+.main-portfolio-swiper .swiper-button-prev::after {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* Thumbnail Gallery Slider */
+.portfolio-gallery-swiper .swiper-slide {
+    opacity: 0.7;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.portfolio-gallery-swiper .swiper-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.portfolio-gallery-swiper .swiper-slide:hover,
+.portfolio-gallery-swiper .swiper-slide.portfolio-thumb-active {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.portfolio-gallery-swiper .swiper-slide:hover::before,
+.portfolio-gallery-swiper .swiper-slide.portfolio-thumb-active::before {
+    opacity: 0;
+}
+
+.portfolio-gallery-swiper .swiper-slide.portfolio-thumb-active {
+    border: 3px solid #fff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.portfolio-gallery-swiper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-portfolio-swiper {
+        height: 400px !important;
+    }
+    
+    .main-portfolio-swiper .swiper-button-next,
+    .main-portfolio-swiper .swiper-button-prev {
+        width: 40px;
+        height: 40px;
+        margin-top: -20px;
+    }
+    
+    .main-portfolio-swiper .swiper-button-next::after,
+    .main-portfolio-swiper .swiper-button-prev::after {
+        font-size: 14px;
+    }
+    
+    .portfolio-gallery-swiper .swiper-slide {
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-portfolio-swiper {
+        height: 300px !important;
+    }
+    
+    .portfolio-gallery-swiper .swiper-slide {
+        height: 50px;
+    }
+}
+
+/* Loading State */
+.main-portfolio-swiper.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f0f0f0;
+}
+
+.main-portfolio-swiper .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Smooth transitions for all elements */
+.portfolio-gallery-swiper .swiper-slide,
+.main-portfolio-swiper .swiper-slide {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hide scrollbar but keep functionality */
+.portfolio-gallery-swiper .swiper-wrapper {
+    cursor: grab;
+}
+
+.portfolio-gallery-swiper .swiper-wrapper:active {
+    cursor: grabbing;
+}

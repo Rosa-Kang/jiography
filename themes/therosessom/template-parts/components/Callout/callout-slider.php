@@ -45,13 +45,13 @@ if ($bg_image && isset($bg_image['url'])) {
                     <?php if ($title || $subtitle): ?>
                     <div data-aos="fade-in"  data-aos-delay="100"  data-aos-duration="200" >
                         <?php if ($title): ?>
-                            <h2 class="italic lowercase text-4xl lg:text-7xl font-light font-primary text-gray-800 leading-tight">
+                            <h2 class="italic lowercase text-5xl lg:text-7xl font-light font-primary text-gray-800 leading-tight">
                                 <?php echo esc_html($title); ?>
                             </h2>
                         <?php endif; ?>
                         
                         <?php if ($subtitle): ?>
-                            <h3 class="italic uppercase text-4xl lg:text-7xl mb-3 font-bold font-primary text-gray-900">
+                            <h3 class="italic uppercase text-5xl lg:text-7xl mb-3 font-bold font-primary text-gray-900">
                                 <?php echo esc_html($subtitle); ?>
                             </h3>
                         <?php endif; ?>
@@ -73,7 +73,7 @@ if ($bg_image && isset($bg_image['url'])) {
     
                         <!-- Text Content -->
                         <?php if ($content): ?>
-                            <div class="flex-1 text-xs/4" data-aos="fade-in" data-aos-delay="300"  data-aos-duration="500">
+                            <div class="flex-1 text-xs/4 font-light font-secondary" data-aos="fade-in" data-aos-delay="300"  data-aos-duration="500">
                                     <?php echo $content; ?>
                             </div>
                         <?php endif; ?>
@@ -82,9 +82,13 @@ if ($bg_image && isset($bg_image['url'])) {
     
                 <!-- Bottom Section - The Way I See -->
                 <div class="mt-12 px-6 lg:pr-6 xl:pl-[85px]" data-aos="fade-in" data-aos-delay="300"  data-aos-duration="500">
-                    <?php if ($way_title): ?>
-                        <h3 class="text-2xl lg:text-3xl font-light font-primary text-gray-800 italic leading-tight">
-                            <?php echo esc_html($way_title); ?>
+                    <?php if ($way_title): 
+                        $words = explode(' ', trim($way_title));
+                        $first_two = implode(' ', array_slice($words, 0, 2));
+                        $remaining = count($words) > 2 ? ' ' . implode(' ', array_slice($words, 2)) : '';
+                        ?>
+                        <h3 class="text-4xl lg:text-5xl font-primary text-gray-800 leading-tight mb-4">
+                            <span class="italic"><?php echo esc_html($first_two); ?></span> <span><?php echo esc_html($remaining); ?></span>
                         </h3>
                     <?php endif; ?>
     
@@ -92,13 +96,13 @@ if ($bg_image && isset($bg_image['url'])) {
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs leading-relaxed text-gray-700">
                         
                         <?php if ($way_content_left): ?>
-                            <div data-aos="fade-in" data-aos-delay="300"  data-aos-duration="700">
+                            <div class="font-secondary" data-aos="fade-in" data-aos-delay="300"  data-aos-duration="700">
                                 <?php echo $way_content_left; ?>
                             </div>
                         <?php endif; ?>
     
                         <?php if ($way_content_right): ?>
-                            <div data-aos="fade-in" data-aos-delay="400"  data-aos-duration="700">
+                            <div class="font-secondary" data-aos="fade-in" data-aos-delay="400"  data-aos-duration="700">
                                 <?php echo $way_content_right; ?>
                             </div>
                         <?php endif; ?>
@@ -109,7 +113,7 @@ if ($bg_image && isset($bg_image['url'])) {
                     $button_text = esc_html($callout_slides_button['title']);
                     $button_target = esc_attr($callout_slides_button['target'] ?: '_self');
                 ?>
-                    <div class="pt-4 flex justify-end">
+                    <div class="pt-4 flex justify-end mt-8">
                         <a href="<?php echo $button_url; ?>" 
                            target="<?php echo $button_target; ?>"
                            class="btn-primary flex text-xs uppercase tracking-widest font-medium"
@@ -154,7 +158,7 @@ if ($bg_image && isset($bg_image['url'])) {
                             <!-- Slide Counter -->
                 <?php if (count($callout_slides) > 1): ?>
                 <div class="absolute bottom-8 lg:bottom-16 left-1/2 -translate-x-1/2 lg:-translate-x-[calc(50%-2rem)] z-30">
-                    <span class="callout-counter text-xs text-gray-600 font-mono">
+                    <span class="callout-counter text-xs text-gray-600 font-secondary">
                         (<span class="current-slide">1</span>/<span class="total-slides"><?php echo count($callout_slides); ?></span>)
                     </span>
                 </div>

@@ -9,33 +9,25 @@
 	$footer_script = get_field('footer_script', 'option');
 ?>
 
-		<footer id="colophon" role="contentinfo" class="relative z-20 bg-primary-light">
-			<div class="py-12">
-				<?php if ( is_front_page() ) : ?>
-					<div class="container lg:max-w-[1400px] mx-auto">
-						<hr class="horizontal-line">
-					</div>
-				<?php endif; ?>
-			</div>
+		<footer id="colophon" role="contentinfo" class="relative z-20 bg-primary-light pt-16">
 
-			<div class="ig-feed">
+			<div class="ig-feed py-16">
 				<?php get_template_part('template-parts/components/IG/ig-feed') ;?>
 			</div>
 
-			<div class="container lg:max-w-[1024px] mx-auto px-4 py-6">
+			<div class="container lg:max-w-[1024px] mx-auto px-4 pb-8">
 				<div class="w-full flex justify-center items-center py-6 sm:px-6 lg:px-8">
-					<div id="footer-menu-container" class="space-y-2">
-						<?php wp_nav_menu(['menu' => 'Footer Menu', 'menu_id' => 'footer-menu']); ?>
+					<div id="footer-menu-container" class="space-y-2 font-secondary">
+						<?php wp_nav_menu(['menu' => 'Footer Menu', 'menu_id' => 'footer-menu', 'menu_class' => 'text-xs']); ?>
 					</div>
 				</div>
 				<?php if( $footer_copyright ): ?>
-					<div class="pb-6">
-						<div class="footer-bar text-neutral-500">
+					<div>
+						<div class="footer-bar text-neutral-500 text-xs text-center">
 							<?php { echo $footer_copyright; } ?>
 						</div>
 					</div>
 				<?php endif;?>
-
 			</div>
 		</footer>
 	</div><!-- #content -->

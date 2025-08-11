@@ -86,3 +86,37 @@
         }
     }
 }
+
+#portfolio-loadmore {
+    &::after {
+            content: '';
+            display: inline-block;
+            width: 16px; 
+            height: 16px;
+            background-image: url('@images/arrow-forward.svg');
+            transform: rotate(45deg);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-top: 1.25px;
+            margin-left: 3px;
+            transition: $transition;
+            vertical-align: middle;
+    }
+
+    &:hover {
+        &::after {
+           transform: rotate(45deg) translateX(5px);
+        }
+    }
+}
+
+.text-overlay:before {
+    background-color: #ffffff;
+    content: "";
+    inset: 0;
+    position: absolute;
+    transition: opacity .3s ease;
+    opacity: 0.68;
+    z-index: 1;
+}

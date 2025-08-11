@@ -42,7 +42,7 @@ if (!$see_moments_button) {
         </div>
 
         <!-- Testimonials Swiper Container -->
-        <div class="testimonials-swiper swiper" data-aos="fade-in" data-aos-delay="300">
+        <div class="testimonials-swiper swiper" data-aos="fade-in" data-aos-delay="100">
             <div class="swiper-wrapper relative"> 
                 <?php foreach ($testimonials_slides as $index => $slide): ?>
                 <div class="swiper-slide lg:pl-12">
@@ -69,7 +69,7 @@ if (!$see_moments_button) {
                                     </p>
                                 <?php endif; ?>
                                 <?php if ($slide['client_date']): ?>
-                                    <p class="text-xs text-gray-600 font-mono">
+                                    <p class="text-xs text-gray-600 font-secondary">
                                         <?php echo esc_html($slide['client_date']); ?>
                                     </p>
                                 <?php endif; ?>
@@ -84,12 +84,12 @@ if (!$see_moments_button) {
                                 
                                 <!-- Number -->
                                 <div class="flex items-start gap-8">
-                                    <span class="text-xl font-mono text-gray-500 flex-shrink-0 mt-1">
+                                    <span class="text-xl font-mono text-gray-500 flex-shrink-0 mt-1 testimonial-number cursor-pointer hover:opacity-70 transition-opacity" data-slide="<?php echo $index; ?>">
                                         <?php echo str_pad($index + 1, 2, '0', STR_PAD_LEFT); ?>
                                     </span>
                                     
                                     <!-- Testimonial Text -->
-                                    <div class="flex-1">
+                                    <div class="flex-1 font-secondary">
                                         <?php if ($slide['testimonial_text']): ?>
                                                 <?php echo $slide['testimonial_text']; ?>
                                         <?php endif; ?>

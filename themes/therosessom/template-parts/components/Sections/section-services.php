@@ -97,7 +97,7 @@
                                                 </div>
                                                 <span class="text-xs text-gray-400 uppercase tracking-wider text-left lg:text-right"><?php the_sub_field( 'service_price' ); ?></span>
                                             </div>
-                                            <div data-aos="fade-in" class="prose prose-sm max-w-none prose-p:my-2 mt-2 text-gray-700">
+                                            <div data-aos="fade-in" class="font-secondary text-sm/6 tracking-wide text-light max-w-none prose-p:my-2 mt-2 text-gray-700">
                                                 <?php the_sub_field( 'service_description' ); ?>
                                             </div>
                                         </div>

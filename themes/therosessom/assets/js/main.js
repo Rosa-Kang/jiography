@@ -25,10 +25,10 @@ class TheRosessomTheme {
 
   initializeComponents() {
     this.initNavigation();
-    this.initAOS();
     this.initLazyLoading();
     this.initSmoothScroll();
     this.initSwipers();
+    this.initAOS();
 
     // Portfolio-specific functionality
     if (document.getElementById('portfolio-grid')) {
@@ -76,6 +76,7 @@ class TheRosessomTheme {
   async initSwipers() {
     this.sliderManager = new SliderManager();
     await this.sliderManager.init();
+    AOS.refresh();
   }
 
   initAOS() {
