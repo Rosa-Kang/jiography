@@ -16,7 +16,8 @@ export class SliderManager {
             hero: document.querySelector('.hero-swiper'),
             callout: document.querySelector('.callout-swiper'), 
             testimonials: document.querySelector('.testimonials-swiper'),
-            testimonialsAbout: document.querySelector('.testimonials-about-swiper') 
+            testimonialsAbout: document.querySelector('.testimonials-about-swiper'),
+            portfolioGallery: document.querySelector('.portfolio-gallery-swiper') 
         };
 
         // Exit early if no sliders exist
@@ -36,6 +37,7 @@ export class SliderManager {
             this.initCallout(sliders.callout, Swiper);
             this.initTestimonials(sliders.testimonials, Swiper);
             this.initTestimonialsAbout(sliders.testimonialsAbout, Swiper);
+            this.initPortfolioGallery(sliders.portfolioGallery, Swiper);
 
 
         } catch (error) {
@@ -219,6 +221,31 @@ export class SliderManager {
                 prevSlideMessage: 'Previous testimonial',
                 nextSlideMessage: 'Next testimonial',
             }
+        });
+    }
+
+/**
+ * Initialize portfolio gallery slider
+ */
+    initPortfolioGallery(element, Swiper) {
+        if (!element) return;
+        
+        const slideCount = element.querySelectorAll('.swiper-slide').length;
+        if (slideCount <= 1) return;
+
+        new Swiper(element, {
+            loop: true,
+            slidesPerView: 'auto', 
+            spaceBetween: 16, 
+            freeMode: true, 
+            grabCursor: true, 
+            simulateTouch: true,
+            allowTouchMove: true,
+            a11y: {
+                enabled: true,
+                prevSlideMessage: 'Previous image',
+                nextSlideMessage: 'Next image',
+            },
         });
     }
 }
