@@ -27,8 +27,8 @@ class TheRosessomTheme {
     this.initNavigation();
     this.initLazyLoading();
     this.initSmoothScroll();
-    this.initSwipers();
     this.initAOS();
+    this.initSwipers();
 
     // Portfolio-specific functionality
     if (document.getElementById('portfolio-grid')) {
@@ -36,6 +36,14 @@ class TheRosessomTheme {
     }
 
     this.initPortfolioFilterToggle();
+
+    // Add a load event listener to refresh AOS after everything has loaded
+    window.addEventListener('load', () => {
+      AOS.refresh();
+      setTimeout(() => {
+        AOS.refresh();
+      }, 500);
+    });
 
     document.dispatchEvent(new CustomEvent('therosessom:initialized'));
   }
