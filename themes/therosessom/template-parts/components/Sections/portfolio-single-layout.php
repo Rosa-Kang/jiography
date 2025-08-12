@@ -13,7 +13,7 @@
     
     <article id="post-<?php the_ID(); ?>" <?php post_class('max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16'); ?>>
 
-    <div class="max-w-[80%] lg:container-lg mx-auto px-4 flex flex-col py-16">
+    <div class="max-w-[90%] lg:container-lg mx-auto px-4 flex flex-col py-16">
 
         <div class="flex flex-col md:flex-row md:gap-x-12 lg:gap-x-20 items-start pb-16">
             
@@ -60,7 +60,7 @@
         </div>
         
         <?php if ( $slider_images ) : ?>
-            <div class="max-w-[80%] lg:container-md mx-auto">
+            <div class="max-w-[90%] lg:container-md mx-auto">
                 <div class="main-portfolio-swiper swiper aspect-[1/1.23] max-h-[670px] mb-8 relative">
                     <div class="swiper-wrapper">
                         <?php foreach ( $slider_images as $slide ) : 

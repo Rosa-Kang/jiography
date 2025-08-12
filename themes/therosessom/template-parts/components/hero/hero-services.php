@@ -13,11 +13,15 @@ $bg_style = $hero_services_image ?
     'style="background-image: url(' . esc_url($hero_services_image['url']) . '); 
            background-position: center; 
            background-size: cover; 
-           background-repeat: no-repeat; 
-           background-attachment: fixed;"' : '';
+           background-repeat: no-repeat;"' : '';
 ?>
 
-<section class="hero-services py-[92px] relative" <?php echo $bg_style; ?>>
+
+<section class="hero-services py-[92px] relative z-10">
+    <?php if ($hero_services_image) : ?>
+        <div class="hero-background-layer z-9 image-overlay" <?php echo $bg_style; ?>></div>
+    <?php endif; ?>
+
     <div class="hero-content min-h-[418px] flex justify-center items-center">
         <?php if ($hero_services_text) : ?>
            <div class="sticky-content">

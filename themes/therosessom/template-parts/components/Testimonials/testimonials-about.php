@@ -8,7 +8,7 @@ $testimonials = get_field('testimonials');
 ?>
 
 <section class="testimonials-about bg-primary-light py-16 lg:py-[92px]">
-    <div class="max-w-[80%] lg:container-md mx-auto relative"
+    <div class="max-w-[85%] lg:container-md mx-auto relative"
          data-aos="fade-in"
          data-aos-duration="1200"
          data-aos-delay="200"
@@ -23,10 +23,10 @@ $testimonials = get_field('testimonials');
                         setup_postdata($post_object);
                     ?>
                         <div class="swiper-slide">
-                            <div class="slide-content relative w-[280px] h-auto md:w-[647px] md:h-[647px] mx-auto text-overlay">
+                            <div class="slide-content relative w-full h-[470px] md:w-[647px] md:h-[647px] mx-auto text-overlay">
                                 <?php if (has_post_thumbnail($post_object->ID)) : ?>
-                                    <div class="testimonial-image-container w-[280px] h-auto md:w-[647px] md:h-[647px] mx-auto">
-                                        <?php echo get_the_post_thumbnail($post_object->ID, 'large', ['class' => 'testimonial-image grayscale aspect-[1/1.3] md:aspect-square md:w-full object-cover']); ?>
+                                    <div class="testimonial-image-container w-full h-[470px] md:w-[647px] md:h-[647px] mx-auto">
+                                        <?php echo get_the_post_thumbnail($post_object->ID, 'large', ['class' => 'testimonial-image grayscale h-full md:aspect-square w-full md:h-inherit object-cover']); ?>
                                     </div>
                                 <?php endif; ?>
                                 

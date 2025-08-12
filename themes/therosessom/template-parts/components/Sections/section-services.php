@@ -9,7 +9,7 @@
 
 
 <section class="section-services pb-16 md:pb-24 z-20 relative bg-primary-light">
-    <div class="max-w-[80%] lg:container-lg mx-auto px-4">
+    <div class="max-w-[90%] lg:container-lg mx-auto px-4">
 
         <?php if ( have_rows( 'service_sections' ) ) :
             while ( have_rows( 'service_sections' ) ) :

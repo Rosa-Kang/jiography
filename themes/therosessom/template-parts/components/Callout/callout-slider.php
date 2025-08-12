@@ -36,7 +36,7 @@ if ($bg_image && isset($bg_image['url'])) {
 <section class="callout-slider relative" style="<?php echo $background_style; ?>">
     <div class="w-full flex flex-col lg:flex-row lg:items-center lg:justify-around">
         <!-- Left Content Section -->
-        <div class="<?php echo $class;?> mx-auto lg:mx-0 px-8 pt-16 pb-8 xl:px-16 lg:py-[82px] max-w-[660px] flex-1 flex-col justify-between relative">
+        <div class="<?php echo $class;?> mx-auto lg:mx-0 px-8 pt-16 pb-8 xl:pl-16 xl:pr-0 lg:py-[82px] max-w-[660px] flex-1 flex-col justify-between relative">
             <div>
                 <!-- Top Section - The Thought -->
                 <div>

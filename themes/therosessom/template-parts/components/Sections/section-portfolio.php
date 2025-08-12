@@ -8,7 +8,7 @@
 ?>
 
 <section class="section-portfolio bg-primary-light py-[92px] max-w-screen-xl mx-auto px-4">
-    <div class="max-w-[80%] lg:container-lg mx-auto px-4">
+    <div class="max-w-[90%] lg:container-lg mx-auto px-4">
         <?php
         get_template_part('template-parts/components/Filter/portfolio-filter');
         ?>
