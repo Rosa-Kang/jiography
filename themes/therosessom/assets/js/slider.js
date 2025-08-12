@@ -31,10 +31,8 @@ export class SliderManager {
         const callout = document.querySelector('.callout-swiper');
         if (callout) this.initCallout(callout);
 
-        console.log('initialize')
         const testimonials = document.querySelector('.testimonials-swiper');
         if (testimonials) this.initTestimonials(testimonials);
-        console.log('initialize done')
 
         const testimonialsAbout = document.querySelector('.testimonials-about-swiper');
         if (testimonialsAbout) this.initTestimonialsAbout(testimonialsAbout);

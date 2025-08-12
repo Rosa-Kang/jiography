@@ -5,19 +5,9 @@
  * @package by Therosessom
  */
 
-// Get ACF testimonials data
 $testimonials_title = get_field('testimonials_title');
 $testimonials_subtitle = get_field('testimonials_subtitle'); 
-$testimonials_slides = get_field('testimonials_slides');
-$see_moments_button = get_field('see_moments_button');
-
-if (!$see_moments_button) {
-    $see_moments_button = [
-        'url' => '/gallery',
-        'title' => 'SEE THE MOMENTS',
-        'target' => '_self'
-    ];
-}
+$testimonials = get_field('testimonials');
 ?>
 
 <section class="testimonials bg-texture-neutral py-16 lg:py-[92px] relative">
@@ -44,35 +34,33 @@ if (!$see_moments_button) {
         <!-- Testimonials Swiper Container -->
         <div class="testimonials-swiper swiper" data-aos="fade-in" data-aos-delay="100">
             <div class="swiper-wrapper relative"> 
-                <?php foreach ($testimonials_slides as $index => $slide): ?>
+                <?php
+                    foreach ($testimonials as $index => $testimonial_row) :
+                        $post_object = $testimonial_row['testimonial'];
+                        if (!$post_object) continue;
+                        setup_postdata($post_object);
+                        $button_link = get_field('testimonials_link', $post_object->ID);
+                    ?>
                 <div class="swiper-slide lg:pl-12">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center justify-center">
                         
                         <!-- Left Column - Polaroid Image -->
                         <div class="order-2 lg:order-1 m-auto flex flex-col items-center justify-center w-full md:w-[390px]">
                             <div class="polaroid-frame">
-                                <?php if ($slide['client_image']): 
-                                    $client_img_url = is_array($slide['client_image']) ? $slide['client_image']['url'] : $slide['client_image'];
-                                    $client_img_alt = is_array($slide['client_image']) && !empty($slide['client_image']['alt']) ? $slide['client_image']['alt'] : 'photographer in toronto Client Photo';
+                                <?php if (has_post_thumbnail($post_object->ID)) :
                                 ?>
-                                    <img src="<?php echo esc_url($client_img_url); ?>" 
-                                         alt="<?php echo esc_attr($client_img_alt); ?>"
-                                         class="w-full aspect-[3/3.5] object-cover">
+                                <?php echo get_the_post_thumbnail($post_object->ID, 'large', ['class' => 'w-full aspect-[3/3.5] object-cover']); ?>
                                 <?php endif; ?>
-                                
                             </div>
                             <!-- Polaroid Caption -->
                             <div class="flex w-full items-center justify-between text-center pt-4">
-                                <?php if ($slide['client_names']): ?>
                                     <p class="font-primary text-sm text-gray-800 italic">
-                                        <?php echo esc_html($slide['client_names']); ?>
+                                       <?php echo esc_html(get_the_title($post_object->ID)); ?>
                                     </p>
-                                <?php endif; ?>
-                                <?php if ($slide['client_date']): ?>
+
                                     <p class="text-xs text-gray-600 font-secondary">
-                                        <?php echo esc_html($slide['client_date']); ?>
-                                    </p>
-                                <?php endif; ?>
+                                        <span><?php echo get_the_date('M d, Y', $post_object->ID); ?></span>
+                                    </p> 
                             </div>
                         </div>
 
@@ -90,21 +78,17 @@ if (!$see_moments_button) {
                                     
                                     <!-- Testimonial Text -->
                                     <div class="flex-1 font-secondary">
-                                        <?php if ($slide['testimonial_text']): ?>
-                                                <?php echo $slide['testimonial_text']; ?>
-                                        <?php endif; ?>
+                                        <?php echo wp_kses_post(get_the_content(null, false, $post_object->ID)); ?>
                                     </div>
                                 </div>
 
                                 <!-- See Moments Button -->
-                            <?php if ($slide['see_moments_button']):
-                                $button = $slide['see_moments_button']
-                            ?>
+                            <?php if ($button_link):?>
                             <div class="flex justify-end mt-4">
-                                <a href="<?php echo esc_url($button['url']); ?>" 
-                                   target="<?php echo esc_attr($button['target'] ?: '_self'); ?>"
+                                <a href="<?php echo esc_url($button_link['url']); ?>" 
+                                   target="<?php echo esc_attr($button_link['target'] ?: '_self'); ?>"
                                    class="btn-primary up flex text-xs uppercase tracking-widest font-medium">
-                                   <span><?php echo esc_html($button['title']); ?></span> 
+                                   <span class="uppercase">see moments</span> 
                                 </a>
                             </div>
                             <?php endif; ?>
@@ -113,7 +97,7 @@ if (!$see_moments_button) {
                             <!-- Other Testimonial Numbers (Inactive) -->
                             <div class="space-y-4">
                                 <?php 
-                                    $total_slides = count($testimonials_slides);
+                                    $total_slides = count($testimonials);
                                     for ($i = 1; $i < $total_slides; $i++) {
                                     $display_index = ($index + $i) % $total_slides;
                                 ?>
