@@ -10,7 +10,7 @@
 <article class="portfolio-item">
     <?php if (has_post_thumbnail()) : ?>
         <div class="portfolio-thumb">
-            <?php the_post_thumbnail('large', ['class' => 'w-full h-auto object-cover']); ?>
+            <?php the_post_thumbnail('large', ['class' => 'w-full h-auto object-cover', 'alt' => 'Photographer Jio in Toronto, Portfolio']); ?>
         </div>
     <?php endif; ?>
 

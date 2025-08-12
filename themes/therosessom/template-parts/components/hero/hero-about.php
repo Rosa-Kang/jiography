@@ -19,7 +19,7 @@ $content_left = get_field('hero_content_left');
             <div class="order-1 lg:mb-16">
                 <?php if ($hero_photo):
                     $image_url = is_array($hero_photo) ? $hero_photo['url'] : $hero_photo;
-                    $image_alt = is_array($hero_photo) ? $hero_photo['alt'] : 'Intro Image';
+                    $image_alt = is_array($hero_photo) && !empty($hero_photo['alt']) ? $hero_photo['alt'] : 'Toronto Photographer Intro Image';
                 ?>
                     <div    class="polaroid-frame relative mx-auto max-w-[464px]"
                             data-aos="fade-in"

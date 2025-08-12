@@ -33,7 +33,7 @@ if ($background_image && isset($background_image['url'])) {
                 <?php endif;?>
                 <?php if($deco_image) : 
                     $url = is_array($deco_image) ? $deco_image['url'] : $deco_image;
-                    $alt = is_array($deco_image) ?  $deco_image['alt'] : 'decorative-image';
+                    $alt = is_array($deco_image) && !empty($deco_image['alt']) ? $deco_image['alt'] : 'photographer in toronto decorative-image';
                     ?>
                 <div data-aos="fade-in" data-aos-delay="450" data-aos-duration="450">
                     <img src="<?php echo esc_url($url); ?>" alt="<?php echo $alt; ?>" class="w-[250px] h-[309px] lg:ml-12 pb-6">

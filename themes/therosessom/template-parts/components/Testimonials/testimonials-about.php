@@ -60,10 +60,10 @@ $testimonials = get_field('testimonials');
             </div>
             
             <div id="prev-btn" class="swiper-button-prev">
-                <img width="11px" height="11px" src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-left.svg" alt="Previous Slide">
+                <img width="11px" height="11px" src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-left.svg" alt="Toronto Photographer Previous Slide">
             </div>
             <div id="next-btn" class="swiper-button-next">
-                <img width="11px" height="11px" src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-right.svg" alt="Next Slide">
+                <img width="11px" height="11px" src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-right.svg" alt="Toronto Photographer Next Slide">
             </div>
             
             <div class="swiper-pagination-fraction flex justify-center items-center pt-6"></div>

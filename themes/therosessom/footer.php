@@ -16,7 +16,7 @@
 			</div>
 
 			<div class="container lg:max-w-[1024px] mx-auto px-4 pb-8">
-				<div class="w-full flex justify-center items-center py-6 sm:px-6 lg:px-8">
+				<div class="flex justify-center items-center py-6 mx-auto px-4 sm:px-6 lg:px-8">
 					<div id="footer-menu-container" class="space-y-2 font-secondary">
 						<?php wp_nav_menu(['menu' => 'Footer Menu', 'menu_id' => 'footer-menu', 'menu_class' => 'text-xs']); ?>
 					</div>

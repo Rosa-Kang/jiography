@@ -26,7 +26,7 @@ $intro_button = get_field('intro_button');
                  data-aos-easing="ease-out-cubic">
                 <?php if ($intro_image):
                     $image_url = is_array($intro_image) ? $intro_image['url'] : $intro_image;
-                    $image_alt = is_array($intro_image) ? $intro_image['alt'] : 'Intro Image';
+                    $image_alt = is_array($intro_image) && !empty($intro_image['alt']) ? $intro_image['alt'] : 'Toronto Photographer Intro Image';
                 ?>
                     <div class="polaroid-frame relative mx-auto max-w-[300px] lg:max-w-none">
                          <?php if ($intro_decorative_text):

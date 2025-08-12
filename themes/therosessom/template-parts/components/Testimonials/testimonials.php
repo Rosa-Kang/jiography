@@ -53,7 +53,7 @@ if (!$see_moments_button) {
                             <div class="polaroid-frame">
                                 <?php if ($slide['client_image']): 
                                     $client_img_url = is_array($slide['client_image']) ? $slide['client_image']['url'] : $slide['client_image'];
-                                    $client_img_alt = is_array($slide['client_image']) ? $slide['client_image']['alt'] : 'Client Photo';
+                                    $client_img_alt = is_array($slide['client_image']) && !empty($slide['client_image']['alt']) ? $slide['client_image']['alt'] : 'photographer in toronto Client Photo';
                                 ?>
                                     <img src="<?php echo esc_url($client_img_url); ?>" 
                                          alt="<?php echo esc_attr($client_img_alt); ?>"

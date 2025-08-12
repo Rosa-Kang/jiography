@@ -22,7 +22,7 @@ $bottom_signature = get_field('slide_bottom_signature');
                 <?php foreach ($hero_slides as $index => $slide): 
                     $image = $slide['slide_image'];
                     $image_url = is_array($image) ? $image['url'] : $image;
-                    $image_alt = is_array($image) ? $image['alt'] : 'Hero Slide';
+                    $image_alt = is_array($image) && !empty($image['alt']) ? $image['alt'] : 'Toronto Photographer Hero Slide';
                 ?>
                     <div class="swiper-slide relative h-full overflow-hidden">
                         <!-- Background Image with Overlay -->

@@ -27,11 +27,13 @@
 
                     <div class="flex flex-col md:flex-row items-stretch gap-12 lg:gap-14">
                         <div class="w-full">
-                            <?php if ( $image ) : ?>
+                            <?php if ( $image ) : 
+                                $image_alt = is_array($image) && !empty($image['alt']) ? $image['alt'] : 'Toronto Photographer Services Image';
+                                ?>
                                 <img 
                                 data-aos="fade-in" data-aos-duration="400"
                                 class="w-full h-full max-h-[450px] lg:min-h-[526px] lg:max-h-none object-cover"
-                                src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" 
+                                src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr($image_alt); ?>" 
                                 >
                             <?php endif; ?>
                         </div>

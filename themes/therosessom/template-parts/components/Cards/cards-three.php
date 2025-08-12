@@ -35,10 +35,12 @@ $button = get_field('cards_three_button');
             <div 
             data-aos="fade-in"
             class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <?php foreach ($images as $image) : ?>
+                <?php foreach ($images as $image) : 
+                    $image_alt = is_array($image) && !empty($image['alt']) ? $image['alt'] : 'Toronto Photographer Services Image';
+                    ?>
                     <div>
                         <img src="<?php echo esc_url($image['url']); ?>"
-                             alt="<?php echo esc_attr($image['alt']); ?>"
+                             alt="<?php echo esc_attr($image_alt); ?>"
                              class="w-full h-full object-cover max-h-[540px] aspect-[3/4]">
                     </div>
                 <?php endforeach; ?>

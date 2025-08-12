@@ -62,7 +62,7 @@ if ($bg_image && isset($bg_image['url'])) {
                     <div class="flex flex-col gap-[14px] px-6 xl:pr-6 xl:pl-[85px] items-start">
                         <?php if ($thought_image): 
                             $thought_img_url = is_array($thought_image) ? $thought_image['url'] : $thought_image;
-                            $thought_img_alt = is_array($thought_image) ? $thought_image['alt'] : 'Thought Image';
+                            $thought_img_alt = is_array($thought_image) && !empty($thought_image['alt']) ? $thought_image['alt'] : 'Toronto Photographer Thought Image';
                         ?>
                             <div class="flex-shrink-0 w-[250px]" data-aos="fade-in" data-aos-delay="200"  data-aos-duration="300">
                                 <img src="<?php echo esc_url($thought_img_url); ?>" 
@@ -137,7 +137,7 @@ if ($bg_image && isset($bg_image['url'])) {
                         <div class="relative bg-transparent px-5 overflow-hidden size-fit">
                             <?php if (!empty($slide['slide_image'])): 
                                 $slide_img_url = is_array($slide['slide_image']) ? $slide['slide_image']['url'] : $slide['slide_image'];
-                                $slide_img_alt = is_array($slide['slide_image']) ? $slide['slide_image']['alt'] : 'Main Slide Image';
+                                $slide_img_alt = is_array($slide['slide_image']) && !empty($slide['slide_image']['alt']) ? $slide['slide_image']['alt'] : 'photographer in toronto main slide image';
                             ?>
                                 <img src="<?php echo esc_url($slide_img_url); ?>" 
                                     alt="<?php echo esc_attr($slide_img_alt); ?>"

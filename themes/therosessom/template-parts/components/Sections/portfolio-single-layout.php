@@ -22,9 +22,10 @@
                     <div class="flex gap-4 mb-6 items-stretch">
                         <?php foreach( $two_images as $item ) : 
                             $image = $item['image'];
+                            $image_alt = is_array($image) && !empty($image['alt']) ? $image['alt'] : 'Toronto Photographer Portfolio Image';
                             if( $image ): ?>
                             <div class="w-1/2 h-full" data-aos="fade-in" data-aos-duration="600" data-aos-delay="350">
-                                <img src="<?php echo esc_url($image['sizes']['medium']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="w-full aspect-square object-cover">
+                                <img src="<?php echo esc_url($image['sizes']['medium']); ?>" alt="<?php echo esc_attr($image_alt); ?>" class="w-full aspect-square object-cover">
                             </div>
                             <?php endif;
                         endforeach; ?>
