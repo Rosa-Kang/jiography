@@ -22,13 +22,15 @@ $bg_style = $hero_services_image ?
         <div class="hero-background-layer z-9 image-overlay" <?php echo $bg_style; ?>></div>
     <?php endif; ?>
 
-    <div class="hero-content min-h-[418px] flex justify-center items-center">
+    <div class="hero-content min-h-[428px] flex justify-center items-center">
         <?php if ($hero_services_text) : ?>
            <div class="sticky-content">
                <h1
                data-aos="fade-in"
-               data-aos-duration="1000"
-               class="hero-services-title font-primary max-w-[725px] text-white text-3xl text-center pt-[9rem]">
+               data-aos-duration="2500"
+               data-aos-delay="500"
+               data-aos-easing="cubic-bezier(0.68, -0.55, 0.27, 1.55)"
+               class="hero-services-title font-primary max-w-[725px] text-white text-3xl text-center pt-0">
                    <?php echo $hero_services_text; ?>
                </h1>
            </div>

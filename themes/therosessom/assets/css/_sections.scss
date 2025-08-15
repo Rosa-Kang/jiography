@@ -72,33 +72,34 @@
     }
 
     .swiper-pagination.swiper-pagination-vertical.testimonial-pagination{
-            display: none;
 
-            @media (min-width: $breakpoint-lg) {
-                left: 32px;
-                max-width: 300px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                padding-bottom: 2.5rem;
-    
-                .swiper-pagination-bullet {
-                        height: auto;
-                        background-color: transparent;
-                        border-radius: 0;
-                        font-size: 0.95rem;
-                        font-family: monospace; 
-                        color: #9CA3AF;
-                        opacity: 0.7;
-                        transition: color 0.3s, opacity 0.3s;
-                        margin-bottom: 1rem;
-                }
-    
-                .swiper-pagination-bullet-active {
-                    color: #000;
-                    opacity: 1;
-                }
-            }
+       display: none;
+
+
+        @media (min-width: $breakpoint-lg) {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            top: 50%;
+            left: 32px;
+        }
+
+        .swiper-pagination-bullet {
+                height: auto;
+                background-color: transparent;
+                border-radius: 0;
+                font-size: 0.95rem;
+                font-family: monospace; 
+                color: #9CA3AF;
+                opacity: 0.7;
+                transition: color 0.3s, opacity 0.3s;
+                margin-bottom: 1rem;
+        }
+
+        .swiper-pagination-bullet-active {
+            color: #000;
+            opacity: 1;
+        }
     }
 
 }

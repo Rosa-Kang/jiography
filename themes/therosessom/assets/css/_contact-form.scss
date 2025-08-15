@@ -67,11 +67,12 @@
               height: 16px;
               transition: $transition;
               background-image: url('@images/arrow-forward.svg');
-              transform: rotate(45deg);
+              transform: rotate(-45deg);
               background-size: contain;
               background-repeat: no-repeat;
               background-position: center;
               margin-left: 3px;
+              margin-bottom: 0.3rem;
               vertical-align: middle;
             }
 
@@ -82,7 +83,7 @@
             opacity: 0.65;
 
               &::after {
-                transform: rotate(45deg) translateX(5px);
+                transform: rotate(-45deg) translateX(5px);
               }
             }
           }
