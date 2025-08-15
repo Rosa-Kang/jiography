@@ -7,7 +7,6 @@
  */
 
 $blurb = get_field('ig_blurb', 'option');
-$link = get_field('ig_url', 'option');
 $short_code = get_field('ig_shortcode', 'option');
 ?>
 

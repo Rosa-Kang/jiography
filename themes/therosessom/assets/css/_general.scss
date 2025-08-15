@@ -7,6 +7,13 @@
     background: $color-primary-light;
 }
 
+a {
+    transition: $transition;
+        &:hover {
+            opacity: 0.65;
+        }
+}
+
 /**
 * Background Overlay
 **/
@@ -119,4 +126,45 @@
     transition: opacity .3s ease;
     opacity: 0.68;
     z-index: 1;
+}
+
+/**Social Icons **/ 
+.social-ig{
+    position: relative;
+    transition: $transition;
+    &::after {
+        content: '';
+        display: inline-block;
+        width: 28px; 
+        height: 28px;
+        background-image: url('@images/ig.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        vertical-align: middle;
+    }
+
+    &:hover {
+        opacity: 0.65;
+    }
+}
+
+.social-pinterest{
+    position: relative;
+    transition: $transition;
+    &::after {
+        content: '';
+        display: inline-block;
+        width: 28px; 
+        height: 28px;
+        background-image: url('@images/pinterest.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        vertical-align: middle;
+    }
+
+    &:hover {
+        opacity: 0.65;
+    }
 }
