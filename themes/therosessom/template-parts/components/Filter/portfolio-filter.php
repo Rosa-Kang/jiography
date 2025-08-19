@@ -16,7 +16,7 @@ $terms = get_terms([
 <div class="flex flex-col">
     <div class="section-title">
         <h1 data-aos="fade-in" data-aos-duration="700"  class="uppercase font-primary text-4xl mb-4">check out our work</h1>
-        <hr data-aos="fade-left" data-aos-delay="400" data-aos-duration="800" class="horizontal-line-gray-300 mb-4">
+        <hr data-aos="fade-left" data-aos-delay="500" data-aos-duration="1800" class="horizontal-line-gray-300 mb-4">
     </div>
     <div class="portfolio-filter-container relative">
         <button id="filter-toggle-btn" class="filter-toggle-btn font-primary">
