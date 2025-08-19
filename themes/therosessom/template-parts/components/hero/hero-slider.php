@@ -36,68 +36,27 @@ $bottom_signature = get_field('slide_bottom_signature');
         </div>
         
         <!-- Content Overlay (Static for all slides) -->
-        <div class="absolute inset-0 z-20 h-[58%] top-[31%] flex flex-col justify-between items-center text-center px-4">
+        <div class="absolute inset-0 z-20 h-[51%] top-[calc(50%_-_64px)] flex flex-col justify-between items-center text-center px-4">
             <div class="max-w-6xl mx-auto">
                 <?php if ($title): ?>
-                <h1 class="hero-title text-5xl text-white font-light tracking-wider mb-6" data-aos="fade-in" data-aos-delay="300">
-                <?php  
-                $cleaned_title = strip_tags($title); 
-                $cleaned_title = html_entity_decode($cleaned_title); 
-                $lines = preg_split('/\r\n|\r|\n|<br\s*\/?>/i', $cleaned_title);
-
-                // Remove empty lines and trim whitespace
-                $lines = array_filter(array_map('trim', $lines), function($line) {
-                return !empty($line);
-                });
-
-                // Reindex array to ensure sequential keys
-                $lines = array_values($lines);
-
-                if (count($lines) >= 2) {
-                // If we have multiple lines, use WYSIWYG line breaks
-                $first_line = $lines[0];
-                $second_line = $lines[1];
-
-                // Split second line into first word and remaining words
-                $second_line_words = explode(' ', trim($second_line));
-                $first_word_second_line = array_shift($second_line_words);
-                $remaining_words_second_line = implode(' ', $second_line_words);
-                } else {
-                // Fallback: if no line breaks detected, use word-based splitting
-                $title_words = explode(' ', trim($cleaned_title));
-                $word_count = count($title_words);
-
-                if ($word_count >= 3) {
-                    $middle_index = floor($word_count / 2);
-                    $first_line = implode(' ', array_slice($title_words, 0, $middle_index));
-                    $first_word_second_line = $title_words[$middle_index];
-                    $remaining_words_second_line = implode(' ', array_slice($title_words, $middle_index + 1));
-                } else {
-                    $first_line = $cleaned_title;
-                    $first_word_second_line = '';
-                    $remaining_words_second_line = '';
-                }
-                }
-                ?>
-
-                <!-- First line with capitalize styling -->
-                <span class="block capitalize font-primary leading-tight">
-                <?php echo esc_html($first_line); ?>
-                </span>
-
-                <!-- Second line if exists -->
-                <?php if (!empty($first_word_second_line)): ?>
-                <span class="flex flex-col items-center md:flex-row md:items-end justify-center font-primary italic leading-tight mt-2">
-                <!-- First word of second line with hero-subtitle-prefix -->
-                <span class="hero-subtitle-prefix mb-1"><?php echo esc_html($first_word_second_line); ?></span>
-
-                <!-- Remaining words of second line with capitalize -->
-                <?php if (!empty($remaining_words_second_line)): ?>
-                    <span class="capitalize"><?php echo esc_html($remaining_words_second_line); ?></span>
-                <?php endif; ?>
-                </span>
-                <?php endif; ?>
-                </h1>
+                    <?php
+                    $clean_title = strip_tags($title);
+                    $lines = preg_split('/\r\n|\r|\n/', $clean_title);
+                    $lines = array_filter($lines, 'strlen');
+                    ?>
+                        <h1 class="hero-title text-5xl text-white font-primary tracking-wider mb-6" 
+                        data-aos="fade-in" 
+                        data-aos-delay="300">
+                            <?php foreach ($lines as $index => $line): ?>
+                                <?php if ($index === 0): ?>
+                                    <!-- First line: normal style -->
+                                    <span class="block leading-[50px]"><?php echo htmlspecialchars(trim($line)); ?></span>
+                                <?php else: ?>
+                                    <!-- Second line and beyond: italic style -->
+                                    <span class="block italic leading-[50px]"><?php echo htmlspecialchars(trim($line)); ?></span>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </h1>
                 <?php endif; ?>
             </div>
 
