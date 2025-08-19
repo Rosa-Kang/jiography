@@ -67,7 +67,7 @@ if ($bg_image && isset($bg_image['url'])) {
                             <div class="flex-shrink-0 w-[250px]" data-aos="fade-in" data-aos-delay="200"  data-aos-duration="300">
                                 <img src="<?php echo esc_url($thought_img_url); ?>" 
                                         alt="<?php echo esc_attr($thought_img_alt); ?>"
-                                        class="w-full aspect-[3/3.71] object-cover grayscale">
+                                        class="w-full aspect-[3/3.71] object-cover">
                             </div>
                         <?php endif; ?>
     

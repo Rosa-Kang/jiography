@@ -21,14 +21,14 @@ $content_left = get_field('hero_content_left');
                     $image_url = is_array($hero_photo) ? $hero_photo['url'] : $hero_photo;
                     $image_alt = is_array($hero_photo) && !empty($hero_photo['alt']) ? $hero_photo['alt'] : 'Toronto Photographer Intro Image';
                 ?>
-                    <div    class="polaroid-frame relative mx-auto max-w-[464px]"
+                    <div    class="relative mx-auto max-w-[464px]"
                             data-aos="fade-in"
                             data-aos-delay="600"
                             data-aos-duration="1200"
                             data-aos-easing="ease-in-out">
                         <img src="<?php echo esc_url($image_url); ?>"
                              alt="<?php echo esc_attr($image_alt); ?>"
-                             class="w-full h-auto object-cover grayscale aspect-[1/1.3]">
+                             class="w-full h-auto object-cover aspect-[1/1.3]">
                     </div>
                 <?php endif; ?>
             </div>

@@ -107,7 +107,7 @@ export class SliderManager {
             speed: 500,
             loop: true,
             autoplay: {
-                delay: 5000,
+                delay: 2500,
                 disableOnInteraction: false,
             },
             pagination: {

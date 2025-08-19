@@ -17,7 +17,7 @@ $site_logo = get_field('site_logo', 'option');
     <?php else : ?>
         <?php if ( is_front_page() && is_home() ) : ?>
             <h1 class="site-title">
-                <a class="lowercase font-primary text-4xl lg:text-2xl text-gray-800 hover:opacity-80 transition-opacity" 
+                <a class="lowercase font-primary text-2xl text-gray-800 hover:opacity-80 transition-opacity" 
                     href="<?php echo esc_url( home_url( '/' ) ); ?>" 
                     rel="home">
                     <?php bloginfo( 'name' ); ?>
@@ -25,7 +25,7 @@ $site_logo = get_field('site_logo', 'option');
             </h1>
         <?php else : ?>
             <p class="site-title">
-                <a class="lowercase font-primary text-4xl lg:text-2xl text-gray-800 hover:opacity-80 transition-opacity" 
+                <a class="lowercase font-primary text-2xl text-gray-800 hover:opacity-80 transition-opacity" 
                     href="<?php echo esc_url( home_url( '/' ) ); ?>" 
                     rel="home">
                     <?php bloginfo( 'name' ); ?>
