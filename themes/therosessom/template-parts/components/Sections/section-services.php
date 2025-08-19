@@ -8,7 +8,7 @@
 ?>
 
 
-<section class="section-services pb-16 md:pb-24 z-20 relative bg-primary-light">
+<section class="section-services pb-16 md:py-16 z-20 relative bg-primary-light">
     <div class="max-w-[90%] lg:container-lg mx-auto px-4">
 
         <?php if ( have_rows( 'service_sections' ) ) :
@@ -21,24 +21,24 @@
                 ?>
                 <div class="layout-container py-16">
                     <div class="title-wrapper mb-6">
-                        <h2 data-aos="fade-in" data-aos-duration="300"  class="text-2xl text-gray-800 uppercase font-primary"><?php the_sub_field( 'title' ); ?></h2>
-                        <p data-aos="fade-in" data-aos-duration="300"  class="text-sm font-extralight uppercase tracking-wider font-secondary"><?php the_sub_field( 'subtitle' ); ?></p>
+                        <h2 data-aos="fade-in" data-aos-duration="300" data-aos-delay="500"  class="text-2xl text-gray-800 uppercase font-primary"><?php the_sub_field( 'title' ); ?></h2>
+                        <p data-aos="fade-in" data-aos-duration="300" data-aos-delay="500"  class="text-sm font-extralight uppercase tracking-wider font-secondary"><?php the_sub_field( 'subtitle' ); ?></p>
                     </div>
 
-                    <div class="flex flex-col md:flex-row items-stretch gap-12 lg:gap-14">
+                    <div class="flex flex-col md:flex-row items-stretch gap-12 lg:gap-24">
                         <div class="w-full">
                             <?php if ( $image ) : 
                                 $image_alt = is_array($image) && !empty($image['alt']) ? $image['alt'] : 'Toronto Photographer Services Image';
                                 ?>
                                 <img 
                                 data-aos="fade-in" data-aos-duration="400"
-                                class="w-full h-full max-h-[450px] lg:min-h-[526px] lg:max-h-none object-cover"
+                                class="w-full h-full max-h-[450px] lg:min-h-[526px] lg:max-h-none object-cover p-2 border-[1px] border-solid border-black"
                                 src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr($image_alt); ?>" 
                                 >
                             <?php endif; ?>
                         </div>
 
-                        <div class="w-full h-full lg:mr-[13vw] flex flex-col gap-16">
+                        <div class="w-full h-full flex flex-col gap-16">
                             <div class="section-desc font-primary text-gray-700" data-aos="fade-in" data-aos-duration="500" data-aos-delay="500">
                                 <?php the_sub_field( 'description' ); ?>
                             </div>
@@ -128,6 +128,70 @@
                         </div>
                     </div>
                 </div>          
+                <?php
+                elseif ( get_row_layout() == 'layout3' ) :
+                    $images = get_sub_field( 'images' );
+                    $blurb  = get_sub_field( 'blurb' );
+                    $button = get_sub_field( 'button' );
+                ?>
+                <div class="layout-container py-16 lg:py-[92px]">
+                    <div class="max-w-[80%] lg:container-md mx-auto">
+                        
+                        <!-- Title and Subtitle -->
+                        <div class="mb-12 flex flex-col lg:flex-row items-center justify-center lg:justify-start text-center font-serif">
+                            <?php if ( get_sub_field( 'title' ) ) : ?>
+                                <span data-aos="fade-in" data-aos-duration="300" data-aos-delay="300" class="text-2xl text-gray-800 capitalize italic font-primary">
+                                    <?php the_sub_field( 'title' ); ?>
+                                </span>
+                            <?php endif; ?>
+
+                            <?php if ( get_sub_field( 'subtitle' ) ) : ?>
+                                <span data-aos="fade-in" data-aos-duration="300" data-aos-delay="500" class="text-gray-400 mx-4 hidden lg:inline">/</span>
+                                <span data-aos="fade-in" data-aos-duration="300" data-aos-delay="500" class="mt-2 md:mt-0 text-sm font-primary text-gray-500 uppercase tracking-widest">
+                                    <?php the_sub_field( 'subtitle' ); ?>
+                                </span>
+                            <?php endif; ?>
+                        </div>
+
+                        <!-- Images Grid -->
+                        <?php if ( $images ) : ?>
+                            <div data-aos="fade-in" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                                <?php foreach ( $images as $image ) : 
+                                    $image_alt = is_array($image) && !empty($image['alt']) ? $image['alt'] : 'Toronto Photographer Services Image';
+                                    ?>
+                                    <div>
+                                        <img src="<?php echo esc_url($image['url']); ?>"
+                                             alt="<?php echo esc_attr($image_alt); ?>"
+                                             class="w-full h-full object-cover max-h-[540px] aspect-[3/4]">
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <!-- Blurb Text -->
+                        <?php if ( $blurb ) : ?>
+                            <div data-aos="fade-in" class="font-primary prose prose-lg mx-auto lg:mr-0 lg:ml-auto justify-end text-gray-700 mb-10">
+                                <?php echo $blurb; ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <!-- Button -->
+                        <?php if ( $button ) : 
+                            $button_url = esc_url($button['url']);
+                            $button_text = esc_html($button['title']);
+                            $button_target = esc_attr($button['target'] ?: '_self');
+                        ?>
+                            <div data-aos="fade-up" class="flex justify-end">
+                                <a href="<?php echo $button_url; ?>"
+                                   target="<?php echo $button_target; ?>"
+                                   class="btn-primary flex text-xs uppercase tracking-widest font-medium">
+                                    <span><?php echo $button_text; ?></span>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
                 <?php
                 endif;
             endwhile;
