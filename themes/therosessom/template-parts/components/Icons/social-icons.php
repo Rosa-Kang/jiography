@@ -11,8 +11,8 @@ $pinterest_url = get_field('pinterest_link', 'option');
 ?>
 
 <?php if ($ig_url || $pinterest_url) : ?>
-  <div class="flex flex-col items-start justify-end h-full">
-    <div class="social-icons-wrapper flex justify-between mt-16 w-[80px]">
+  <div class="flex flex-col items-start justify-end h-full border-white border-t-[1px] pt-4">
+    <div class="social-icons-wrapper flex justify-between w-[80px]">
       <?php if ($ig_url) : ?>
       <a href="<?php echo $ig_url; ?>" target="_blank"
         rel="noopener noreferrer">

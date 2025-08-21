@@ -2,7 +2,8 @@
 /**
  * The header for our theme
  *
- * Enhanced with sticky header support for mobile and desktop
+ * Enhanced with separated mobile and desktop navigation
+ * No JavaScript modifications required
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
@@ -23,7 +24,7 @@ $site_favicon = get_field('site_favicon', 'option');
 			echo '<link rel="icon" href="' . esc_url($site_favicon['url']) . '">';
 		} else {
 			echo '<link rel="icon" href="data:,">';
-		} 
+		}
 	?>
 	<?php wp_head(); ?>
 </head>
@@ -33,21 +34,41 @@ $site_favicon = get_field('site_favicon', 'option');
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'therosessom' ); ?></a>
 	
-	<!-- Enhanced header with data attributes for JS initialization -->
+	<!-- Enhanced header with separated mobile/desktop navigation -->
 	<header id="masthead" class="site-header w-full" 
 	        data-sticky="true" 
 	        data-hide-on-scroll="true"
 	        data-scroll-threshold="100">
 		<div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="flex items-center justify-between h-16">
-				<!-- Site Logo -->
-				<?php get_template_part('template-parts/components/Branding/site-logo')?>
-				<!-- Navigation -->
-				<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'therosessom' ); ?>">
-					<!-- Enhanced hamburger button with proper ARIA labels -->
+				
+				<!-- Site Logo - Always visible -->
+				<div class="site-branding">
+					<?php get_template_part('template-parts/components/Branding/site-logo'); ?>
+				</div>
+
+				<!-- Desktop Navigation - Hidden on mobile -->
+				<nav class="desktop-navigation hidden md:block" role="navigation" aria-label="<?php esc_attr_e( 'Desktop Primary Menu', 'therosessom' ); ?>">
+					<?php
+					wp_nav_menu(array(
+						'theme_location'  => 'primary-menu',
+						'menu_id'         => 'desktop-primary-menu',
+						'menu_class'      => 'desktop-menu-list',
+						'container'       => false,
+						'depth'           => 3,
+						'fallback_cb'     => false,
+						'link_before'     => '<span class="menu-text text-sm">',
+						'link_after'      => '</span>',
+					));
+					?>
+				</nav>
+
+				<!-- Mobile Navigation Container - Hidden on desktop -->
+				<nav id="site-navigation" class="main-navigation md:hidden" role="navigation" aria-label="<?php esc_attr_e( 'Mobile Primary Menu', 'therosessom' ); ?>">
+					<!-- Hamburger button for mobile -->
 					<button id="menu-toggle" 
-					        class="hamburger-button md:hidden" 
-					        aria-controls="primary-menu" 
+					        class="hamburger-button"
+					        aria-controls="primary-menu"
 					        aria-expanded="false"
 					        aria-label="<?php esc_attr_e( 'Toggle navigation menu', 'therosessom' ); ?>">
 						<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'therosessom' ); ?></span>
@@ -56,33 +77,28 @@ $site_favicon = get_field('site_favicon', 'option');
 						<span class="line" aria-hidden="true"></span>
 					</button>
 
+					<!-- Mobile menu panel -->
 					<?php
-					// Base arguments for the navigation menu
-					$nav_menu_args = array(
+					// Get social icons HTML for mobile menu
+					ob_start();
+					get_template_part('template-parts/components/Icons/social-icons');
+					$social_icons_html = ob_get_clean();
+
+					// Mobile navigation menu with social icons
+					wp_nav_menu(array(
 						'theme_location'  => 'primary-menu',
-						'menu_id'         => 'primary-menu',
-						'menu_class'      => 'primary-menu-list',
+						'menu_id'         => 'primary-menu', // Keep same ID for JS compatibility
+						'menu_class'      => 'mobile-menu-list',
 						'container'       => false,
 						'depth'           => 3,
 						'fallback_cb'     => false,
-						'link_before'     => '<span class="menu-text text-2xl md:text-sm">',
+						'link_before'     => '<span class="menu-text text-2xl">',
 						'link_after'      => '</span>',
-					);
-
-					// Check if it's a mobile device to add social icons
-					if (function_exists('wp_is_mobile') && wp_is_mobile()) {
-						ob_start();
-						get_template_part('template-parts/components/Icons/social-icons');
-						$social_icons_html = ob_get_clean();
-
-						// Add the custom 'items_wrap' to the arguments array for mobile
-						$nav_menu_args['items_wrap'] = '<ul id="%1$s" class="%2$s">%3$s<li class="menu-item mobile-social-icons h-full flex">' . $social_icons_html . '</li></ul>';
-					}
-
-					// Call the navigation menu function with the prepared arguments
-					wp_nav_menu($nav_menu_args);
+						'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s<li class="menu-item mobile-social-icons">' . $social_icons_html . '</li></ul>',
+					));
 					?>
 				</nav>
+
 			</div>
 		</div>
 	</header>

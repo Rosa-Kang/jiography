@@ -13,7 +13,7 @@
         get_template_part('template-parts/components/Filter/portfolio-filter');
         ?>
     
-        <div id="portfolio-grid" class="portfolio-grid flex flex-col gap-8 mt-8">
+        <div id="portfolio-grid" class="portfolio-grid flex flex-col lg:gap-8 lg:mt-4">
             <?php
             $args = [
                 'post_type'      => 'portfolio',

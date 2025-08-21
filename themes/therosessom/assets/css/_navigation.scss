@@ -1,6 +1,6 @@
 @use 'variables' as *;
 /**
- * Site Navigation - Pure SCSS Variables
+ * Site Navigation - Separated Mobile/Desktop Navigation
  * Enhanced with wavy effects and current page highlighting
  */
 
@@ -11,20 +11,18 @@ $nav-current-font-weight: 600;
 body.menu-open {
   overflow: hidden;
   &::before {
-    @media (max-width: #{$breakpoint-md - 1px}) {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: $z-index-modal-backdrop;
-    }
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: $z-index-modal-backdrop;
   }
 }
 
-// --- Hamburger Button ---
+// --- Hamburger Button (Mobile Only) ---
 .hamburger-button {
   z-index: $z-index-tooltip;
   position: relative;
@@ -40,11 +38,6 @@ body.menu-open {
 
   .line:nth-child(3) {
     width: 22px;
-  }
-
-  // Hide on desktop
-  @media (min-width: $breakpoint-md) {
-    display: none;
   }
 
   .line {
@@ -72,57 +65,19 @@ body.menu-open {
   }
 }
 
-// --- Main Navigation Container ---
-.main-navigation {
-  @media (min-width: $breakpoint-md) {
-    display: block;
-  }
-
-  @media (max-width: #{$breakpoint-md - 1px}) {
-    display: flex;
-    align-items: center;
-  }
-
-  // Mobile slide-in panel
-  #primary-menu {
-    @media (max-width: #{$breakpoint-md - 1px}) {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: $mobile-menu-width;
-      height: 100vh;
-      background-color: $color-black;
-      z-index: $z-index-popover;
-      transform: translateX(100%);
-      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      padding: $spacing-48 $spacing-8 $spacing-8 $spacing-16;
-      box-shadow: $shadow-xl;
-
-      li{
-        z-index: $z-index-popover;
-      }
-    }
-  }
-
-  // Show panel when toggled
-  &.toggled #primary-menu {
-    @media (max-width: #{$breakpoint-md - 1px}) {
-      transform: translateX(0);
-    }
-  }
-}
-
-// --- Navigation Menu List ---
-#primary-menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  // Desktop horizontal menu
-  @media (min-width: $breakpoint-md) {
+// --- Desktop Navigation (Hidden on Mobile) ---
+.desktop-navigation {
+  #desktop-primary-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     align-items: center;
     gap: $spacing-8;
+
+    li {
+      position: relative;
+    }
 
     a {
       text-transform: uppercase;
@@ -132,7 +87,8 @@ body.menu-open {
       color: $color-gray-600;
       transition: color 0.2s $ease-out;
       position: relative;
-      padding-bottom: 5px; 
+      padding-bottom: 5px;
+      text-decoration: none;
       
       &::after {
         content: '';
@@ -159,31 +115,13 @@ body.menu-open {
         border-radius: 2px;
       }
     }
-  }
 
-  // Mobile vertical menu
-  @media (max-width: #{$breakpoint-md - 1px}) {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: $spacing-6;
-
-    a {
-      color: $color-white;
-      transition: color 0.2s $ease-out;
-    }
-  }
-}
-
-// --- Current Page Highlighting ---
-#primary-menu {
-  // Current page styling for both desktop and mobile
-  .current-menu-item > a,
-  .current-page-ancestor > a,
-  .current-menu-ancestor > a,
-  .current-menu-parent > a,
-  .menu-current {
-     @media (min-width: $breakpoint-md) {
+    // Current page highlighting for desktop
+    .current-menu-item > a,
+    .current-page-ancestor > a,
+    .current-menu-ancestor > a,
+    .current-menu-parent > a,
+    .menu-current {
       color: $color-gray-800 !important;
       font-weight: $nav-current-font-weight;
     
@@ -195,8 +133,53 @@ body.menu-open {
         background-color: $color-gray-800;
       }
     }
-    // Mobile current page styling
-    @media (max-width: #{$breakpoint-md - 1px}) {
+  }
+}
+
+// --- Mobile Navigation Container (Hidden on Desktop) ---
+.main-navigation {
+  display: flex;
+  align-items: center;
+
+  // Mobile slide-in panel
+  #primary-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: $mobile-menu-width;
+    height: 100vh;
+    background-color: $color-black;
+    z-index: $z-index-popover;
+    transform: translateX(100%);
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: $spacing-48 $spacing-8 $spacing-8 $spacing-12;
+    box-shadow: $shadow-xl;
+    list-style: none;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-6;
+
+    li {
+      z-index: $z-index-popover;
+      width: 100%;
+    }
+
+    a {
+      color: $color-white;
+      transition: color 0.2s $ease-out;
+      text-decoration: none;
+      display: block;
+      width: 100%;
+    }
+
+    // Current page highlighting for mobile
+    .current-menu-item > a,
+    .current-page-ancestor > a,
+    .current-menu-ancestor > a,
+    .current-menu-parent > a,
+    .menu-current {
       font-weight: $nav-current-font-weight;
       color: $color-white !important;
       opacity: 1;
@@ -209,48 +192,35 @@ body.menu-open {
       }
     }
   }
-}
 
-
-// --- Accessibility & Performance ---
-// Respect user's motion preferences
-@media (prefers-reduced-motion: reduce) {
-  #primary-menu a {
-    .letter {
-      animation: none !important;
-      transition: none !important;
-    }
+  // Show panel when toggled
+  &.toggled #primary-menu {
+    transform: translateX(0);
   }
 }
 
-// High contrast mode support
-@media (prefers-contrast: high) {
-  #primary-menu a {
-    &:hover,
-    &.menu-current {
-      text-decoration: underline;
-      text-decoration-thickness: 2px;
-      text-underline-offset: 4px;
-    }
+// --- Social Icons in Mobile Menu ---
+.mobile-social-icons {
+  width: 100%;
+  margin-top: auto;
+  padding-top: $spacing-8;
+
+  // Since the template uses divs for icons, style them appropriately
+  [class^="social-"] {
+    // Add styles if needed based on your social-icons.php structure
   }
 }
 
-// Performance optimization: Pause animations when page is hidden
-.page-hidden #primary-menu a {
-  .letter {
-    animation-play-state: paused;
-  }
-}
-
+// --- Site Branding ---
 .site-branding a {
-  transition: $transition ;
+  transition: $transition;
 
   &:hover {
     opacity: 0.7;
   }
 }
 
-// Sticky Header
+// --- Sticky Header ---
 #masthead {
   position: fixed;
   top: 0;
@@ -271,18 +241,37 @@ body.menu-open {
   }
 }
 
-// --- Social Icons in Mobile Menu ---
-.mobile-social-icons {
-  display: none;
+// --- Accessibility & Performance ---
+// Respect user's motion preferences
+@media (prefers-reduced-motion: reduce) {
+  .desktop-navigation a,
+  .main-navigation a {
+    .letter {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}
 
-  @media (max-width: #{$breakpoint-md - 1px}) {
-    display: list-item; // Make it visible as a list item
-    width: 100%;        // Ensure it takes full width for centering
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .desktop-navigation a,
+  .main-navigation a {
+    &:hover,
+    &.menu-current {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+  }
+}
 
-    // Since the template uses divs for icons, we might need to style them.
-    // This depends on the content of social-icons.php
-    [class^="social-"] {
-      // Example: Add styles if the icons are background images
+// Performance optimization: Pause animations when page is hidden
+.page-hidden {
+  .desktop-navigation a,
+  .main-navigation a {
+    .letter {
+      animation-play-state: paused;
     }
   }
 }
