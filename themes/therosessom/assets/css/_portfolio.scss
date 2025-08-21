@@ -282,3 +282,26 @@
 .portfolio-gallery-swiper .swiper-wrapper:active {
     cursor: grabbing;
 }
+
+.portfolio-navigation {
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        content: 'none';
+    }
+
+    a {
+        img {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        &:hover {
+            #prev-btn img {
+                transform: translateX(-7px);
+            }
+
+            #next-btn img {
+                transform: translateX(7px);
+            }
+        }
+    }
+}

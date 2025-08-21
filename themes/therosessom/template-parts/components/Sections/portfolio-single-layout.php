@@ -71,7 +71,8 @@
                 <?php endif; ?>
             </div>
         </div>
-
+    
+    <?php if( $subheading || $heading ):?>
         <div class="py-16 mx-auto" data-aos="fade-in" data-aos-duration="600">
             <?php if ( $subheading ) : ?>
                 <p class="mt-16 text-6xl italic font-primary lowercase leading-none" data-aos="fade-in" data-aos-duration="650">
@@ -85,7 +86,8 @@
                 </h2>
             <?php endif; ?>
         </div>
-        
+    <?php endif;?> 
+    
         <?php if ( $slider_images ) : ?>
             <div class="max-w-[90%] lg:container-md mx-auto">
                 <div class="main-portfolio-swiper swiper aspect-[1/1.23] max-h-[670px] mb-8 relative">
@@ -175,6 +177,34 @@
 
     </div>
     </article>
+
+    <nav class="portfolio-navigation flex justify-between max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 pb-8">
+        <div data-aos="fade-up">
+            <?php
+            $next_post = get_next_post();
+            if (!empty($next_post)) : ?>
+                <a href="<?php echo get_permalink($next_post->ID); ?>" class="flex items-center space-x-4">
+                    <div id="prev-btn">
+                        <img width="11px" height="11px" src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-left.svg" alt="Previous Portfolio">
+                    </div>
+                    <span class="text-xs uppercase tracking-widest font-medium !ml-[10px]">Previous</span>
+                </a>
+            <?php endif; ?>
+        </div>
+        <div data-aos="fade-up">
+             <?php
+            $prev_post = get_previous_post();
+            if (!empty($prev_post)) : ?>
+                <a href="<?php echo get_permalink($prev_post->ID); ?>" class="flex items-center space-x-4">
+                    <span class="text-xs uppercase tracking-widest font-medium">Next</span>
+                    <div id="next-btn" class="!ml-[10px]">
+                        <img width="11px" height="11px" src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-right.svg" alt="Next Portfolio">
+                    </div>
+                </a>
+            <?php endif; ?>
+           
+        </div>
+    </nav>
 
     <?php endwhile; ?>
 </main>

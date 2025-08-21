@@ -115,7 +115,19 @@ module.exports = {
         '6xl': 'var(--font-size-6xl)',
       },
       
+      zIndex: {
+        'dropdown': '1000',
+        'sticky': '1020', 
+        'fixed': '1030',
+        'modal-backdrop': '1040',
+        'modal': '1050',
+        'popover': '1060',
+        'tooltip': '1070',
+      },
 
+      transitionTimingFunction: {
+        'slide': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+      },
       
       // Box shadows - 핵심적인 것만
       boxShadow: {
