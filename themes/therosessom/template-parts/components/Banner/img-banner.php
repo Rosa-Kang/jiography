@@ -12,13 +12,13 @@ $button = get_field('image_banner_button');
 
 <section class="img-banner py-16">
     <div class="max-w-[90%] lg:container-2xl flex flex-col justify-center mx-auto">
-        <div class="w-full mb-8 aspect-[2.58/1] min-h-[235px]">
+        <div class="w-full mb-8 aspect-[2.58/1] min-h-[235px] max-h-[420px]">
             <?php if ( $image ) : 
             $image_alt = is_array($image) && !empty($image['alt']) ? $image['alt'] : 'Toronto Photographer Banner Image';
                 ?>
                 <img 
                 data-aos="fade-in" data-aos-delay="300" data-aos-duration="600"
-                class="w-full h-full max-h-[450px] lg:min-h-[526px] lg:max-h-none object-cover"
+                class="w-full h-full max-h-[450px] lg:max-h-none object-cover"
                 src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr($image_alt); ?>" 
                 >
             <?php endif; ?>
