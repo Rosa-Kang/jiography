@@ -18,6 +18,7 @@ $terms = get_terms([
         <h1 data-aos="fade-in" data-aos-duration="700"  class="uppercase font-primary text-4xl mb-4">check out our work</h1>
         <hr data-aos="fade-left" data-aos-delay="500" data-aos-duration="1800" class="horizontal-line-gray-400 mb-4">
     </div>
+    <?php if ( ! empty( $terms ) && ! is_wp_error( $terms ) && count( $terms ) >= 1 ) : ?>
     <div class="portfolio-filter-container relative">
         <button id="filter-toggle-btn" class="filter-toggle-btn font-primary">
             <span class="filter-toggle-text font-primary">ALL</span>
@@ -34,6 +35,8 @@ $terms = get_terms([
             <?php endforeach; ?>
         </div>
     </div>
+    <?php endif; ?>
+
 </div>
 
 <?php 

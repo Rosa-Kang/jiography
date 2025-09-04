@@ -16,6 +16,7 @@ $site_favicon = get_field('site_favicon', 'option');
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="description" content="<?php bloginfo('description'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<meta name="theme-color" content="#ffffff">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
@@ -39,7 +40,7 @@ $site_favicon = get_field('site_favicon', 'option');
 	        data-sticky="true" 
 	        data-hide-on-scroll="true"
 	        data-scroll-threshold="100">
-		<div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="flex items-center justify-between h-16">
 				
 				<!-- Site Logo - Always visible -->
@@ -53,7 +54,7 @@ $site_favicon = get_field('site_favicon', 'option');
 					wp_nav_menu(array(
 						'theme_location'  => 'primary-menu',
 						'menu_id'         => 'desktop-primary-menu',
-						'menu_class'      => 'desktop-menu-list',
+						'menu_class'       => 'desktop-menu-list',
 						'container'       => false,
 						'depth'           => 3,
 						'fallback_cb'     => false,

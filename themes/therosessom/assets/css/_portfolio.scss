@@ -136,38 +136,49 @@
 /* Portfolio Slider Styles */
 
 /* Main Portfolio Slider */
-.main-portfolio-swiper .swiper-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+.main-portfolio-swiper {
+    .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    
+    /* Navigation Buttons Styling */
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: #fff;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 50%;
+        width: 29px;
+        height: 29px;
+        margin-top: -25px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        bottom: 38%;
+        top: unset;
+    }
+    
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+        opacity: 0.65;
+    }
+    
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    .swiper-button-prev {
+        left: 0;
+    }
+
+    .swiper-button-next {
+        right: 0;
+    }
 }
 
-/* Navigation Buttons Styling */
-.main-portfolio-swiper .swiper-button-next,
-.main-portfolio-swiper .swiper-button-prev {
-    color: #fff;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 50%;
-    width: 29px;
-    height: 29px;
-    margin-top: -25px;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    bottom: 42%;
-    top: unset;
-}
-
-.main-portfolio-swiper .swiper-button-next:hover,
-.main-portfolio-swiper .swiper-button-prev:hover {
-    opacity: 0.65;
-}
-
-.main-portfolio-swiper .swiper-button-next::after,
-.main-portfolio-swiper .swiper-button-prev::after {
-    font-size: 10px;
-    font-weight: bold;
-}
 
 /* Thumbnail Gallery Slider */
 .portfolio-gallery-swiper .swiper-slide {
@@ -215,10 +226,7 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .main-portfolio-swiper {
-        height: 400px !important;
-    }
-    
+
     .main-portfolio-swiper .swiper-button-next,
     .main-portfolio-swiper .swiper-button-prev {
         width: 23px;
@@ -230,21 +238,9 @@
     .main-portfolio-swiper .swiper-button-prev::after {
         font-size: 10px;
     }
-    
-    .portfolio-gallery-swiper .swiper-slide {
-        height: 60px;
-    }
+
 }
 
-@media (max-width: 480px) {
-    .main-portfolio-swiper {
-        height: 300px !important;
-    }
-    
-    .portfolio-gallery-swiper .swiper-slide {
-        height: 50px;
-    }
-}
 
 /* Loading State */
 .main-portfolio-swiper.loading {

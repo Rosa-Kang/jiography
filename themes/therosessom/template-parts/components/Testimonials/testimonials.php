@@ -14,7 +14,7 @@ $testimonials = get_field('testimonials');
     <div class="container-xl m-auto px-8 relative z-10">
         
         <!-- Section Title -->
-        <div class="text-center mb-16" data-aos="fade-in" data-aos-delay="100">
+        <div class="text-center mb-8 lg:mb-16" data-aos="fade-in" data-aos-delay="100">
             <?php if ($testimonials_title || $testimonials_subtitle): ?>
                 <h2 class="flex flex-wrap justify-center text-3xl lg:text-4xl text-gray-900 font-primary leading-tight">
                     <?php if ($testimonials_title): ?>
@@ -32,7 +32,7 @@ $testimonials = get_field('testimonials');
         </div>
 
         <!-- Testimonials Swiper Container -->
-        <div class="testimonials-swiper swiper relative max-w-[479px] lg:max-w-none" data-aos="fade-in" data-aos-delay="100">
+        <div class="testimonials-swiper swiper relative max-w-[479px] lg:max-w-none flex flex-col-reverse lg:flex-row-reverse" data-aos="fade-in" data-aos-delay="100">
             <div class="swiper-wrapper"> 
                 <?php
                     foreach ($testimonials as $index => $testimonial_row) :
@@ -42,10 +42,10 @@ $testimonials = get_field('testimonials');
                         $button_link = get_field('testimonials_link', $post_object->ID);
                     ?>
                 <div class="swiper-slide lg:pl-12">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center justify-center">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center justify-center">
                         
                         <!-- Left Column - Polaroid Image -->
-                        <div class="order-2 lg:order-1 m-auto flex flex-col items-center justify-center w-full max-w-[390px]">
+                        <div class="order-1 m-auto flex flex-col items-center justify-center w-full max-w-[390px] relative testimonial-image-container">
                             <div class="polaroid-frame">
                                 <?php if (has_post_thumbnail($post_object->ID)) :
                                 ?>
@@ -65,46 +65,26 @@ $testimonials = get_field('testimonials');
                         </div>
 
                         <!-- Right Column - Testimonials -->
-                        <div class="order-1 lg:order-2 space-y-8 m-auto">
+                        <div class="order-2 space-y-8 m-auto">
                             
                             <!-- Current Testimonial -->
                             <div class="testimonial-content">
                                 
-                                <!-- Number -->
-                                <div class="flex items-start gap-8">
-                                    <span class="lg:hidden text-xl font-mono text-gray-500 flex-shrink-0 mt-1 testimonial-number cursor-pointer hover:opacity-70 transition-opacity" data-slide="<?php echo $index; ?>">
-                                        <?php echo str_pad($index + 1, 2, '0', STR_PAD_LEFT); ?>
-                                    </span>
-                                    <!-- Testimonial Text -->
-                                    <div class="flex-1 font-secondary max-w-[390px] md:max-unset">
-                                        <?php echo wp_kses_post(get_the_content(null, false, $post_object->ID)); ?>
-                                    </div>
+                                <!-- Testimonial Text -->
+                                <div class="font-secondary max-w-[390px] md:max-unset">
+                                    <?php echo wp_kses_post(get_the_content(null, false, $post_object->ID)); ?>
                                 </div>
-                                        <!-- See Moments Button -->
-                                    <?php if ($button_link):?>
-                                    <div class="flex justify-end mt-4">
-                                        <a href="<?php echo esc_url($button_link['url']); ?>" 
-                                        target="<?php echo esc_attr($button_link['target'] ?: '_self'); ?>"
-                                        class="btn-primary up flex text-xs uppercase tracking-widest font-medium">
-                                        <span class="uppercase">see moments</span> 
-                                        </a>
-                                    </div>
-                                    <?php endif; ?>
-                            </div>
-                            <!-- Other Testimonial Numbers (Inactive) -->
-                            <div class="space-y-4 lg:hidden">
-                                <?php 
-                                    $total_slides = count($testimonials);
-                                    for ($i = 1; $i < $total_slides; $i++) {
-                                    $display_index = ($index + $i) % $total_slides;
-                                ?>
-                                    <div class="flex items-center gap-8 opacity-30">
-                                        <span class="text-xl font-mono text-gray-500 flex-shrink-0 testimonial-number cursor-pointer hover:opacity-70 transition-opacity"
-                                            data-slide="<?php echo $display_index; ?>">
-                                            <?php echo str_pad($display_index + 1, 2, '0', STR_PAD_LEFT); ?>
-                                        </span>
-                                    </div>
-                                <?php } ?>
+                                
+                                <!-- See Moments Button -->
+                                <?php if ($button_link):?>
+                                <div class="flex justify-end mt-4">
+                                    <a href="<?php echo esc_url($button_link['url']); ?>" 
+                                    target="<?php echo esc_attr($button_link['target'] ?: '_self'); ?>"
+                                    class="btn-primary up flex text-xs uppercase tracking-widest font-medium">
+                                    <span class="uppercase">see moments</span> 
+                                    </a>
+                                </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -114,13 +94,7 @@ $testimonials = get_field('testimonials');
                 
             </div>
             <!-- Pagination -->
-            <div 
-            class="swiper-pagination 
-            swiper-pagination-vertical
-            testimonial-pagination
-            absolute
-            ">
-            </div>
+            <div class="swiper-pagination testimonial-pagination"></div>
         </div>
     </div>
 </section>

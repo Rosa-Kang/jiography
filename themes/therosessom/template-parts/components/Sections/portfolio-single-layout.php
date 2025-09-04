@@ -13,13 +13,13 @@
     
     <article id="post-<?php the_ID(); ?>" <?php post_class('max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16'); ?>>
 
-    <div class="max-w-[90%] lg:container-lg mx-auto px-4 flex flex-col py-16">
+    <div class="max-w-[100%] lg:max-w-[80%] lg:container-lg mx-auto px-4 flex flex-col py-16">
 
-        <div class="flex flex-col md:flex-row md:gap-x-12 lg:gap-x-20 items-start pb-16">
+        <div class="flex flex-col md:flex-row md:gap-x-12 lg:gap-x-20 items-stretch">
             
-            <div class="w-full mb-8 md:mb-0">
+            <div class="w-full mb-8 md:mb-0 md:basis-[57%]">
                 <?php if ( $two_images ) : ?>
-                    <div class="flex gap-4 mb-6 items-stretch">
+                    <div class="flex gap-4 mb-6">
                         <?php foreach( $two_images as $item ) : 
                             $image = isset($item['image']) ? $item['image'] : null;
                             $image_link_raw = isset($item['image_link']) ? $item['image_link'] : '';
@@ -36,7 +36,7 @@
                             
                             $image_alt = (is_array($image) && isset($image['alt']) && !empty($image['alt'])) ? $image['alt'] : 'Toronto Photographer Portfolio Image';
                             if( $image ): ?>
-                                <div class="w-1/2 h-full" data-aos="fade-in" data-aos-duration="600" data-aos-delay="350">
+                                <div class="w-1/2 h-full items-stretch" data-aos="fade-in" data-aos-duration="600" data-aos-delay="350">
                                     <?php if( !empty($image_link) ): ?>
                                         <a href="<?php echo esc_url($image_link); ?>" target="_blank" rel="noopener noreferrer" class="block w-full h-full">
                                             <img src="<?php echo esc_url($image['sizes']['medium']); ?>" 
@@ -54,26 +54,26 @@
                     </div>
                 <?php endif; ?>
                 
-                <header>
-                    <?php the_title( '<h1 class="text-4xl font-semibold font-secondary text-gray-800 mb-4">', '</h1>' ); ?>
-                </header>
-                
-                <div class="entry-content font-secondary font-light lg:mt-36" data-aos="fade-in" data-aos-duration="600" data-aos-delay="450">
-                    <?php the_content(); ?>
+                <div>
+                    <div data-aos="fade-in" data-aos-duration="600" data-aos-delay="450">
+                        <?php the_title( '<h1 class="text-4xl font-semibold font-secondary text-gray-800 mb-4">', '</h1>' ); ?>
+                    </div>
+                    
+                    <div class="entry-content font-secondary font-light lg:mt-32" data-aos="fade-in" data-aos-duration="600" data-aos-delay="650">
+                        <?php the_content(); ?>
+                    </div>
                 </div>
             </div>
 
-            <div class="h-full">
+            <div class="h-full md:basis-[43%]" data-aos="fade-in" data-aos-duration="600">
                 <?php if ( has_post_thumbnail() ) : ?>
-                    <div class="aspect-[2/3]" data-aos="fade-in" data-aos-duration="600">
-                        <?php the_post_thumbnail( 'large', ['class' => 'w-full h-full object-cover'] ); ?>
-                    </div>
+                        <?php the_post_thumbnail( 'large', ['class' => 'h-full min-h-[520px] object-cover'] ); ?>
                 <?php endif; ?>
             </div>
         </div>
     
     <?php if( $subheading || $heading ):?>
-        <div class="py-16 mx-auto" data-aos="fade-in" data-aos-duration="600">
+        <div class="pb-8 lg:py-16 mx-auto" data-aos="fade-in" data-aos-duration="600">
             <?php if ( $subheading ) : ?>
                 <p class="mt-16 text-6xl italic font-primary lowercase leading-none" data-aos="fade-in" data-aos-duration="650">
                     <?php echo esc_html($subheading); ?>
@@ -81,7 +81,7 @@
             <?php endif; ?>
             
             <?php if ( $heading ) : ?>
-                <h2 class="mb-16 text-6xl font-primary uppercase leading-none" data-aos="fade-in" data-aos-duration="800" data-aos-delay="350">
+                <h2 class="lg:mb-16 text-6xl font-primary uppercase leading-none" data-aos="fade-in" data-aos-duration="800" data-aos-delay="350">
                     <?php echo esc_html($heading); ?>
                 </h2>
             <?php endif; ?>
@@ -89,8 +89,8 @@
     <?php endif;?> 
     
         <?php if ( $slider_images ) : ?>
-            <div class="max-w-[90%] lg:container-md mx-auto">
-                <div class="main-portfolio-swiper swiper aspect-[1/1.23] max-h-[670px] mb-8 relative">
+            <div class="max-w-[100%] lg:max-w-[90%] lg:container-md mx-auto">
+                <div class="main-portfolio-swiper swiper aspect-[1/1.23] lg:max-h-[670px] mb-8 relative">
                     <div class="swiper-wrapper">
                         <?php foreach ( $slider_images as $slide ) : 
                             $image = isset($slide['image']) ? $slide['image'] : null;
@@ -131,7 +131,7 @@
                         <?php foreach ( $slider_images as $slide ) : 
                             $image = isset($slide['image']) ? $slide['image'] : null;
                             if ( $image ) : ?>
-                            <div class="swiper-slide cursor-pointer">
+                            <div class="swiper-slide cursor-pointer aspect-square">
                                 <img src="<?php echo esc_url($image['sizes']['medium']); ?>" 
                                     alt="<?php echo esc_attr(isset($image['alt']) ? $image['alt'] : ''); ?>" 
                                     class="aspect-square object-cover">
@@ -178,7 +178,7 @@
     </div>
     </article>
 
-    <nav class="portfolio-navigation flex justify-between max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 pb-8">
+    <nav class="portfolio-navigation flex justify-between max-w-6xl mx-auto lg:max-w-[80%] px-4 sm:px-6 lg:px-16 pb-8">
         <div data-aos="fade-up">
             <?php
             $next_post = get_next_post();

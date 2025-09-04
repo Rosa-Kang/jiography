@@ -101,12 +101,10 @@ function therosessom_enqueue_production_assets() {
 
     if (!empty($main_js_entry['css'])) {
         foreach ($main_js_entry['css'] as $index => $css_file) {
-            wp_enqueue_style(
-                'therosessom-style-' . $index,
-                get_template_directory_uri() . '/dist/' . $css_file,
-                [],
-                THEROSESSOM_VERSION
-            );
+            add_action('wp_head', function() use ($css_file) {
+                echo '<link rel="preload" href="' . esc_url(get_template_directory_uri() . '/dist/' . $css_file) . '" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
+                echo '<noscript><link rel="stylesheet" href="' . esc_url(get_template_directory_uri() . '/dist/' . $css_file) . '"></noscript>' . "\n";
+            });
         }
     }
 
@@ -329,3 +327,20 @@ function therosessom_custom_nav_class($classes, $item, $args) {
     return $classes;
 }
 add_filter('nav_menu_css_class', 'therosessom_custom_nav_class', 10, 3);
+
+/**
+ * Add a Content Security Policy (CSP) to the site.
+ * This helps to prevent Cross-Site Scripting (XSS) attacks.
+ */
+function add_content_security_policy() {
+    $policy = "default-src 'self'; ";
+    $policy .= "script-src 'self' 'unsafe-inline'; ";
+    $policy .= "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; ";
+    $policy .= "img-src 'self' data:; ";
+    $policy .= "font-src 'self' data: https://fonts.gstatic.com; ";
+    $policy .= "connect-src 'self'; ";
+    $policy .= "frame-src 'none';";
+
+    header('Content-Security-Policy: ' . $policy);
+}
+add_action('send_headers', 'add_content_security_policy');

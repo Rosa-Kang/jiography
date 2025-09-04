@@ -29,7 +29,7 @@ $bottom_signature = get_field('slide_bottom_signature');
                         <div class="absolute inset-0 bg-black/40 z-10"></div>
                         <img src="<?php echo esc_url($image_url); ?>" 
                              alt="<?php echo esc_attr($image_alt); ?>"
-                             class="hero-parallax absolute inset-0 object-cover w-full h-full lazy">
+                             class="hero-parallax absolute inset-0 object-cover w-full h-full">
                     </div>
                 <?php endforeach; ?>
             </div>
