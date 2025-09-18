@@ -15,10 +15,16 @@
   font-display: swap;
 }
 
+// Special Font
+@font-face {
+  font-family: 'Scope One';
+  src: url('../fonts/scopeone-regular.woff2') format('woff2');
+  font-display: swap;
+}
+
 // Perfectly Nineties - Bold (if available)
 @font-face {
     font-family: 'Perfectly Nineties';
-    // Changed path to be absolute from the public/dist root, reflecting Vite's output config.
     src: url('../fonts/perfectly-nineties.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
@@ -43,6 +49,10 @@ body {
     font-feature-settings: "kern" 1, "liga" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.font-special {
+    font-family: var(--font-special);
 }
 
 // Secondary font class

@@ -36,7 +36,7 @@ $bottom_signature = get_field('slide_bottom_signature');
         </div>
         
         <!-- Content Overlay (Static for all slides) -->
-        <div class="absolute inset-0 z-20 h-[51%] top-[calc(50%_-_64px)] flex flex-col justify-between items-center text-center px-4">
+        <div class="absolute inset-0 z-20 h-[51%] top-[calc(50%_-_80px)] flex flex-col justify-between items-center text-center px-4">
             <div class="max-w-6xl mx-auto">
                 <?php if ($title): ?>
                     <?php
@@ -44,16 +44,16 @@ $bottom_signature = get_field('slide_bottom_signature');
                     $lines = preg_split('/\r\n|\r|\n/', $clean_title);
                     $lines = array_filter($lines, 'strlen');
                     ?>
-                        <h1 class="hero-title text-5xl text-white font-primary tracking-wider mb-6" 
+                        <h1 class="hero-title text-white tracking-wider mb-6" 
                         data-aos="fade-in" 
                         data-aos-delay="300">
                             <?php foreach ($lines as $index => $line): ?>
                                 <?php if ($index === 0): ?>
                                     <!-- First line: normal style -->
-                                    <span class="block leading-[50px]"><?php echo htmlspecialchars(trim($line)); ?></span>
+                                    <span class="block font-special text-2xl lowercase"><?php echo htmlspecialchars(trim($line)); ?></span>
                                 <?php else: ?>
                                     <!-- Second line and beyond: italic style -->
-                                    <span class="block italic leading-[50px]"><?php echo htmlspecialchars(trim($line)); ?></span>
+                                    <span class="block font-secondary text-xs font-thin lowercase"><?php echo htmlspecialchars(trim($line)); ?></span>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </h1>

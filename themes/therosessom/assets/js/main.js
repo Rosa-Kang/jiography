@@ -29,6 +29,7 @@ class TheRosessomTheme {
     this.initSmoothScroll();
     this.initAOS();
     this.initSwipers();
+    this.initTransparentHeader();
 
     // Portfolio-specific functionality
     if (document.getElementById('portfolio-grid')) {
@@ -128,6 +129,25 @@ class TheRosessomTheme {
         }
       });
     });
+  }
+
+  initTransparentHeader() {
+    const header = document.getElementById('masthead');
+    if (!header || !header.classList.contains('is-transparent')) {
+      return;
+    }
+
+    const scrollThreshold = 100;
+
+    const onScroll = () => {
+      if (window.scrollY > scrollThreshold) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
   }
 }
 

@@ -101,10 +101,12 @@ function therosessom_enqueue_production_assets() {
 
     if (!empty($main_js_entry['css'])) {
         foreach ($main_js_entry['css'] as $index => $css_file) {
-            add_action('wp_head', function() use ($css_file) {
-                echo '<link rel="preload" href="' . esc_url(get_template_directory_uri() . '/dist/' . $css_file) . '" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
-                echo '<noscript><link rel="stylesheet" href="' . esc_url(get_template_directory_uri() . '/dist/' . $css_file) . '"></noscript>' . "\n";
-            });
+            wp_enqueue_style(
+                'therosessom-style-' . $index,
+                get_template_directory_uri() . '/dist/' . $css_file,
+                [],
+                THEROSESSOM_VERSION
+            );
         }
     }
 

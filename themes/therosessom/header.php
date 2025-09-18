@@ -11,6 +11,10 @@
  */
 
 $site_favicon = get_field('site_favicon', 'option');
+$header_classes = 'site-header w-full';
+if (is_front_page()) {
+    $header_classes .= ' is-transparent';
+}
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -31,17 +35,17 @@ $site_favicon = get_field('site_favicon', 'option');
 </head>
 
 <body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
-<div id="page" class="site">
+	<?php wp_body_open(); ?>
+	<div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'therosessom' ); ?></a>
 	
 	<!-- Enhanced header with separated mobile/desktop navigation -->
-	<header id="masthead" class="site-header w-full" 
+	<header id="masthead" class="<?php echo esc_attr($header_classes); ?>" 
 	        data-sticky="true" 
 	        data-hide-on-scroll="true"
 	        data-scroll-threshold="100">
 		<div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="flex items-center justify-between h-16">
+			<div class="flex items-center justify-between h-14">
 				
 				<!-- Site Logo - Always visible -->
 				<div class="site-branding">
@@ -105,5 +109,5 @@ $site_favicon = get_field('site_favicon', 'option');
 	</header>
 
 	<!-- Main content area with proper spacing for fixed header -->
-	<div id="content" class="site-content">
+	<main id="content" class="site-content bg-primary-light">
 		<!-- Content will be inserted here by WordPress -->

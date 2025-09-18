@@ -9,6 +9,8 @@
 	$footer_script = get_field('footer_script', 'option');
 ?>
 
+</main><!-- #content -->
+
 		<footer id="colophon" role="contentinfo" class="relative z-20 bg-primary-light pt-16">
 
 			<div class="ig-feed py-16">
@@ -30,7 +32,7 @@
 				<?php endif;?>
 			</div>
 		</footer>
-	</div><!-- #content -->
+
 </div> <!-- #page -->
 
 <?php wp_footer(); ?>

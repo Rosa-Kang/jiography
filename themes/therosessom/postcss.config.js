@@ -1,7 +1,7 @@
 export default {
   plugins: {
     // Import CSS files
-    'postcss-import': {},
+    // 'postcss-import': {},
     
     // Tailwind CSS with custom config path
     tailwindcss: {

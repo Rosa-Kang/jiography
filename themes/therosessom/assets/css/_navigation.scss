@@ -230,6 +230,7 @@ body.menu-open {
   width: 100%;
   background-color: white;
   transition: transform 0.3s ease-in-out, 
+              background-color 0.3s ease-in-out,
               box-shadow 0.3s ease;
   
   &.header-hidden {
@@ -238,6 +239,56 @@ body.menu-open {
   
   &.header-sticky {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  // Transparent state for front page
+  &.is-transparent {
+    background-color: transparent;
+    box-shadow: none;
+
+    .site-title a {
+        color: $color-white;
+    }
+
+    .desktop-navigation a {
+      color: $color-white;
+      &::after {
+        background-color: $color-white;
+      }
+    }
+
+    .hamburger-button .line {
+        background-color: $color-white;
+    }
+
+    // Scrolled state
+    &.is-scrolled {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+      .site-title a {
+        color: $color-gray-800;
+      }
+
+      .desktop-navigation a {
+        color: $color-gray-600;
+        &::after {
+          background-color: $color-gray-800;
+        }
+        &:hover {
+          color: $color-gray-800;
+        }
+      }
+
+      .hamburger-button .line {
+        background-color: $color-gray-800;
+      }
+
+      .desktop-navigation .current-menu-item > a,
+      .desktop-navigation .current-page-ancestor > a {
+        color: $color-gray-800 !important;
+      }
+    }
   }
 }
 

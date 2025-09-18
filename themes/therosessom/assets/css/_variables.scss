@@ -34,6 +34,7 @@ $color-gray-900: #171717;
 
 // Typography
 $font-primary: 'Perfectly Nineties', Georgia, serif;
+$font-special: 'Scope One', Georgia, serif;
 $font-secondary : 'Heebo', system-ui, sans-serif;
 $font-body: 'Inter', system-ui, sans-serif;
 
@@ -183,6 +184,7 @@ $button-font-weight: $font-weight-medium;
   
   // Typography
   --font-primary: #{$font-primary};
+  --font-special: #{$font-special};
   --font-body: #{$font-body};
   
   // Font Sizes
